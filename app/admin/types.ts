@@ -22,4 +22,5 @@ export interface Lead {
   status: string;
 
   createdAt: string;
+  notes: string | null;
 }
