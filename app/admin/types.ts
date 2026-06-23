@@ -23,4 +23,6 @@ export interface Lead {
 
   createdAt: string;
   notes: string | null;
+  converted: boolean;
+  projectId: string | null;
 }

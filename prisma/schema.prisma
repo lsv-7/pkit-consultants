@@ -23,7 +23,7 @@ model Lead {
 
   projectDescription String?
 
-  status             String   @default("NEW")
+  status String @default("NEW_LEAD")
 
   notes              String?
 
@@ -38,21 +38,48 @@ model Project {
   id          String   @id @default(cuid())
 
   projectName String
+
   clientName  String
 
   email       String
+
   phone       String
 
   company     String?
+
   service     String
 
-  description String?
-
   status      String   @default("PLANNING")
+
+  description String?
 
   progress    Int      @default(0)
 
   createdAt   DateTime @default(now())
+
+  clientId    String?
+
+  client      Client?  @relation(fields: [clientId], references: [id])
+}
+
+model Client {
+  id              String    @id @default(cuid())
+
+  company         String
+  contactPerson   String
+
+  email           String
+  phone           String
+
+  website         String?
+  address         String?
+  industry        String?
+
+  notes           String?
+
+  createdAt       DateTime  @default(now())
+
+  projects        Project[]
 }
 
 model Admin {
@@ -64,4 +91,77 @@ model Admin {
   password  String
 
   createdAt DateTime @default(now())
+}
+
+model WebsiteSettings {
+  id                   String   @id @default("default")
+  companyName          String
+  tagline              String
+  email                String
+  phone                String
+  whatsapp             String
+  officeAddress        String
+  googleMapsLink       String   @db.Text
+  workingHours         String
+  logoUrl              String
+  faviconUrl           String
+  linkedin             String?
+  instagram            String?
+  facebook             String?
+  twitter              String?
+  youtube              String?
+  defaultSeoTitle      String
+  defaultSeoDescription String
+}
+
+model Service {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  shortDescription String   @db.Text
+  longDescription  String   @db.Text
+  icon             String
+  displayOrder     Int      @default(0)
+  active           Boolean  @default(true)
+  features         String[]
+  technologies     String[]
+}
+
+model Industry {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  description  String   @db.Text
+  icon         String
+  displayOrder Int      @default(0)
+  active       Boolean  @default(true)
+  solutions    String[]
+}
+
+model FAQ {
+  id           String   @id @default(cuid())
+  question     String   @db.Text
+  answer       String   @db.Text
+  category     String
+  displayOrder Int      @default(0)
+  active       Boolean  @default(true)
+}
+
+model Technology {
+  id           String   @id @default(cuid())
+  name         String
+  logo         String?
+  category     String
+  displayOrder Int      @default(0)
+}
+
+model HomepageSection {
+  id                 String   @id @default("default")
+  heroTitleNormal    String
+  heroTitleHighlight String
+  heroSubtitle       String   @db.Text
+  ctaText            String
+  ctaLink            String
+  whyChooseUs        Json
+  devProcess         Json
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Lead } from "../types";
+import { Lead } from "../app/admin/types";
 
 export default function useLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);

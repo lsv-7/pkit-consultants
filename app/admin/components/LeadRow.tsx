@@ -1,19 +1,23 @@
 "use client";
-"use client";
 
 import { useState } from "react";
+import { Eye } from "lucide-react";
 import LeadModal from "./LeadModal";
 import { Lead } from "../types";
+import { Button } from "@/components/ui/Button";
 
 interface Props {
   lead: Lead;
 }
 
 const statuses = [
-  "NEW",
+  "NEW_LEAD",
   "CONTACTED",
-  "IN_PROGRESS",
-  "COMPLETED",
+  "MEETING_SCHEDULED",
+  "QUOTATION_SENT",
+  "NEGOTIATION",
+  "WON",
+  "LOST",
 ];
 
 export default function LeadRow({ lead }: Props) {
@@ -37,55 +41,71 @@ export default function LeadRow({ lead }: Props) {
 
     setSaving(false);
   }
-return (
-  <>
-    <tr className="border-t border-slate-800 hover:bg-slate-900">
 
-      <td className="p-4">{lead.fullName}</td>
+  return (
+    <>
+      <tr className="border-t border-[#0E204A]/60 hover:bg-[#0C1A3D]/25 transition-colors duration-150 text-sm">
+        {/* Name */}
+        <td className="p-4.5 font-medium text-slate-200">{lead.fullName}</td>
 
-      <td className="p-4">{lead.company || "-"}</td>
+        {/* Company */}
+        <td className="p-4.5 text-slate-400 hidden lg:table-cell">
+          {lead.company || <span className="text-slate-600">-</span>}
+        </td>
 
-      <td className="p-4">{lead.email}</td>
+        {/* Email */}
+        <td className="p-4.5 text-slate-400 hidden xl:table-cell truncate max-w-xs">{lead.email}</td>
 
-      <td className="p-4">{lead.phone}</td>
+        {/* Phone */}
+        <td className="p-4.5 text-slate-400 hidden lg:table-cell">{lead.phone}</td>
 
-      <td className="p-4">{lead.service}</td>
+        {/* Service */}
+        <td className="p-4.5 text-slate-300 hidden md:table-cell">{lead.service}</td>
 
-      <td className="p-4">
-        <select
-          value={status}
-          disabled={saving}
-          onChange={(e) => updateStatus(e.target.value)}
-          className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2"
-        >
-          {statuses.map((s) => (
-            <option key={s} value={s}>
-              {s.replace("_", " ")}
-            </option>
-          ))}
-        </select>
-      </td>
-      <td className="p-4">
-  {new Date(lead.createdAt).toLocaleDateString()}
-</td>
+        {/* Status */}
+        <td className="p-4.5">
+          <select
+            value={status}
+            disabled={saving}
+            onChange={(e) => updateStatus(e.target.value)}
+            className="bg-[#060F24] border border-[#0E204A] rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF]/20 transition-all duration-150"
+          >
+            {statuses.map((s) => (
+              <option key={s} value={s}>
+                {s
+                  .replaceAll("_", " ")
+                  .toLowerCase()
+                  .replace(/\b\w/g, (c) => c.toUpperCase())}
+              </option>
+            ))}
+          </select>
+        </td>
 
-      <td className="p-4">
-        <button
-          onClick={() => setOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm"
-        >
-          View
-        </button>
-      </td>
+        {/* Date Received */}
+        <td className="p-4.5 text-slate-400 hidden xl:table-cell">
+          {new Date(lead.createdAt).toLocaleDateString()}
+        </td>
 
-    </tr>
+        {/* Actions */}
+        <td className="p-4.5 text-right">
+          <Button
+            onClick={() => setOpen(true)}
+            variant="secondary"
+            size="sm"
+            className="h-8"
+          >
+            <Eye size={13} className="text-slate-400" />
+            <span>View</span>
+          </Button>
+        </td>
+      </tr>
 
-    {open && (
-      <LeadModal
-        lead={lead}
-        onClose={() => setOpen(false)}
-      />
-    )}
-  </>
-);
+      {open && (
+        <LeadModal
+          lead={lead}
+          onClose={() => setOpen(false)}
+        />
+      )}
+    </>
+  );
 }

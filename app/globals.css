@@ -1,26 +1,278 @@
 @import "tailwindcss";
 
+/* ─── PKIT Design Tokens (Derived from Logo) ────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #020612;               /* Deep navy black */
+  --surface: #060F24;          /* Midnight navy container */
+  --surface-2: #0C1A3D;        /* Elevated hover container */
+  --border: #142D66;           /* Brand navy border */
+  --border-soft: #0E204A;      /* Soft brand border */
+  --blue: #0066FF;             /* Vibrant electric blue */
+  --blue-soft: rgba(0, 102, 255, 0.12); /* Soft highlight blue */
+  --blue-hover: #297FFF;       /* Bright hover blue */
+  --cyan: #38BDF8;             /* Sky blue accent */
+  --text: #F1F5F9;             /* Slate 100 typography */
+  --muted: #94A3B8;            /* Slate 400 description text */
+  --muted-2: #475569;          /* Slate 600 subtle text */
+  --logo-dark-blue: #001B4B;   /* Brand midnight navy */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --shadow-premium: none;
+  --nav-bg-idle: rgba(2, 6, 18, 0.4);
+  --nav-bg-scroll: rgba(2, 6, 18, 0.9);
+  --nav-border-scroll: var(--border-soft);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme="light"] {
+  --bg: #ffffff;               /* Pure white background */
+  --surface: #f8fafc;          /* Slate 50 (very light gray) */
+  --surface-2: #f1f5f9;        /* Slate 100 */
+  --border: #cbd5e1;           /* Slate 300 */
+  --border-soft: #e2e8f0;      /* Slate 200 */
+  --blue: #0066FF;             /* Keep electric blue accent */
+  --blue-soft: rgba(0, 102, 255, 0.08); /* Subtle highlight */
+  --blue-hover: #0052cc;       /* Darker hover blue */
+  --cyan: #0284c7;             /* Darker sky-blue for contrast */
+  --text: #0f172a;             /* Slate 900 typography */
+  --muted: #475569;            /* Slate 600 description text */
+  --muted-2: #94a3b8;          /* Slate 400 subtle text */
+  --logo-dark-blue: #e2e8f0;   /* Light gray logo bg alternative */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --shadow-premium: 0 4px 20px -2px rgba(15, 23, 42, 0.05); /* Premium soft shadow */
+  --nav-bg-idle: rgba(255, 255, 255, 0.4);
+  --nav-bg-scroll: rgba(255, 255, 255, 0.85);
+  --nav-border-scroll: rgba(0, 0, 0, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Global color property transitions for theme changes */
+body, body *, body *::before, body *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* ─── Reset / Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Geist", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────── */
+.font-display {
+  font-family: "Space Grotesk", "Geist", system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+}
+
+/* ─── Eyebrow label ──────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  flex-shrink: 0;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 11px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(47, 111, 237, 0.6);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 11px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  border-color: var(--blue);
+  background: var(--surface);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  box-shadow: var(--shadow-premium);
+  transition: border-color 0.25s ease, transform 0.25s ease,
+    background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  background: var(--surface-2);
+}
+
+/* ─── Icon box ───────────────────────────────────────────────────────── */
+.icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  border: 1px solid rgba(47, 111, 237, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+/* ─── Layout helpers ─────────────────────────────────────────────────── */
+.max-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.section-pad {
+  padding: 96px 24px;
+}
+
+@media (max-width: 640px) {
+  .section-pad {
+    padding: 64px 20px;
+  }
+}
+
+/* ─── Background grid ────────────────────────────────────────────────── */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to right,
+      var(--border-soft) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    black 40%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ─── Glow ───────────────────────────────────────────────────────────── */
+.glow-blue {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    var(--blue-soft) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Focus ring ─────────────────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── SVG trace animation ────────────────────────────────────────────── */
+.trace-line {
+  animation: dash-travel 3.5s linear infinite;
+}
+
+@keyframes dash-travel {
+  0% {
+    stroke-dashoffset: 220;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -220;
+    opacity: 0;
+  }
+}
+
+/* ─── Process line ───────────────────────────────────────────────────── */
+.process-line {
+  background: linear-gradient(
+    to bottom,
+    var(--border) 0%,
+    var(--blue) 50%,
+    var(--border) 100%
+  );
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .trace-line {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

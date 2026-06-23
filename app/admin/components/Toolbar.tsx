@@ -1,7 +1,9 @@
 "use client";
 
+import { RefreshCw } from "lucide-react";
 import SearchBar from "./SearchBar";
 import StatusFilter from "./StatusFilter";
+import { Button } from "@/components/ui/Button";
 
 interface Props {
   search: string;
@@ -21,27 +23,23 @@ export default function Toolbar({
   refresh,
 }: Props) {
   return (
-    <div className="mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+    <div className="mb-6 flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+      
+      {/* Search component */}
+      <SearchBar value={search} onChange={setSearch} />
 
-      <SearchBar
-        value={search}
-        onChange={setSearch}
-      />
+      {/* Filter and Action Buttons */}
+      <div className="flex gap-3 items-stretch">
+        <StatusFilter value={status} onChange={setStatus} />
 
-      <div className="flex gap-3">
-
-        <StatusFilter
-          value={status}
-          onChange={setStatus}
-        />
-
-        <button
+        <Button
           onClick={refresh}
-          className="bg-blue-600 hover:bg-blue-700 px-5 rounded-lg font-medium transition"
+          variant="secondary"
+          className="flex-shrink-0"
         >
-          Refresh
-        </button>
-
+          <RefreshCw size={14} className="text-slate-400" />
+          <span>Refresh</span>
+        </Button>
       </div>
 
     </div>
