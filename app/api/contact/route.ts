@@ -48,11 +48,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Company name must not exceed 100 characters" }, { status: 400 });
     }
 
+    const cleanEmail = email.trim().toLowerCase();
+
     const lead = await prisma.lead.create({
       data: {
-        fullName: body.fullName,
-        email: body.email,
-        phone: body.phone,
+        fullName: body.fullName.trim(),
+        email: cleanEmail,
+        phone: body.phone.trim(),
         company: body.company || "",
         service: body.service || "General Consulting",
         budget: body.budget || "Not Specified",

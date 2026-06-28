@@ -16,9 +16,10 @@ export async function POST(req: Request) {
 
   try {
     const { email, password } = await req.json();
+    const cleanEmail = email ? email.trim().toLowerCase() : "";
 
     const admin = await prisma.admin.findUnique({
-      where: { email },
+      where: { email: cleanEmail },
     });
 
     if (!admin) {

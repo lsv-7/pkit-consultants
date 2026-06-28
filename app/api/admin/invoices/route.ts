@@ -122,12 +122,14 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: false, message: "Missing required fields for manual client entry" }, { status: 400 });
       }
 
+      const cleanEmail = email.trim().toLowerCase();
+
       // Create new client
       const newClient = await prisma.client.create({
         data: {
           company,
           contactPerson,
-          email,
+          email: cleanEmail,
           phone,
           address: address || "",
           notes: "Auto-created from manual/offline invoice builder entry.",
