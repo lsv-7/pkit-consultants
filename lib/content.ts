@@ -1,6 +1,6 @@
 // PKIT Consultants — Public Website Content Layer
-// This file acts as the decoupled content gateway. UI components consume these functions,
-// making it trivial to migrate to dynamic database-driven content (CRM/Prisma) in the future.
+// Company constants live in lib/company.ts (single source of truth).
+import { COMPANY, getAddressLine } from "@/lib/company";
 
 export interface ServiceItem {
   id: string;
@@ -55,14 +55,14 @@ export interface CompanyInfo {
 
 // ─── COMPANY INFO ───────────────────────────────────────────────────────────
 const companyInfo: CompanyInfo = {
-  name: "PKIT Consultants",
-  tagline: "Technology Consulting",
-  email: "pkitconsultants@gmail.com",
-  phone: "+971 50 116 4565",
-  whatsappLink: "https://wa.me/971501164565",
-  address: "Dubai, United Arab Emirates",
-  hours: "Monday - Friday: 9:00 AM - 6:00 PM (GST)",
-  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115494.39860649718!2d55.19799863481267!3d25.194849313063546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a6d489b%3A0x2f6cf9cf0c9a44c!2sDubai!5e0!3m2!1sen!2sae!4v1700000000000",
+  name: COMPANY.name,
+  tagline: COMPANY.tagline,
+  email: COMPANY.email,
+  phone: COMPANY.phone,
+  whatsappLink: COMPANY.whatsappUrl,
+  address: getAddressLine(),
+  hours: COMPANY.workingHours,
+  mapEmbedUrl: COMPANY.googleMapsEmbed,
 };
 
 export function getCompanyInfo(): CompanyInfo {
@@ -72,7 +72,7 @@ export function getCompanyInfo(): CompanyInfo {
 // ─── HERO CONTENT ───────────────────────────────────────────────────────────
 export function getHeroContent() {
   return {
-    eyebrow: "PKIT Consultants",
+    eyebrow: COMPANY.name,
     headingNormal: "Connecting Business",
     headingHighlight: "Technology",
     subheading: "PKIT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
@@ -291,7 +291,7 @@ export function getAboutContent() {
     vision: "To become the premier tech-enabler for scaling firms and enterprises in the Middle East, recognized for our commitment to clean code, reliable architecture, and transparent communication.",
     founder: {
       name: "M. Prasanna Kumar",
-      title: "Founder & Chief Executive Officer",
+      title: "Founder & Managing Director",
       bio: [
         "M. Prasanna Kumar founded PKIT Consultants with a deep passion for clean engineering and a commitment to helping UAE businesses bridge the technical gap. Originally from Andhra Pradesh, India, he established the firm in Dubai, UAE, to assemble an elite squad of engineers capable of executing high-complexity software systems.",
         "Under his leadership, PKIT operates with a customer-centric delivery framework. We strictly focus on outcomes, engineering robustness, and absolute technical transparency.",

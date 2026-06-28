@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Menu, X, ArrowRight, Sun, Moon } from "lucide-react";
 import { getCompanyInfo } from "@/lib/content";
 import { useTheme } from "@/components/ThemeProvider";
+import { COMPANY } from "@/lib/company";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -108,8 +109,8 @@ export default function Navbar({ settings }: NavbarProps) {
                   letterSpacing: "-0.03em",
                 }}
               >
-                <span className="brand-name-full">{companyInfo.name || "PKIT Consultants"}</span>
-                <span className="brand-name-abbr">PKIT</span>
+                <span className="brand-name-full">{companyInfo.name || COMPANY.name}</span>
+                <span className="brand-name-abbr">{COMPANY.name.split(" ")[0]}</span>
               </span>
               <span
                 className="brand-tagline"
@@ -120,7 +121,7 @@ export default function Navbar({ settings }: NavbarProps) {
                   marginTop: 2,
                 }}
               >
-                {companyInfo.tagline || "Technology Consulting"}
+                {companyInfo.tagline || COMPANY.tagline}
               </span>
             </div>
           </Link>
@@ -201,7 +202,7 @@ export default function Navbar({ settings }: NavbarProps) {
               </div>
             </button>
             <Link
-              href="/login"
+              href="/portal/login"
               style={{
                 fontSize: 13.5,
                 fontWeight: 500,
@@ -317,7 +318,7 @@ export default function Navbar({ settings }: NavbarProps) {
             ))}
             <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
               <Link
-                href="/login"
+                href="/portal/login"
                 style={{
                   display: "block",
                   padding: "10px 0",

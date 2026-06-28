@@ -5,13 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { getCompanyInfo, getServices } from "@/lib/content";
+import { COMPANY } from "@/lib/company";
 
-const COMPANY = [
+const COMPANY_LINKS = [
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/industries", label: "Industries" },
   { href: "/contact", label: "Contact" },
-  { href: "/login", label: "Client Login" },
+  { href: "/portal/login", label: "Client Login" },
 ];
 
 interface FooterProps {
@@ -58,7 +59,7 @@ export default function Footer({ settings, services }: FooterProps) {
             >
               <Image src="/logo.png" alt={companyInfo.name} width={36} height={36} style={{ borderRadius: 8 }} />
               <span className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>
-                PKIT<span style={{ color: "var(--blue)" }}>.</span>
+                {COMPANY.name.split(" ")[0]}<span style={{ color: "var(--blue)" }}>.</span>
               </span>
             </Link>
             <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.75, maxWidth: 280 }}>
@@ -95,7 +96,7 @@ export default function Footer({ settings, services }: FooterProps) {
               Company
             </h3>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-              {COMPANY.map((item) => (
+              {COMPANY_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

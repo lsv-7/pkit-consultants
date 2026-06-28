@@ -32,6 +32,9 @@ model Lead {
   projectId          String?
 
   createdAt          DateTime @default(now())
+  sentEmails         SentEmail[]
+
+  @@index([projectId])
 }
 
 model Project {
@@ -60,6 +63,10 @@ model Project {
   clientId    String?
 
   client      Client?  @relation(fields: [clientId], references: [id])
+  invoices    Invoice[]
+  sentEmails  SentEmail[]
+
+  @@index([clientId])
 }
 
 model Client {
@@ -80,6 +87,43 @@ model Client {
   createdAt       DateTime  @default(now())
 
   projects        Project[]
+  clientUsers     ClientUser[]
+  documents       Document[]
+  invoices        Invoice[]
+  sentEmails      SentEmail[]
+}
+
+model ClientUser {
+  id           String   @id @default(cuid())
+  clientId     String
+  client       Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  fullName     String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("CLIENT")
+  active       Boolean  @default(true)
+  lastLogin    DateTime?
+  resetToken   String?
+  resetTokenExp DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sentEmails   SentEmail[]
+
+  @@index([clientId])
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  title     String
+  fileUrl   String
+  fileSize  String
+  category  String   // e.g. "PROPOSAL", "AGREEMENT", "INVOICE", "REQUIREMENTS", "SRS", "DEPLOYMENT"
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clientId])
 }
 
 model Admin {
@@ -90,6 +134,15 @@ model Admin {
 
   password  String
 
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  type      String   // e.g. "NEW_LEAD", "PROJECT_CREATED", "CMS_UPDATED", "LOGIN_ACTIVITY"
+  title     String
+  message   String
+  read      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
 
@@ -112,6 +165,10 @@ model WebsiteSettings {
   youtube              String?
   defaultSeoTitle      String
   defaultSeoDescription String
+  
+  ceoName              String   @default("M. Prasanna Kumar")
+  ceoDesignation       String   @default("Founder & Managing Director")
+  ceoSignatureUrl      String   @default("")
 }
 
 model Service {
@@ -164,4 +221,102 @@ model HomepageSection {
   ctaLink            String
   whyChooseUs        Json
   devProcess         Json
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  invoiceNumber String        @unique
+  invoiceDate   DateTime
+  dueDate       DateTime
+  
+  clientId      String
+  client        Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  projectId     String?
+  project       Project?      @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  
+  status        String        @default("DRAFT") // DRAFT, SENT, PAID, CANCELLED, OVERDUE
+  
+  subtotal      Float
+  vatRate       Float         @default(5.0)     // VAT %
+  vatAmount     Float
+  discount      Float         @default(0.0)
+  grandTotal    Float
+  amountInWords String
+  notes         String?       @db.Text
+  
+  authorizedBy  String        @default("Authorized By")
+  founderName   String        @default("M. Prasanna Kumar")
+  designation   String        @default("Founder & Managing Director")
+  signatureUrl  String?
+  
+  paymentStatus String        @default("UNPAID") // UNPAID, PARTIALLY_PAID, PAID
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  items         InvoiceItem[]
+  payments      Payment[]
+  sentEmails    SentEmail[]
+
+  @@index([clientId])
+  @@index([projectId])
+}
+
+model InvoiceItem {
+  id           String   @id @default(cuid())
+  invoiceId    String
+  invoice      Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  serialNumber Int
+  description  String
+  quantity     Float
+  unitPrice    Float
+  amount       Float
+
+  @@index([invoiceId])
+}
+
+model Payment {
+  id               String   @id @default(cuid())
+  invoiceId        String
+  invoice          Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amount           Float
+  paymentDate      DateTime @default(now())
+  paymentMethod    String   // e.g. "STRIPE", "BANK_TRANSFER", "CASH"
+  transactionId    String?
+  paymentReference String?
+  createdAt        DateTime @default(now())
+
+  @@index([invoiceId])
+}
+
+model SentEmail {
+  id           String      @id @default(cuid())
+  recipient    String
+  subject      String
+  body         String      @db.Text
+  type         String      // WELCOME, PORTAL_CREDENTIALS, INVOICE, PAYMENT_RECEIPT, PASSWORD_RESET, CONSULTATION_CONFIRMATION, ADMIN_NOTIFICATION, PROJECT_STATUS, GENERAL
+  status       String      @default("PENDING") // PENDING, SENT, FAILED
+  errorMessage String?     @db.Text
+  createdBy    String      @default("SYSTEM")  // SYSTEM, ADMIN
+  
+  clientId     String?
+  client       Client?     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  leadId       String?
+  lead         Lead?       @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  invoiceId    String?
+  invoice      Invoice?    @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  projectId    String?
+  project      Project?    @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  clientUserId String?
+  clientUser   ClientUser? @relation(fields: [clientUserId], references: [id], onDelete: SetNull)
+
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([clientId])
+  @@index([leadId])
+  @@index([invoiceId])
+  @@index([projectId])
+  @@index([clientUserId])
 }

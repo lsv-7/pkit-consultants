@@ -1,10 +1,23 @@
+import type { Metadata } from "next";
 import { getSettings } from "@/lib/services/settings";
 import { getHomepageSection } from "@/lib/services/website";
 import { getServices } from "@/lib/services/services";
 import { getIndustries } from "@/lib/services/industries";
 import { getFAQs } from "@/lib/services/faq";
 import { getAboutContent } from "@/lib/content";
+import { COMPANY } from "@/lib/company";
 import HomeClient from "./HomeClient";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  return {
+    title: settings.defaultSeoTitle,
+    description: settings.defaultSeoDescription,
+    alternates: {
+      canonical: COMPANY.website,
+    },
+  };
+}
 
 export default async function Home() {
   const settings = await getSettings();

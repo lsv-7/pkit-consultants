@@ -14,15 +14,15 @@ export default function StatusFilter({ value, onChange }: Props) {
         px-4
         py-2.5
         rounded-lg
-        bg-[#060F24]
+        bg-[#111827]
         border
-        border-[#0E204A]
+        border-[#1E293B]
         text-slate-300
         text-sm
         focus:outline-none
-        focus:border-[#0066FF]
+        focus:border-[#2563EB]
         focus:ring-2
-        focus:ring-[#0066FF]/20
+        focus:ring-[#2563EB]/20
         transition-all
         duration-200
         cursor-pointer

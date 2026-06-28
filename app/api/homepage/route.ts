@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getHomepageSection, updateHomepageSection } from "@/lib/services/website";
 import { verifyAdmin } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   const homepage = await getHomepageSection();
@@ -16,6 +17,17 @@ export async function PATCH(req: Request) {
   try {
     const data = await req.json();
     const updated = await updateHomepageSection(data);
+
+    // Create CMS Notification
+    await prisma.notification.create({
+      data: {
+        type: "CMS_UPDATED",
+        title: "Homepage CMS Updated",
+        message: "Landing hero copy or development process values changed.",
+        read: false,
+      },
+    });
+
     return NextResponse.json({ success: true, homepage: updated });
   } catch (error) {
     console.error(error);

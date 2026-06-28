@@ -74,7 +74,7 @@ export default function SeoSettingsCMS() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="animate-spin text-[#0066FF]" size={32} />
+        <Loader2 className="animate-spin text-[#2563EB]" size={32} />
         <span className="ml-3 text-slate-300">Loading SEO settings...</span>
       </div>
     );
@@ -84,7 +84,7 @@ export default function SeoSettingsCMS() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-100 font-display flex items-center gap-2">
-          <Globe className="text-[#0066FF]" size={24} /> SEO Configuration
+          <Globe className="text-[#2563EB]" size={24} /> SEO Configuration
         </h1>
         <p className="text-sm text-slate-400 mt-1">
           Configure default search engine optimization meta tags used across the public website pages.
@@ -106,8 +106,8 @@ export default function SeoSettingsCMS() {
           </div>
         )}
 
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-slate-200 border-b border-[#0E204A] pb-3 font-display">
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">
             Default Meta Tags
           </h2>
           
@@ -119,7 +119,7 @@ export default function SeoSettingsCMS() {
                 name="defaultSeoTitle"
                 value={formData.defaultSeoTitle}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
               <span className="text-[11px] text-slate-500 block">
@@ -134,7 +134,7 @@ export default function SeoSettingsCMS() {
                 rows={4}
                 value={formData.defaultSeoDescription}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition resize-y"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition resize-y"
                 required
               />
               <span className="text-[11px] text-slate-500 block">
@@ -145,7 +145,7 @@ export default function SeoSettingsCMS() {
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit" disabled={saving} className="bg-[#0066FF] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
+          <Button type="submit" disabled={saving} className="bg-[#2563EB] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
             {saving ? (
               <>
                 <Loader2 size={16} className="animate-spin" /> Saving...

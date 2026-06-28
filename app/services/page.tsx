@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import { getServices } from "@/lib/services/services";
 import { getSettings } from "@/lib/services/settings";
+import { COMPANY } from "@/lib/company";
 import ServicesClient from "./ServicesClient";
 
 export const revalidate = 3600; // Cache for 1 hour
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  return {
+    title: "Our Services | " + settings.companyName,
+    description: "Explore " + settings.companyName + "'s core competencies: custom AI integrations, custom software platforms, web systems, mobile solutions, cloud optimization, and zero-trust security.",
+    alternates: {
+      canonical: `${COMPANY.website}/services`,
+    },
+  };
+}
 
 export default async function ServicesPage() {
   const dbServices = await getServices(true);
@@ -21,8 +34,8 @@ export default async function ServicesPage() {
 
   const companyInfo = {
     name: settings.companyName || "PKIT Consultants",
-    tagline: settings.tagline || "Technology Consulting",
-    whatsappLink: settings.whatsapp || "https://wa.me/971501164565",
+    tagline: settings.tagline || "Technology. Consulting. Solutions.",
+    whatsappLink: settings.whatsapp || COMPANY.whatsappUrl,
   };
 
   return <ServicesClient services={servicesData} companyInfo={companyInfo} />;

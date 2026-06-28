@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Loader2, Plus, Edit2, Trash2, ArrowLeft, Save, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useToast } from "@/components/ui/ToastProvider";
 
 interface FAQItem {
   id: string;
@@ -14,6 +15,7 @@ interface FAQItem {
 }
 
 export default function FAQsCMS() {
+  const { toast } = useToast();
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -90,7 +92,7 @@ export default function FAQsCMS() {
       }
       setFaqs((prev) => prev.filter((f) => f.id !== id));
     } catch (err: any) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -144,7 +146,7 @@ export default function FAQsCMS() {
   if (loading && faqs.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="animate-spin text-[#0066FF]" size={32} />
+        <Loader2 className="animate-spin text-[#2563EB]" size={32} />
         <span className="ml-3 text-slate-300">Loading FAQs...</span>
       </div>
     );
@@ -160,7 +162,7 @@ export default function FAQsCMS() {
               <h1 className="text-2xl font-bold text-slate-100 font-display">FAQs CMS</h1>
               <p className="text-sm text-slate-400 mt-1">Manage frequently asked questions, answers, and visual sorting order on the public site.</p>
             </div>
-            <Button onClick={handleOpenCreate} className="bg-[#0066FF] hover:bg-[#297FFF] flex items-center gap-1.5 px-4">
+            <Button onClick={handleOpenCreate} className="bg-[#2563EB] hover:bg-[#297FFF] flex items-center gap-1.5 px-4">
               <Plus size={16} /> Add FAQ
             </Button>
           </div>
@@ -172,11 +174,11 @@ export default function FAQsCMS() {
             </div>
           )}
 
-          <div className="bg-[#060F24] border border-[#0E204A] rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#111827] border border-[#1E293B] rounded-xl overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
-                  <tr className="border-b border-[#0E204A] bg-[#0C1A3D]/40 text-slate-400 font-medium select-none">
+                  <tr className="border-b border-[#1E293B] bg-[#111827]/70 text-slate-400 font-medium select-none">
                     <th className="py-4 px-6">Display Order</th>
                     <th className="py-4 px-6">Question</th>
                     <th className="py-4 px-6">Category</th>
@@ -184,14 +186,14 @@ export default function FAQsCMS() {
                     <th className="py-4 px-6 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#0E204A] text-slate-300">
+                <tbody className="divide-y divide-[#1E293B]/50 text-slate-300">
                   {faqs.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="py-8 text-center text-slate-500">No FAQs found. Click "Add FAQ" to start.</td>
+                      <td colSpan={5} className="py-8 text-center text-slate-500">No FAQs found. Click &quot;Add FAQ&quot; to start.</td>
                     </tr>
                   ) : (
                     faqs.map((f) => (
-                      <tr key={f.id} className="hover:bg-[#0C1A3D]/20 transition duration-150">
+                      <tr key={f.id} className="hover:bg-[#1E293B]/20 transition duration-150">
                         <td className="py-4 px-6 font-mono text-xs">{f.displayOrder}</td>
                         <td className="py-4 px-6 font-semibold text-slate-100 max-w-sm truncate">{f.question}</td>
                         <td className="py-4 px-6 text-slate-400 font-mono text-xs">{f.category}</td>
@@ -201,7 +203,7 @@ export default function FAQsCMS() {
                           </span>
                         </td>
                         <td className="py-4 px-6 text-right space-x-2">
-                          <button onClick={() => handleOpenEdit(f)} className="p-1.5 text-slate-400 hover:text-white hover:bg-[#0C1A3D] rounded transition">
+                          <button onClick={() => handleOpenEdit(f)} className="p-1.5 text-slate-400 hover:text-white hover:bg-[#1E293B] rounded transition">
                             <Edit2 size={15} />
                           </button>
                           <button onClick={() => handleDelete(f.id)} className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded transition">
@@ -220,7 +222,7 @@ export default function FAQsCMS() {
         /* 2. EDITOR FORM VIEW */
         <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <button onClick={() => setEditorOpen(false)} className="p-2 text-slate-400 hover:text-slate-200 hover:bg-[#060F24] rounded-lg border border-[#0E204A]">
+            <button onClick={() => setEditorOpen(false)} className="p-2 text-slate-400 hover:text-slate-200 hover:bg-[#111827] rounded-lg border border-[#1E293B]">
               <ArrowLeft size={16} />
             </button>
             <div>
@@ -237,7 +239,7 @@ export default function FAQsCMS() {
               </div>
             )}
 
-            <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
+            <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-400">Question</label>
                 <input
@@ -245,7 +247,7 @@ export default function FAQsCMS() {
                   name="question"
                   value={formData.question}
                   onChange={handleFormChange}
-                  className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                  className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                   required
                 />
               </div>
@@ -259,7 +261,7 @@ export default function FAQsCMS() {
                     value={formData.category}
                     onChange={handleFormChange}
                     placeholder="e.g. Engagements, General, Support"
-                    className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                    className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                     required
                   />
                 </div>
@@ -271,7 +273,7 @@ export default function FAQsCMS() {
                     name="displayOrder"
                     value={formData.displayOrder}
                     onChange={handleFormChange}
-                    className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition font-mono"
+                    className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition font-mono"
                     required
                   />
                 </div>
@@ -283,7 +285,7 @@ export default function FAQsCMS() {
                       name="active"
                       checked={formData.active}
                       onChange={handleFormChange}
-                      className="w-4 h-4 rounded accent-[#0066FF] bg-[#0C1A3D] border border-[#142D66]"
+                      className="w-4 h-4 rounded accent-[#2563EB] bg-[#1E293B] border border-[#1E293B]"
                     />
                     Active (visible on website)
                   </label>
@@ -297,17 +299,17 @@ export default function FAQsCMS() {
                   rows={5}
                   value={formData.answer}
                   onChange={handleFormChange}
-                  className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition resize-y"
+                  className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition resize-y"
                   required
                 />
               </div>
             </div>
 
             <div className="flex justify-end gap-3">
-              <Button type="button" onClick={() => setEditorOpen(false)} variant="secondary" className="px-5 border-[#0E204A] text-slate-300">
+              <Button type="button" onClick={() => setEditorOpen(false)} variant="secondary" className="px-5 border-[#1E293B] text-slate-300">
                 Cancel
               </Button>
-              <Button type="submit" disabled={saving} className="bg-[#0066FF] hover:bg-[#297FFF] px-6 py-2 flex items-center gap-1.5">
+              <Button type="submit" disabled={saving} className="bg-[#2563EB] hover:bg-[#297FFF] px-6 py-2 flex items-center gap-1.5">
                 {saving ? (
                   <>
                     <Loader2 size={16} className="animate-spin" /> Saving...

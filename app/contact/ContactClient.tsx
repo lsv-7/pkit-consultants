@@ -6,11 +6,26 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
 import { Mail, Phone, MessageSquare, MapPin, Clock, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useToast } from "@/components/ui/ToastProvider";
 
-function ContactFormSection() {
+interface ContactClientProps {
+  companyInfo: {
+    name: string;
+    tagline: string;
+    email: string;
+    phone: string;
+    whatsappLink: string;
+    address: string;
+    hours: string;
+    mapEmbedUrl: string;
+  };
+}
+
+function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["companyInfo"] }) {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { toast } = useToast();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -70,11 +85,10 @@ function ContactFormSection() {
           projectDescription: "",
         });
       } else {
-        alert("Submission failed. Please try again.");
+        toast.error(data.message || "Submission failed. Please try again.");
       }
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please check your connection.");
+    } catch {
+      toast.error("Something went wrong. Please check your connection.");
     } finally {
       setLoading(false);
     }
@@ -231,138 +245,7 @@ function ContactFormSection() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }} className="form-row-2">
-            <div>
-              <label htmlFor="service" style={{ display: "none" }}>Select Service</label>
-              <select
-                id="service"
-                value={formData.service}
-                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                style={{
-                  width: "100%",
-                  padding: "13px 16px",
-                  borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: formData.service ? "var(--text)" : "var(--muted-2)",
-                  fontSize: 14,
-                  cursor: "pointer",
-                }}
-                className="form-input"
-                required
-              >
-                <option value="" style={{ color: "var(--muted-2)" }}>Select Service</option>
-                <option value="AI Solutions" style={{ color: "var(--text)" }}>AI Solutions</option>
-                <option value="Software Development" style={{ color: "var(--text)" }}>Software Development</option>
-                <option value="Web Development" style={{ color: "var(--text)" }}>Web Development</option>
-                <option value="Mobile Apps" style={{ color: "var(--text)" }}>Mobile Apps</option>
-                <option value="Cloud Solutions" style={{ color: "var(--text)" }}>Cloud Solutions</option>
-                <option value="Cybersecurity" style={{ color: "var(--text)" }}>Cybersecurity</option>
-                <option value="IT Consulting" style={{ color: "var(--text)" }}>IT Consulting</option>
-                <option value="Digital Transformation" style={{ color: "var(--text)" }}>Digital Transformation</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="budget" style={{ display: "none" }}>Budget Range</label>
-              <select
-                id="budget"
-                value={formData.budget}
-                onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                style={{
-                  width: "100%",
-                  padding: "13px 16px",
-                  borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: formData.budget ? "var(--text)" : "var(--muted-2)",
-                  fontSize: 14,
-                  cursor: "pointer",
-                }}
-                className="form-input"
-              >
-                <option value="">Budget Range</option>
-                <option value="Under $5,000">Under $5,000</option>
-                <option value="$5,000 - $15,000">$5,000 - $15,000</option>
-                <option value="$15,000 - $35,000">$15,000 - $35,000</option>
-                <option value="$35,000+">$35,000+</option>
-              </select>
-            </div>
-          </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }} className="form-row-2">
-            <div>
-              <label htmlFor="contactMethod" style={{ display: "none" }}>Preferred Contact Method</label>
-              <select
-                id="contactMethod"
-                value={formData.contactMethod}
-                onChange={(e) => setFormData({ ...formData, contactMethod: e.target.value })}
-                style={{
-                  width: "100%",
-                  padding: "13px 16px",
-                  borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: formData.contactMethod ? "var(--text)" : "var(--muted-2)",
-                  fontSize: 14,
-                  cursor: "pointer",
-                }}
-                className="form-input"
-              >
-                <option value="">Preferred Contact Method</option>
-                <option value="Email">Email</option>
-                <option value="Phone">Phone</option>
-                <option value="WhatsApp">WhatsApp</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="timeline" style={{ display: "none" }}>Project Timeline</label>
-              <select
-                id="timeline"
-                value={formData.timeline}
-                onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                style={{
-                  width: "100%",
-                  padding: "13px 16px",
-                  borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: formData.timeline ? "var(--text)" : "var(--muted-2)",
-                  fontSize: 14,
-                  cursor: "pointer",
-                }}
-                className="form-input"
-              >
-                <option value="">Project Timeline</option>
-                <option value="Immediate">Immediate</option>
-                <option value="Within 1 Month">Within 1 Month</option>
-                <option value="Within 3 Months">Within 3 Months</option>
-                <option value="6+ Months">6+ Months</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="projectDescription" style={{ display: "none" }}>Project Description</label>
-            <textarea
-              id="projectDescription"
-              rows={5}
-              placeholder="Tell us about your project requirements..."
-              value={formData.projectDescription}
-              onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-              style={{
-                width: "100%",
-                padding: "13px 16px",
-                borderRadius: 8,
-                background: "var(--surface-2)",
-                border: "1px solid var(--border)",
-                color: "var(--text)",
-                fontSize: 14,
-                lineHeight: 1.5,
-                resize: "vertical",
-              }}
-              className="form-input"
-            />
-          </div>
 
           <button
             type="submit"
@@ -390,19 +273,6 @@ function ContactFormSection() {
       </div>
     </Reveal>
   );
-}
-
-interface ContactClientProps {
-  companyInfo: {
-    name: string;
-    tagline: string;
-    email: string;
-    phone: string;
-    whatsappLink: string;
-    address: string;
-    hours: string;
-    mapEmbedUrl: string;
-  };
 }
 
 export default function ContactClient({ companyInfo }: ContactClientProps) {
@@ -571,7 +441,7 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
                 <span style={{ fontSize: 14, color: "var(--muted)" }}>Loading Consultation Form...</span>
               </div>
             }>
-              <ContactFormSection />
+              <ContactFormSection companyInfo={companyInfo} />
             </Suspense>
           </div>
         </div>

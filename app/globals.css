@@ -2,26 +2,26 @@
 
 /* ─── PKIT Design Tokens (Derived from Logo) ────────────────────────── */
 :root {
-  --bg: #020612;               /* Deep navy black */
-  --surface: #060F24;          /* Midnight navy container */
-  --surface-2: #0C1A3D;        /* Elevated hover container */
-  --border: #142D66;           /* Brand navy border */
-  --border-soft: #0E204A;      /* Soft brand border */
-  --blue: #0066FF;             /* Vibrant electric blue */
-  --blue-soft: rgba(0, 102, 255, 0.12); /* Soft highlight blue */
-  --blue-hover: #297FFF;       /* Bright hover blue */
+  --bg: #0B1120;               /* Premium dark background */
+  --surface: #111827;          /* Premium card surface */
+  --surface-2: #1F2937;        /* Elevated hover surface */
+  --border: #1E293B;           /* Modern charcoal border */
+  --border-soft: #334155;      /* Subtle slate border */
+  --blue: #2563EB;             /* Stripe/Linear blue */
+  --blue-soft: rgba(37, 99, 235, 0.1); /* Soft blue highlights */
+  --blue-hover: #3B82F6;       /* Bright blue hover */
   --cyan: #38BDF8;             /* Sky blue accent */
-  --text: #F1F5F9;             /* Slate 100 typography */
-  --muted: #94A3B8;            /* Slate 400 description text */
-  --muted-2: #475569;          /* Slate 600 subtle text */
-  --logo-dark-blue: #001B4B;   /* Brand midnight navy */
+  --text: #F8FAFC;             /* Clean typography text */
+  --muted: #94A3B8;            /* Slate descriptions */
+  --muted-2: #475569;          /* Slate subtle text */
+  --logo-dark-blue: #0F172A;
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
-  --shadow-premium: none;
-  --nav-bg-idle: rgba(2, 6, 18, 0.4);
-  --nav-bg-scroll: rgba(2, 6, 18, 0.9);
-  --nav-border-scroll: var(--border-soft);
+  --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --nav-bg-idle: rgba(11, 17, 32, 0.4);
+  --nav-bg-scroll: rgba(11, 17, 32, 0.85);
+  --nav-border-scroll: var(--border);
 }
 
 :root[data-theme="light"] {
@@ -30,9 +30,9 @@
   --surface-2: #f1f5f9;        /* Slate 100 */
   --border: #cbd5e1;           /* Slate 300 */
   --border-soft: #e2e8f0;      /* Slate 200 */
-  --blue: #0066FF;             /* Keep electric blue accent */
-  --blue-soft: rgba(0, 102, 255, 0.08); /* Subtle highlight */
-  --blue-hover: #0052cc;       /* Darker hover blue */
+  --blue: #2563EB;             /* Keep electric blue accent */
+  --blue-soft: rgba(37, 99, 235, 0.08); /* Subtle highlight */
+  --blue-hover: #1d4ed8;       /* Darker hover blue */
   --cyan: #0284c7;             /* Darker sky-blue for contrast */
   --text: #0f172a;             /* Slate 900 typography */
   --muted: #475569;            /* Slate 600 description text */

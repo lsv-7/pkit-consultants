@@ -1,5 +1,15 @@
+import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
+import { COMPANY } from "@/lib/company";
+
+export const metadata: Metadata = {
+  title: "Industries Served",
+  description: "Enterprise technical engineering solutions custom-built for Healthcare, Education, E-Commerce, Logistics, Real Estate, and scaling Startups in Dubai and the UAE.",
+  alternates: {
+    canonical: `${COMPANY.website}/industries`,
+  },
+};
 import {
   Heart,
   GraduationCap,

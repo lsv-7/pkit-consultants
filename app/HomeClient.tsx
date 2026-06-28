@@ -30,6 +30,8 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { useTheme } from "@/components/ThemeProvider";
+import HeroConnectionGraphic from "@/components/sections/HeroConnectionGraphic";
+import HomeFaqAccordion from "@/components/sections/HomeFaqAccordion";
 
 // Dynamic Icon Maps for clean rendering
 const iconMap: Record<string, any> = {
@@ -58,95 +60,7 @@ const iconMap: Record<string, any> = {
   Rocket: Zap,
 };
 
-function ConnectionGraphic() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
 
-  // connector lines static background
-  const lineStroke = isDark ? "#142d66" : "rgba(0, 102, 255, 0.22)";
-  const lineOpacity = isDark ? 0.7 : 1;
-
-  // trace lines moving glow
-  const traceStopColor = isDark ? "#38BDF8" : "#0066FF";
-  const traceBaseColor = isDark ? "#0066FF" : "#0066FF";
-
-  // radial glow boundaries
-  const glowColor = isDark ? "#38BDF8" : "#0066FF";
-  const glowOpacity = isDark ? 0.55 : 0.75;
-
-  return (
-    <svg
-      viewBox="0 0 640 360"
-      className="graphic-svg"
-      role="img"
-      aria-label="Diagram connecting business nodes to technology nodes"
-    >
-      <defs>
-        <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor={traceBaseColor} stopOpacity="0.1" />
-          <stop offset="50%" stopColor={traceStopColor} stopOpacity="0.9" />
-          <stop offset="100%" stopColor={traceBaseColor} stopOpacity="0.1" />
-        </linearGradient>
-        <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor={glowColor} stopOpacity={glowOpacity} />
-          <stop offset="100%" stopColor={glowColor} stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {/* connector lines */}
-      {[
-        [70, 80, 320, 180],
-        [70, 180, 320, 180],
-        [70, 280, 320, 180],
-        [320, 180, 570, 70],
-        [320, 180, 570, 180],
-        [320, 180, 570, 290],
-      ].map(([x1, y1, x2, y2], i) => (
-        <g key={i}>
-          <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={lineStroke} strokeOpacity={lineOpacity} strokeWidth="1.5" />
-          <line
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            stroke="url(#trace)"
-            strokeWidth="2"
-            strokeDasharray="6 220"
-            className="trace-line"
-            style={{ animationDelay: `${i * 0.5}s` }}
-          />
-        </g>
-      ))}
-
-      {/* business nodes (left) */}
-      {[80, 180, 280].map((y, i) => (
-        <g key={`b-${i}`}>
-          <circle cx="70" cy={y} r="22" fill="url(#nodeGlow)" />
-          <circle cx="70" cy={y} r="7" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="2" />
-        </g>
-      ))}
-
-      {/* hub node (center) */}
-      <circle cx="320" cy="180" r="34" fill="url(#nodeGlow)" />
-      <circle cx="320" cy="180" r="11" fill="var(--bg)" stroke="var(--blue)" strokeWidth="2.5" />
-
-      {/* technology nodes (right) */}
-      {[70, 180, 290].map((y, i) => (
-        <g key={`t-${i}`}>
-          <circle cx="570" cy={y} r="22" fill="url(#nodeGlow)" />
-          <circle cx="570" cy={y} r="7" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="2" />
-        </g>
-      ))}
-
-      <text x="70" y="330" textAnchor="middle" className="graphic-label">
-        BUSINESS
-      </text>
-      <text x="570" y="330" textAnchor="middle" className="graphic-label">
-        TECHNOLOGY
-      </text>
-    </svg>
-  );
-}
 
 interface HomeClientProps {
   companyInfo: any;
@@ -165,12 +79,7 @@ export default function HomeClient({
   faqs,
   aboutContent,
 }: HomeClientProps) {
-  // Accordion state
-  const [activeFaqId, setActiveFaqId] = useState<string | null>(null);
 
-  const toggleFaq = (id: string) => {
-    setActiveFaqId(activeFaqId === id ? null : id);
-  };
 
   const heroContent = {
     eyebrow: companyInfo.name,
@@ -273,9 +182,7 @@ export default function HomeClient({
             </div>
 
             <Reveal delay={200}>
-              <div style={{ padding: "8px 0" }}>
-                <ConnectionGraphic />
-              </div>
+                <HeroConnectionGraphic />
             </Reveal>
           </div>
         </div>
@@ -336,7 +243,7 @@ export default function HomeClient({
                     Founder & Leadership
                   </h3>
                   <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>
-                    Led by <strong style={{ fontWeight: 600 }}>{aboutContent.founder.name}</strong>, PKIT acts as a transparent tech-partner for Middle East enterprises and fast-growing ventures.
+                    Led by <strong style={{ fontWeight: 600 }}>{aboutContent.founder.name}</strong>, {companyInfo.name} acts as a transparent tech-partner for Middle East enterprises and fast-growing ventures.
                   </p>
                 </div>
               </div>
@@ -439,7 +346,7 @@ export default function HomeClient({
       <section id="why-us" className="section-pad" style={{ background: "var(--surface)", borderTop: "1px solid var(--border-soft)", borderBottom: "1px solid var(--border-soft)" }}>
         <div className="max-wrap">
           <SectionHeader
-            eyebrow="Why Choose PKIT"
+            eyebrow={"Why Choose " + companyInfo.name.split(" ")[0]}
             heading="Our Core Engineering Strengths"
             description="We deliver elite, high-performance systems with clear outcomes and Senior-only engineering squads."
           />
@@ -596,69 +503,7 @@ export default function HomeClient({
             description="Clear answers regarding our engagement processes, engineering models, and security governance."
           />
 
-          <div style={{ maxWidth: 760, margin: "48px auto 0", display: "flex", flexDirection: "column", gap: 16 }}>
-            {faqs.map((faq) => {
-              const isOpen = activeFaqId === faq.id;
-              return (
-                <Reveal key={faq.id}>
-                  <div
-                    style={{
-                      background: "var(--surface)",
-                      border: `1px solid ${isOpen ? "var(--blue)" : "var(--border-soft)"}`,
-                      borderRadius: 12,
-                      overflow: "hidden",
-                      transition: "border-color 0.25s ease",
-                    }}
-                  >
-                    <button
-                      onClick={() => toggleFaq(faq.id)}
-                      style={{
-                        width: "100%",
-                        padding: "20px 24px",
-                        background: "none",
-                        border: "none",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        textAlign: "left",
-                        cursor: "pointer",
-                        color: "var(--text)",
-                      }}
-                      aria-expanded={isOpen}
-                    >
-                      <span className="font-display" style={{ fontSize: 16, fontWeight: 600 }}>
-                        {faq.question}
-                      </span>
-                      <ChevronDown
-                        size={18}
-                        style={{
-                          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                          transition: "transform 0.25s ease",
-                          color: isOpen ? "var(--blue)" : "var(--muted)",
-                          flexShrink: 0,
-                          marginLeft: 16,
-                        }}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div
-                        style={{
-                          padding: "0 24px 20px 24px",
-                          color: "var(--muted)",
-                          fontSize: 14.5,
-                          lineHeight: 1.65,
-                          borderTop: "1px solid var(--border-soft)",
-                          paddingTop: 16,
-                        }}
-                      >
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
+          <HomeFaqAccordion faqs={faqs} />
         </div>
       </section>
 

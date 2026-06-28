@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { COMPANY, getAddressLine } from "@/lib/company";
 
 export interface SettingsData {
   companyName: string;
@@ -18,26 +19,32 @@ export interface SettingsData {
   youtube?: string | null;
   defaultSeoTitle: string;
   defaultSeoDescription: string;
+  ceoName: string;
+  ceoDesignation: string;
+  ceoSignatureUrl: string;
 }
 
 export const DEFAULT_SETTINGS: SettingsData = {
-  companyName: "PKIT Consultants",
-  tagline: "Technology Consulting",
-  email: "pkitconsultants@gmail.com",
-  phone: "+971 50 116 4565",
-  whatsapp: "https://wa.me/971501164565",
-  officeAddress: "Dubai, United Arab Emirates",
-  googleMapsLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115494.39860649718!2d55.19799863481267!3d25.194849313063546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a6d489b%3A0x2f6cf9cf0c9a44c!2sDubai!5e0!3m2!1sen!2sae!4v1700000000000",
-  workingHours: "Monday - Friday: 9:00 AM - 6:00 PM (GST)",
-  logoUrl: "/logo.png",
-  faviconUrl: "/favicon.ico",
+  companyName: COMPANY.name,
+  tagline: COMPANY.tagline,
+  email: COMPANY.email,
+  phone: COMPANY.phone,
+  whatsapp: COMPANY.whatsappUrl,
+  officeAddress: getAddressLine(),
+  googleMapsLink: COMPANY.googleMapsEmbed,
+  workingHours: COMPANY.workingHours,
+  logoUrl: COMPANY.logoUrl,
+  faviconUrl: COMPANY.faviconUrl,
   linkedin: "",
   instagram: "",
   facebook: "",
   twitter: "",
   youtube: "",
-  defaultSeoTitle: "PKIT Consultants — Enterprise Software & AI Solutions in Dubai",
-  defaultSeoDescription: "Professional technology consultancy in Dubai. AI solutions, custom software engineering, cloud architectures, and dedicated IT support.",
+  defaultSeoTitle: COMPANY.defaultSeoTitle,
+  defaultSeoDescription: COMPANY.defaultSeoDescription,
+  ceoName: COMPANY.ceoName,
+  ceoDesignation: COMPANY.ceoDesignation,
+  ceoSignatureUrl: "",
 };
 
 export async function getSettings(): Promise<SettingsData> {
@@ -46,7 +53,7 @@ export async function getSettings(): Promise<SettingsData> {
       where: { id: "default" },
     });
     if (!settings) return DEFAULT_SETTINGS;
-    return settings;
+    return settings as unknown as SettingsData;
   } catch (error) {
     console.error("Failed to fetch settings from DB, using fallback", error);
     return DEFAULT_SETTINGS;
@@ -75,6 +82,9 @@ export async function updateSettings(data: Partial<SettingsData>) {
       youtube: data.youtube ?? "",
       defaultSeoTitle: data.defaultSeoTitle ?? DEFAULT_SETTINGS.defaultSeoTitle,
       defaultSeoDescription: data.defaultSeoDescription ?? DEFAULT_SETTINGS.defaultSeoDescription,
+      ceoName: data.ceoName ?? DEFAULT_SETTINGS.ceoName,
+      ceoDesignation: data.ceoDesignation ?? DEFAULT_SETTINGS.ceoDesignation,
+      ceoSignatureUrl: data.ceoSignatureUrl ?? DEFAULT_SETTINGS.ceoSignatureUrl,
     },
     update: data,
   });

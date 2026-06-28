@@ -1,9 +1,22 @@
+import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
 import { Target, Eye, ShieldCheck, Zap, HeartHandshake, Award, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { getAboutContent } from "@/lib/content";
 import { getSettings } from "@/lib/services/settings";
+import { COMPANY } from "@/lib/company";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  return {
+    title: "About Us | " + settings.companyName,
+    description: "Learn about the mission, values, and leadership of " + settings.companyName + ", Dubai's premier enterprise technology consultancy.",
+    alternates: {
+      canonical: `${COMPANY.website}/about`,
+    },
+  };
+}
 
 export default async function About() {
   const content = getAboutContent();
@@ -40,7 +53,7 @@ export default async function About() {
           <SectionHeader
             eyebrow="About PKIT"
             heading="Connecting Business with Technology"
-            description={`Founded in ${companyInfo.address}, PKIT Consultants helps startups and enterprises accelerate digital transformation through high-end software development, AI solutions, and strategic technical consulting.`}
+            description="Headquartered in Dubai, UAE, PKIT Consultants helps startups and enterprises accelerate digital transformation through high-end software development, AI solutions, and strategic technical consulting."
           />
         </div>
 
@@ -142,7 +155,7 @@ export default async function About() {
           </Reveal>
         </section>
 
-        {/* Founder & CEO */}
+        {/* Founder & Managing Director */}
         <section style={{ marginBottom: 96 }}>
           <Reveal>
             <div
@@ -241,10 +254,10 @@ export default async function About() {
         <div style={{ marginTop: 112, textAlign: "center" }}>
           <Reveal>
             <h3 className="font-display" style={{ fontSize: 28, fontWeight: 700 }}>
-              Let's build the future together.
+              Let&apos;s build the future together.
             </h3>
             <p style={{ color: "var(--muted)", fontSize: 15, marginTop: 12, maxWidth: 480, marginInline: "auto" }}>
-              Interested in speaking with our engineering team? Let's connect for an initial architecture audit.
+              Interested in speaking with our engineering team? Let&apos;s connect for an initial architecture audit.
             </p>
             <div style={{ marginTop: 24 }}>
               <Link href="/contact" className="btn-primary">

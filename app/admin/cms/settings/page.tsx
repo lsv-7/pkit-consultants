@@ -20,6 +20,9 @@ interface SettingsState {
   facebook: string;
   twitter: string;
   youtube: string;
+  ceoName: string;
+  ceoDesignation: string;
+  ceoSignatureUrl: string;
 }
 
 export default function WebsiteSettingsCMS() {
@@ -39,6 +42,9 @@ export default function WebsiteSettingsCMS() {
     facebook: "",
     twitter: "",
     youtube: "",
+    ceoName: "",
+    ceoDesignation: "",
+    ceoSignatureUrl: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -68,6 +74,9 @@ export default function WebsiteSettingsCMS() {
           facebook: data.facebook || "",
           twitter: data.twitter || "",
           youtube: data.youtube || "",
+          ceoName: data.ceoName || "",
+          ceoDesignation: data.ceoDesignation || "",
+          ceoSignatureUrl: data.ceoSignatureUrl || "",
         });
       } catch (err: any) {
         setError(err.message);
@@ -113,7 +122,7 @@ export default function WebsiteSettingsCMS() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="animate-spin text-[#0066FF]" size={32} />
+        <Loader2 className="animate-spin text-[#2563EB]" size={32} />
         <span className="ml-3 text-slate-300">Loading settings...</span>
       </div>
     );
@@ -142,8 +151,8 @@ export default function WebsiteSettingsCMS() {
         )}
 
         {/* Branding & Essentials */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-slate-200 border-b border-[#0E204A] pb-3 font-display">Essential Settings</h2>
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">Essential Settings</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
@@ -153,7 +162,7 @@ export default function WebsiteSettingsCMS() {
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -165,7 +174,7 @@ export default function WebsiteSettingsCMS() {
                 name="tagline"
                 value={formData.tagline}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -179,7 +188,7 @@ export default function WebsiteSettingsCMS() {
                 name="logoUrl"
                 value={formData.logoUrl}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -191,16 +200,59 @@ export default function WebsiteSettingsCMS() {
                 name="faviconUrl"
                 value={formData.faviconUrl}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
           </div>
         </div>
 
+        {/* Invoice & Signatory Settings */}
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">Invoice Signatory Settings</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400">Managing Director / Signatory Name</label>
+              <input
+                type="text"
+                name="ceoName"
+                value={formData.ceoName}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
+                required
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400">Signatory Designation</label>
+              <input
+                type="text"
+                name="ceoDesignation"
+                value={formData.ceoDesignation}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
+                required
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400">Digital Signature Image Path (Optional)</label>
+              <input
+                type="text"
+                name="ceoSignatureUrl"
+                value={formData.ceoSignatureUrl}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
+                placeholder="e.g. /signature.png"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Contact Coordinates */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-slate-200 border-b border-[#0E204A] pb-3 font-display">Contact Info</h2>
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">Contact Info</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-1.5">
@@ -210,7 +262,7 @@ export default function WebsiteSettingsCMS() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -222,7 +274,7 @@ export default function WebsiteSettingsCMS() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -234,7 +286,7 @@ export default function WebsiteSettingsCMS() {
                 name="whatsapp"
                 value={formData.whatsapp}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -248,7 +300,7 @@ export default function WebsiteSettingsCMS() {
                 name="officeAddress"
                 value={formData.officeAddress}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -260,7 +312,7 @@ export default function WebsiteSettingsCMS() {
                 name="workingHours"
                 value={formData.workingHours}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -273,15 +325,15 @@ export default function WebsiteSettingsCMS() {
               rows={2}
               value={formData.googleMapsLink}
               onChange={handleChange}
-              className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition resize-y font-mono text-xs"
+              className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition resize-y font-mono text-xs"
               required
             />
           </div>
         </div>
 
         {/* Social Accounts */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-slate-200 border-b border-[#0E204A] pb-3 font-display">Social Media Channels</h2>
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">Social Media Channels</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
@@ -291,7 +343,7 @@ export default function WebsiteSettingsCMS() {
                 name="linkedin"
                 value={formData.linkedin}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
               />
             </div>
 
@@ -302,7 +354,7 @@ export default function WebsiteSettingsCMS() {
                 name="instagram"
                 value={formData.instagram}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
               />
             </div>
 
@@ -313,7 +365,7 @@ export default function WebsiteSettingsCMS() {
                 name="facebook"
                 value={formData.facebook}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
               />
             </div>
 
@@ -324,7 +376,7 @@ export default function WebsiteSettingsCMS() {
                 name="twitter"
                 value={formData.twitter}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
               />
             </div>
 
@@ -335,14 +387,14 @@ export default function WebsiteSettingsCMS() {
                 name="youtube"
                 value={formData.youtube}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
               />
             </div>
           </div>
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit" disabled={saving} className="bg-[#0066FF] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
+          <Button type="submit" disabled={saving} className="bg-[#2563EB] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
             {saving ? (
               <>
                 <Loader2 size={16} className="animate-spin" /> Saving...

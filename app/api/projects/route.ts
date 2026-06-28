@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifyAdmin } from "@/lib/auth";
 
 export async function GET() {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
+    return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  }
+
   const projects = await prisma.project.findMany({
     orderBy: {
       createdAt: "desc",
@@ -12,6 +18,11 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const isAdmin = await verifyAdmin();
+  if (!isAdmin) {
+    return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     const lead = await prisma.lead.findUnique({
@@ -44,15 +55,39 @@ if (lead.converted) {
   );
 }
 
+    const lowercasedEmail = body.email.trim().toLowerCase();
+
+    // Find or create Client (case-insensitive)
+    let client = await prisma.client.findFirst({
+      where: {
+        email: {
+          equals: lowercasedEmail,
+          mode: "insensitive"
+        }
+      },
+    });
+
+    if (!client) {
+      client = await prisma.client.create({
+        data: {
+          company: body.company || "Individual",
+          contactPerson: body.clientName,
+          email: lowercasedEmail,
+          phone: body.phone,
+        },
+      });
+    }
+
     const project = await prisma.project.create({
       data: {
         projectName: body.projectName,
         clientName: body.clientName,
-        email: body.email,
+        email: lowercasedEmail,
         phone: body.phone,
         company: body.company,
         service: body.service,
         description: body.description,
+        clientId: client.id,
       },
     });
 
@@ -65,6 +100,16 @@ if (lead.converted) {
         converted: true,
         projectId: project.id,
         status: "COMPLETED",
+      },
+    });
+
+    // Create Project Notification
+    await prisma.notification.create({
+      data: {
+        type: "PROJECT_CREATED",
+        title: "Active Project Initialized",
+        message: `Project '${project.projectName}' was successfully created for ${project.clientName}.`,
+        read: false,
       },
     });
 

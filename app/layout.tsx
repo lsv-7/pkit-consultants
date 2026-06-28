@@ -5,12 +5,13 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { getSettings } from "@/lib/services/settings";
 import { getServices } from "@/lib/services/services";
+import { COMPANY } from "@/lib/company";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 
   return {
-    metadataBase: new URL("https://pkitconsultants.com"),
+    metadataBase: new URL(COMPANY.website),
     title: {
       default: settings.defaultSeoTitle,
       template: "%s | " + settings.companyName,
@@ -26,12 +27,12 @@ export async function generateMetadata(): Promise<Metadata> {
       "digital transformation UAE",
       settings.companyName,
     ],
-    authors: [{ name: settings.companyName, url: "https://pkitconsultants.com" }],
+    authors: [{ name: settings.companyName, url: COMPANY.website }],
     creator: settings.companyName,
     openGraph: {
       type: "website",
       locale: "en_AE",
-      url: "https://pkitconsultants.com",
+      url: COMPANY.website,
       siteName: settings.companyName,
       title: settings.defaultSeoTitle,
       description: settings.defaultSeoDescription,
@@ -86,7 +87,7 @@ export default async function RootLayout({
   }));
 
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -115,8 +116,8 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: settings.companyName,
-              url: "https://pkitconsultants.com",
-              logo: "https://pkitconsultants.com" + settings.logoUrl,
+              url: COMPANY.website,
+              logo: COMPANY.website + settings.logoUrl,
               description: settings.defaultSeoDescription,
               address: {
                 "@type": "PostalAddress",

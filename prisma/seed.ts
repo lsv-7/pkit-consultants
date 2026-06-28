@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { COMPANY, getAddressLine } from "../lib/company";
 
 const prisma = new PrismaClient();
 
@@ -8,12 +9,12 @@ async function main() {
   const hashedPassword = await bcrypt.hash("Admin@123", 10);
   await prisma.admin.upsert({
     where: {
-      email: "admin@pkitconsultants.com",
+      email: "mpkitconsultants@gmail.com",
     },
     update: {},
     create: {
       name: "PKIT Admin",
-      email: "admin@pkitconsultants.com",
+      email: "mpkitconsultants@gmail.com",
       password: hashedPassword,
     },
   });
@@ -23,27 +24,36 @@ async function main() {
   await prisma.websiteSettings.upsert({
     where: { id: "default" },
     update: {
-      tagline: "Technology Consulting",
+      tagline: COMPANY.tagline,
+      email: COMPANY.email,
+      phone: COMPANY.phone,
+      whatsapp: COMPANY.whatsappUrl,
+      officeAddress: getAddressLine(),
+      ceoName: COMPANY.ceoName,
+      ceoDesignation: COMPANY.ceoDesignation,
     },
     create: {
       id: "default",
-      companyName: "PKIT Consultants",
-      tagline: "Technology Consulting",
-      email: "pkitconsultants@gmail.com",
-      phone: "+971 50 116 4565",
-      whatsapp: "https://wa.me/971501164565",
-      officeAddress: "Dubai, United Arab Emirates",
-      googleMapsLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115494.39860649718!2d55.19799863481267!3d25.194849313063546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a6d489b%3A0x2f6cf9cf0c9a44c!2sDubai!5e0!3m2!1sen!2sae!4v1700000000000",
-      workingHours: "Monday - Friday: 9:00 AM - 6:00 PM (GST)",
-      logoUrl: "/logo.png",
-      faviconUrl: "/favicon.ico",
+      companyName: COMPANY.name,
+      tagline: COMPANY.tagline,
+      email: COMPANY.email,
+      phone: COMPANY.phone,
+      whatsapp: COMPANY.whatsappUrl,
+      officeAddress: getAddressLine(),
+      googleMapsLink: COMPANY.googleMapsEmbed,
+      workingHours: COMPANY.workingHours,
+      logoUrl: COMPANY.logoUrl,
+      faviconUrl: COMPANY.faviconUrl,
       linkedin: "",
       instagram: "",
       facebook: "",
       twitter: "",
       youtube: "",
-      defaultSeoTitle: "PKIT Consultants — Enterprise Software & AI Solutions in Dubai",
-      defaultSeoDescription: "Professional technology consultancy in Dubai. AI solutions, custom software engineering, cloud architectures, and dedicated IT support.",
+      defaultSeoTitle: COMPANY.defaultSeoTitle,
+      defaultSeoDescription: COMPANY.defaultSeoDescription,
+      ceoName: COMPANY.ceoName,
+      ceoDesignation: COMPANY.ceoDesignation,
+      ceoSignatureUrl: "",
     },
   });
   console.log("✅ WebsiteSettings seeded successfully");
@@ -353,6 +363,189 @@ async function main() {
     await prisma.fAQ.create({ data: f });
   }
   console.log("✅ FAQs seeded successfully");
+
+  // 8. Seed Notifications (Clear and Re-insert)
+  await prisma.notification.deleteMany({});
+  const initialNotifications = [
+    {
+      type: "NEW_LEAD",
+      title: "New Consultation Request",
+      message: "A new lead was submitted via the contact form.",
+      read: false,
+      createdAt: new Date(Date.now() - 1000 * 60 * 30),
+    },
+    {
+      type: "PROJECT_CREATED",
+      title: "Project Initialized",
+      message: "A new client project was created from a converted lead.",
+      read: false,
+      createdAt: new Date(Date.now() - 1000 * 60 * 120),
+    },
+    {
+      type: "CMS_UPDATED",
+      title: "Branding Configuration Saved",
+      message: "Website settings were updated by an administrator.",
+      read: true,
+      createdAt: new Date(Date.now() - 1000 * 60 * 600),
+    },
+    {
+      type: "LOGIN_ACTIVITY",
+      title: "Admin Dashboard Access",
+      message: "An administrator successfully signed in to the dashboard.",
+      read: true,
+      createdAt: new Date(Date.now() - 1000 * 60 * 1440),
+    },
+  ];
+  for (const n of initialNotifications) {
+    await prisma.notification.create({ data: n });
+  }
+  console.log("✅ Notifications seeded successfully");
+
+  // 9. Seed Invoices
+  await prisma.invoiceItem.deleteMany({});
+  await prisma.payment.deleteMany({});
+  await prisma.invoice.deleteMany({});
+
+  let client = await prisma.client.findFirst();
+  if (!client) {
+    client = await prisma.client.create({
+      data: {
+        company: "PKIT Portal Demo Client",
+        contactPerson: "Portal Demo User",
+        email: "portal-demo@pkitconsultants.com",
+        phone: COMPANY.phone,
+        website: "www.pkitconsultants.com",
+        address: "Deira, Dubai, United Arab Emirates",
+        notes: "Seed data for client portal testing",
+      }
+    });
+    console.log("✅ Seed client created");
+  }
+
+  let project = await prisma.project.findFirst({
+    where: { clientId: client.id }
+  });
+  if (!project) {
+    project = await prisma.project.create({
+      data: {
+        projectName: "Enterprise AI Integration",
+        clientName: client.contactPerson,
+        email: client.email,
+        phone: client.phone,
+        company: client.company,
+        service: "AI Solutions",
+        status: "IN_PROGRESS",
+        progress: 35,
+        clientId: client.id
+      }
+    });
+    console.log("✅ Seed project created");
+  }
+
+  // Create active client user if it doesn't exist so client login works
+  const existingClientUser = await prisma.clientUser.findFirst({
+    where: { clientId: client.id }
+  });
+  if (!existingClientUser) {
+    const passwordHash = await bcrypt.hash("PKIT-TEST12", 10);
+    await prisma.clientUser.create({
+      data: {
+        clientId: client.id,
+        fullName: client.contactPerson,
+        email: client.email,
+        passwordHash,
+        active: true
+      }
+    });
+    console.log("✅ Seed client user created");
+  }
+
+  const invoice1 = await prisma.invoice.create({
+    data: {
+      invoiceNumber: "INV-2026-0001",
+      invoiceDate: new Date("2026-06-01"),
+      dueDate: new Date("2026-06-15"),
+      clientId: client.id,
+      projectId: project.id,
+      status: "PAID",
+      subtotal: 10000,
+      vatRate: 5.0,
+      vatAmount: 500,
+      discount: 1000,
+      grandTotal: 9500,
+      amountInWords: "Nine Thousand Five Hundred United Arab Emirates Dirhams Only",
+      notes: "First milestone payment for AI Integration project.",
+      paymentStatus: "PAID",
+      items: {
+        create: [
+          {
+            serialNumber: 1,
+            description: "AI Integration Phase 1 - Architecture Scoping",
+            quantity: 1,
+            unitPrice: 4000,
+            amount: 4000,
+          },
+          {
+            serialNumber: 2,
+            description: "Development Sprint 1 - Core Backend & DB design",
+            quantity: 1,
+            unitPrice: 6000,
+            amount: 6000,
+          }
+        ]
+      },
+      payments: {
+        create: [
+          {
+            amount: 9500,
+            paymentDate: new Date("2026-06-10"),
+            paymentMethod: "BANK_TRANSFER",
+            transactionId: "TXN-987654321",
+            paymentReference: "HSBC Transfer #55442"
+          }
+        ]
+      }
+    }
+  });
+
+  const invoice2 = await prisma.invoice.create({
+    data: {
+      invoiceNumber: "INV-2026-0002",
+      invoiceDate: new Date("2026-06-20"),
+      dueDate: new Date("2026-07-05"),
+      clientId: client.id,
+      projectId: project.id,
+      status: "SENT",
+      subtotal: 15000,
+      vatRate: 5.0,
+      vatAmount: 750,
+      discount: 0,
+      grandTotal: 15750,
+      amountInWords: "Fifteen Thousand Seven Hundred Fifty United Arab Emirates Dirhams Only",
+      notes: "Second milestone payment for AI Integration development.",
+      paymentStatus: "UNPAID",
+      items: {
+        create: [
+          {
+            serialNumber: 1,
+            description: "Development Sprint 2 - Agentic workflow module",
+            quantity: 1,
+            unitPrice: 8000,
+            amount: 8000,
+          },
+          {
+            serialNumber: 2,
+            description: "Development Sprint 3 - CRM Portal front-end components",
+            quantity: 1,
+            unitPrice: 7000,
+            amount: 7000,
+          }
+        ]
+      }
+    }
+  });
+
+  console.log("✅ Invoices seeded successfully");
 }
 
 main()

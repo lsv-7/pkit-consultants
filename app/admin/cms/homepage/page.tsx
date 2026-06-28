@@ -155,7 +155,7 @@ export default function HomepageCMS() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="animate-spin text-[#0066FF]" size={32} />
+        <Loader2 className="animate-spin text-[#2563EB]" size={32} />
         <span className="ml-3 text-slate-300">Loading homepage content...</span>
       </div>
     );
@@ -184,8 +184,8 @@ export default function HomepageCMS() {
         )}
 
         {/* Hero Copy */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-slate-200 border-b border-[#0E204A] pb-3 font-display">Hero Copy & Call to Action</h2>
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <h2 className="text-base font-semibold text-slate-200 border-b border-[#1E293B] pb-3 font-display">Hero Copy & Call to Action</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
@@ -195,7 +195,7 @@ export default function HomepageCMS() {
                 name="heroTitleNormal"
                 value={formData.heroTitleNormal}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -207,7 +207,7 @@ export default function HomepageCMS() {
                 name="heroTitleHighlight"
                 value={formData.heroTitleHighlight}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -220,7 +220,7 @@ export default function HomepageCMS() {
               rows={3}
               value={formData.heroSubtitle}
               onChange={handleChange}
-              className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition resize-y"
+              className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition resize-y"
               required
             />
           </div>
@@ -233,7 +233,7 @@ export default function HomepageCMS() {
                 name="ctaText"
                 value={formData.ctaText}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -245,7 +245,7 @@ export default function HomepageCMS() {
                 name="ctaLink"
                 value={formData.ctaLink}
                 onChange={handleChange}
-                className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#2563EB] transition"
                 required
               />
             </div>
@@ -253,20 +253,20 @@ export default function HomepageCMS() {
         </div>
 
         {/* Why Choose Us Cards */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#0E204A] pb-3">
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
             <h2 className="text-base font-semibold text-slate-200 font-display">Why Choose Us Cards</h2>
-            <Button type="button" onClick={addCard} variant="secondary" size="sm" className="flex items-center gap-1 text-[#38BDF8] border-[#142D66] hover:bg-[#0C1A3D]">
+            <Button type="button" onClick={addCard} variant="secondary" size="sm" className="flex items-center gap-1 text-[#38BDF8] border-[#1E293B] hover:bg-[#1E293B]">
               <Plus size={14} /> Add Card
             </Button>
           </div>
 
           <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1">
             {formData.whyChooseUs.length === 0 ? (
-              <p className="text-xs text-slate-500 text-center py-4">No cards added. Click "Add Card" to begin.</p>
+              <p className="text-xs text-slate-500 text-center py-4">No cards added. Click &quot;Add Card&quot; to begin.</p>
             ) : (
               formData.whyChooseUs.map((card, idx) => (
-                <div key={idx} className="bg-[#0C1A3D]/40 border border-[#142D66]/60 rounded-lg p-4 space-y-3 relative group">
+                <div key={idx} className="bg-[#111827]/70 border border-[#1E293B]/60 rounded-lg p-4 space-y-3 relative group">
                   <button
                     type="button"
                     onClick={() => removeCard(idx)}
@@ -282,7 +282,7 @@ export default function HomepageCMS() {
                         type="text"
                         value={card.title}
                         onChange={(e) => handleCardChange(idx, "title", e.target.value)}
-                        className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition"
+                        className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition"
                         required
                       />
                     </div>
@@ -292,7 +292,7 @@ export default function HomepageCMS() {
                         type="text"
                         value={card.iconName}
                         onChange={(e) => handleCardChange(idx, "iconName", e.target.value)}
-                        className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition"
+                        className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition"
                         required
                       />
                     </div>
@@ -304,7 +304,7 @@ export default function HomepageCMS() {
                       value={card.desc}
                       rows={2}
                       onChange={(e) => handleCardChange(idx, "desc", e.target.value)}
-                      className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition resize-y"
+                      className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition resize-y"
                       required
                     />
                   </div>
@@ -315,20 +315,20 @@ export default function HomepageCMS() {
         </div>
 
         {/* Process Roadmap Stages */}
-        <div className="bg-[#060F24] border border-[#0E204A] rounded-xl p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#0E204A] pb-3">
+        <div className="bg-[#111827] border border-[#1E293B] rounded-xl p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
             <h2 className="text-base font-semibold text-slate-200 font-display">Development Process Stages</h2>
-            <Button type="button" onClick={addProcess} variant="secondary" size="sm" className="flex items-center gap-1 text-[#38BDF8] border-[#142D66] hover:bg-[#0C1A3D]">
+            <Button type="button" onClick={addProcess} variant="secondary" size="sm" className="flex items-center gap-1 text-[#38BDF8] border-[#1E293B] hover:bg-[#1E293B]">
               <Plus size={14} /> Add Stage
             </Button>
           </div>
 
           <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1">
             {formData.devProcess.length === 0 ? (
-              <p className="text-xs text-slate-500 text-center py-4">No stages added. Click "Add Stage" to begin.</p>
+              <p className="text-xs text-slate-500 text-center py-4">No stages added. Click &quot;Add Stage&quot; to begin.</p>
             ) : (
               formData.devProcess.map((step, idx) => (
-                <div key={idx} className="bg-[#0C1A3D]/40 border border-[#142D66]/60 rounded-lg p-4 space-y-3 relative">
+                <div key={idx} className="bg-[#111827]/70 border border-[#1E293B]/60 rounded-lg p-4 space-y-3 relative">
                   <button
                     type="button"
                     onClick={() => removeProcess(idx)}
@@ -344,7 +344,7 @@ export default function HomepageCMS() {
                         type="text"
                         value={step.num}
                         onChange={(e) => handleProcessChange(idx, "num", e.target.value)}
-                        className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition text-center font-mono"
+                        className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition text-center font-mono"
                         required
                       />
                     </div>
@@ -355,7 +355,7 @@ export default function HomepageCMS() {
                         type="text"
                         value={step.stepTitle}
                         onChange={(e) => handleProcessChange(idx, "stepTitle", e.target.value)}
-                        className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition"
+                        className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition"
                         required
                       />
                     </div>
@@ -367,7 +367,7 @@ export default function HomepageCMS() {
                       value={step.desc}
                       rows={2}
                       onChange={(e) => handleProcessChange(idx, "desc", e.target.value)}
-                      className="w-full bg-[#0C1A3D] border border-[#142D66] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#0066FF] transition resize-y"
+                      className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-[#2563EB] transition resize-y"
                       required
                     />
                   </div>
@@ -378,7 +378,7 @@ export default function HomepageCMS() {
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit" disabled={saving} className="bg-[#0066FF] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
+          <Button type="submit" disabled={saving} className="bg-[#2563EB] hover:bg-[#297FFF] px-6 py-2.5 flex items-center gap-2">
             {saving ? (
               <>
                 <Loader2 size={16} className="animate-spin" /> Saving...

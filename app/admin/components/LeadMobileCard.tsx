@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Lead } from "../types";
 import LeadModal from "./LeadModal";
+import { useToast } from "@/components/ui/ToastProvider";
 
 interface Props {
   lead: Lead;
@@ -19,12 +20,15 @@ const statuses = [
   "NEGOTIATION",
   "WON",
   "LOST",
+  "CONVERTED",
 ];
 
 export default function LeadMobileCard({ lead }: Props) {
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState(lead.status);
   const [saving, setSaving] = useState(false);
+  const [converting, setConverting] = useState(false);
 
   async function updateStatus(newStatus: string) {
     setStatus(newStatus);
@@ -43,11 +47,36 @@ export default function LeadMobileCard({ lead }: Props) {
     setSaving(false);
   }
 
+  async function handleConvert() {
+    if (converting) return;
+    setConverting(true);
+
+    try {
+      const res = await fetch(`/api/leads/${lead.id}/convert`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("CONVERTED");
+        toast.success("Lead successfully converted to client.");
+        window.location.reload();
+      } else {
+        toast.error(data.message || "Failed to convert lead.");
+      }
+    } catch {
+      toast.error("An error occurred during conversion.");
+    } finally {
+      setConverting(false);
+    }
+  }
+
+  const isConverted = lead.converted || status === "CONVERTED";
+
   return (
     <>
-      <Card className="flex flex-col gap-4 border border-[#0E204A] bg-[#060F24]/50 p-5 rounded-xl hover:border-[#142D66]" hoverEffect>
+      <Card className="flex flex-col gap-4 border border-[#1E293B] bg-[#111827]/50 p-5 rounded-xl hover:border-[#1E293B]" hoverEffect>
         {/* Card Header (Name and Company) */}
-        <div className="flex justify-between items-start border-b border-[#0E204A]/60 pb-3">
+        <div className="flex justify-between items-start border-b border-[#1E293B]/60 pb-3">
           <div>
             <h3 className="font-semibold text-slate-200 text-sm">{lead.fullName}</h3>
             <p className="text-xs text-slate-500 mt-0.5">{lead.company || "No Company"}</p>
@@ -75,29 +104,41 @@ export default function LeadMobileCard({ lead }: Props) {
         </div>
 
         {/* Card Actions (Status Select & View Button) */}
-        <div className="flex items-center justify-between gap-3 pt-3 border-t border-[#0E204A]/60 mt-1">
-          <div className="flex-1">
-            <select
-              value={status}
-              disabled={saving}
-              onChange={(e) => updateStatus(e.target.value)}
-              className="w-full bg-[#020612] border border-[#0E204A] rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF]/20"
+        <div className="flex flex-col gap-2.5 pt-3 border-t border-[#1E293B]/60 mt-1">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <select
+                value={status}
+                disabled={saving}
+                onChange={(e) => updateStatus(e.target.value)}
+                className="w-full bg-[#0B1120] border border-[#1E293B] rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/20"
+              >
+                {statuses.map((s) => (
+                  <option key={s} value={s}>
+                    {s.replaceAll("_", " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <Button
+              onClick={() => setOpen(true)}
+              variant="primary"
+              size="sm"
+              className="flex-shrink-0"
             >
-              {statuses.map((s) => (
-                <option key={s} value={s}>
-                  {s.replaceAll("_", " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
-                </option>
-              ))}
-            </select>
+              Details <ChevronRight size={13} />
+            </Button>
           </div>
 
           <Button
-            onClick={() => setOpen(true)}
-            variant="primary"
+            onClick={handleConvert}
+            disabled={isConverted || converting}
+            variant={isConverted ? "secondary" : "indigo"}
             size="sm"
-            className="flex-shrink-0"
+            className="w-full text-xs font-semibold"
           >
-            Details <ChevronRight size={13} />
+            {isConverted ? "Already Converted" : converting ? "Converting..." : "Convert to Client"}
           </Button>
         </div>
       </Card>
