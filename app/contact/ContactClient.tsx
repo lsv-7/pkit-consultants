@@ -127,7 +127,7 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
             Consultation Request Sent!
           </h3>
           <p style={{ color: "var(--muted)", fontSize: 14.5, lineHeight: 1.6, maxWidth: 360, marginInline: "auto" }}>
-            Thank you for reaching out. A senior technical consultant from PKIT will review your details and contact you within 24 business hours.
+            Thank you for reaching out. A senior technical consultant from PK IT will review your details and contact you within 24 business hours.
           </p>
           <button
             onClick={() => setSubmitted(false)}
@@ -415,7 +415,7 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
                 }}
               >
                 <iframe
-                  title="PKIT Consultants Dubai Office Location"
+                  title="PK IT Consultants Dubai Office Location"
                   src={companyInfo.mapEmbedUrl}
                   width="100%"
                   height="100%"

@@ -59,7 +59,7 @@ export default function Footer({ settings, services }: FooterProps) {
             >
               <Image src="/logo.png" alt={companyInfo.name} width={36} height={36} style={{ borderRadius: 8 }} />
               <span className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>
-                {COMPANY.name.split(" ")[0]}<span style={{ color: "var(--blue)" }}>.</span>
+                {COMPANY.shortName || "PK IT"} <span style={{ color: "var(--blue)" }}>Consultants</span>
               </span>
             </Link>
             <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.75, maxWidth: 280 }}>

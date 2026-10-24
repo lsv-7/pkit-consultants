@@ -15,6 +15,8 @@
   --muted: #94A3B8;            /* Slate descriptions */
   --muted-2: #475569;          /* Slate subtle text */
   --logo-dark-blue: #0F172A;
+  --gold: #C89B3C;             /* Dubai prestige gold accent */
+  --gold-soft: rgba(200, 155, 60, 0.12);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
@@ -38,6 +40,8 @@
   --muted: #475569;            /* Slate 600 description text */
   --muted-2: #94a3b8;          /* Slate 400 subtle text */
   --logo-dark-blue: #e2e8f0;   /* Light gray logo bg alternative */
+  --gold: #B48528;             /* Rich gold for light mode contrast */
+  --gold-soft: rgba(180, 133, 40, 0.1);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
@@ -208,6 +212,24 @@ body {
   );
   opacity: 0.45;
   pointer-events: none;
+}
+
+/* ─── Architectural Blueprint Grid ─────────────────────────────────── */
+.bg-blueprint {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(37, 99, 235, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+/* ─── Gold Badge Accent ─────────────────────────────────────────────── */
+.badge-gold {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border: 1px solid rgba(200, 155, 60, 0.28);
 }
 
 /* ─── Glow ───────────────────────────────────────────────────────────── */

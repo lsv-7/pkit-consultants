@@ -40,11 +40,11 @@ export function invoiceEmail(params: InvoiceEmailParams): string {
 
     <p>Thank you for your business.</p>
     
-    <p>Best regards,<br><strong>PKIT Accounts Dept.</strong></p>
+    <p>Best regards,<br><strong>PK IT Accounts Dept.</strong></p>
   `;
 
   return getBaseLayout({
-    title: `Invoice ${params.invoiceNumber} from PKIT Consultants`,
+    title: `Invoice ${params.invoiceNumber} from PK IT Consultants`,
     previewText: `Invoice ${params.invoiceNumber} for ${params.amountFormatted} is now available.`,
     contentHtml,
   });

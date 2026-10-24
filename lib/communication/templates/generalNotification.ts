@@ -24,7 +24,7 @@ export function generalNotificationEmail(params: GeneralNotificationParams): str
 
     <p>If you have any questions or would like to discuss this notice further, please reply to this email.</p>
     
-    <p>Best regards,<br><strong>PKIT Client Operations</strong></p>
+    <p>Best regards,<br><strong>PK IT Client Operations</strong></p>
   `;
 
   return getBaseLayout({

@@ -60,7 +60,7 @@ export class SmtpProvider implements EmailProvider {
 
   async send(options: MailOptions) {
     const fromEmail = process.env.FROM_EMAIL || "mpkitconsultants@gmail.com";
-    const fromName = process.env.FROM_NAME || "PKIT Consultants";
+    const fromName = process.env.FROM_NAME || "PK IT Consultants";
 
     try {
       const transporter = await this.getTransporter();

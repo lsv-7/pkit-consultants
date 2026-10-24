@@ -135,7 +135,7 @@ export default function AdminDashboard() {
     invoiceList.forEach((inv: any) => {
       if (inv.paymentStatus === "PAID" && inv.invoiceDate) {
         const d = new Date(inv.invoiceDate);
-        const key = `${monthNames[d.getMonth()]} ${d.getFullYear().toString().slice(-2)}`;
+        const key = `${monthNames[d.getUTCMonth()]} ${d.getUTCFullYear().toString().slice(-2)}`;
         if (key in monthlyMap) {
           monthlyMap[key] += inv.grandTotal || 0;
         }

@@ -7,6 +7,7 @@ import { ArrowLeft, Printer, Download, Mail, Phone, Globe, MapPin, CreditCard, L
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/ToastProvider";
 import { COMPANY, getWebsiteHost } from "@/lib/company";
+import { formatDisplayDate } from "@/lib/date";
 
 interface InvoiceItem {
   id: string;
@@ -193,7 +194,7 @@ export default function ClientInvoicePreviewPage({ params }: Props) {
             <div className="invoice-header-row">
               <div className="invoice-brand-block">
                 <div className="invoice-logo-title-row">
-                  <img src={logoUrl} alt="PKIT logo" className="invoice-logo-img" />
+                  <img src={logoUrl} alt="PK IT logo" className="invoice-logo-img" />
                   <span className="invoice-company-name">{companyName.toUpperCase()}</span>
                 </div>
               </div>
@@ -240,14 +241,14 @@ export default function ClientInvoicePreviewPage({ params }: Props) {
                       <td className="meta-label">Invoice Date</td>
                       <td className="meta-colon">:</td>
                       <td className="meta-value">
-                        {new Date(invoice.invoiceDate).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" })}
+                        {formatDisplayDate(invoice.invoiceDate)}
                       </td>
                     </tr>
                     <tr>
                       <td className="meta-label">Due Date</td>
                       <td className="meta-colon">:</td>
                       <td className="meta-value">
-                        {new Date(invoice.dueDate).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" })}
+                        {formatDisplayDate(invoice.dueDate)}
                       </td>
                     </tr>
                     <tr>
@@ -368,7 +369,7 @@ export default function ClientInvoicePreviewPage({ params }: Props) {
                   <div className="invoice-sig-line-block">
                     <div className="invoice-sig-name">M. Prasanna Kumar</div>
                     <div className="invoice-sig-title">Founder & Managing Director</div>
-                    <div className="invoice-sig-company">PKIT Consultants</div>
+                    <div className="invoice-sig-company">{companyName || "PK IT Consultants"}</div>
                   </div>
                 </div>
               </div>

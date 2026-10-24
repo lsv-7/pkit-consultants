@@ -199,7 +199,7 @@ export class CommunicationService {
     const html = templates.consultationConfirmationEmail({ clientName });
     return this.sendEmail({
       recipient: recipientEmail,
-      subject: "Thank you for contacting PKIT Consultants",
+      subject: "Thank you for contacting PK IT Consultants",
       html,
       type: "CONSULTATION_CONFIRMATION",
       leadId,

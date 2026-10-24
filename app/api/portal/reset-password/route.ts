@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       clientUser.email,
       clientUser.fullName,
       "Security Notice: Password Reset Complete",
-      "This email confirms that the password for your PKIT Client Portal account has been successfully reset. If you did not make this change, please contact PKIT Client Support immediately.",
+      "This email confirms that the password for your PK IT Client Portal account has been successfully reset. If you did not make this change, please contact PK IT Client Support immediately.",
       "Go to Portal",
       `${process.env.NEXT_PUBLIC_APP_URL || "https://www.pkitconsultants.com"}/portal/login`,
       clientUser.clientId

@@ -66,7 +66,7 @@ async function main() {
       id: "default",
       heroTitleNormal: "Connecting Business",
       heroTitleHighlight: "Technology",
-      heroSubtitle: "PKIT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
+      heroSubtitle: "PK IT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
       ctaText: "Get Free Consultation",
       ctaLink: "/contact",
       whyChooseUs: [
@@ -331,7 +331,7 @@ async function main() {
       active: true,
     },
     {
-      question: "Where is the PKIT team located?",
+      question: "Where is the PK IT team located?",
       answer: "Our leadership and senior software architects are located in Dubai, United Arab Emirates. We manage all direct system scoping and client deliveries locally to maintain alignment with your business workflows.",
       category: "Company",
       displayOrder: 1,
@@ -353,7 +353,7 @@ async function main() {
     },
     {
       question: "Will the scoping team be the same team building our software?",
-      answer: "Yes. At PKIT Consultants, we follow a senior-engineers-only delivery model. The architects who examine your systems and design your technical blueprint are the same engineers who write your production code.",
+      answer: "Yes. At PK IT Consultants, we follow a senior-engineers-only delivery model. The architects who examine your systems and design your technical blueprint are the same engineers who write your production code.",
       category: "Quality",
       displayOrder: 4,
       active: true,

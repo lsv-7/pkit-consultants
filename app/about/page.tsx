@@ -51,9 +51,9 @@ export default async function About() {
         {/* Hero Section */}
         <div style={{ marginBottom: 80 }}>
           <SectionHeader
-            eyebrow="About PKIT"
+            eyebrow="About PK IT"
             heading="Connecting Business with Technology"
-            description="Headquartered in Dubai, UAE, PKIT Consultants helps startups and enterprises accelerate digital transformation through high-end software development, AI solutions, and strategic technical consulting."
+            description="Headquartered in Dubai, UAE, PK IT Consultants helps startups and enterprises accelerate digital transformation through high-end software development, AI solutions, and strategic technical consulting."
           />
         </div>
 

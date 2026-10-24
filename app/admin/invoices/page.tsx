@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/ToastProvider";
+import { formatDisplayDate } from "@/lib/date";
 
 interface Invoice {
   id: string;
@@ -317,9 +318,9 @@ export default function InvoicesPage() {
                         <div className="text-[11px] text-slate-500 mt-0.5">{inv.project?.projectName || "No Project Link"}</div>
                       </td>
                       <td className="py-3 px-5">
-                        <div className="text-slate-300">Issued: {new Date(inv.invoiceDate).toLocaleDateString()}</div>
+                        <div className="text-slate-300">Issued: {formatDisplayDate(inv.invoiceDate)}</div>
                         <div className={`text-xs mt-1 ${isPassedDue ? "text-rose-400 font-semibold" : "text-slate-500"}`}>
-                          Due: {new Date(inv.dueDate).toLocaleDateString()} {isPassedDue && "(Overdue)"}
+                          Due: {formatDisplayDate(inv.dueDate)} {isPassedDue && "(Overdue)"}
                         </div>
                       </td>
                       <td className="py-3 px-5 font-mono font-bold text-slate-200">
@@ -407,9 +408,9 @@ export default function InvoicesPage() {
                     <p className="text-xs text-slate-500 mt-0.5">{inv.project?.projectName || "No linked project"}</p>
                   </div>
                   <div className="flex justify-between text-xs text-slate-400">
-                    <span>Issued: {new Date(inv.invoiceDate).toLocaleDateString()}</span>
+                    <span>Issued: {formatDisplayDate(inv.invoiceDate)}</span>
                     <span className={isPassedDue ? "text-rose-400 font-semibold" : ""}>
-                      Due: {new Date(inv.dueDate).toLocaleDateString()}
+                      Due: {formatDisplayDate(inv.dueDate)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center border-t border-[#1E293B]/40 pt-2.5">

@@ -619,7 +619,7 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
             <Reveal>
               <span className="eyebrow">Our Value</span>
               <h2 className="font-display" style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, marginTop: 12 }}>
-                Why Choose PKIT Consultants?
+                Why Choose PK IT Consultants?
               </h2>
               <p style={{ color: "var(--muted)", fontSize: 16, marginTop: 12, maxWidth: 540, marginInline: "auto" }}>
                 We act as a committed technology partner, focusing on code quality, infrastructure safety, and transparent communication.

@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/ToastProvider";
+import { formatDisplayDate } from "@/lib/date";
 
 interface Invoice {
   id: string;
@@ -121,12 +122,12 @@ export default function ClientInvoicesPage() {
                     
                     {/* Issue Date */}
                     <td className="p-4.5 text-slate-400">
-                      {new Date(inv.invoiceDate).toLocaleDateString()}
+                      {formatDisplayDate(inv.invoiceDate)}
                     </td>
                     
                     {/* Due Date */}
                     <td className={`p-4.5 ${isPassedDue ? "text-rose-400 font-bold" : "text-slate-400"}`}>
-                      {new Date(inv.dueDate).toLocaleDateString()} {isPassedDue && "(Overdue)"}
+                      {formatDisplayDate(inv.dueDate)} {isPassedDue && "(Overdue)"}
                     </td>
                     
                     {/* Amount */}
@@ -198,7 +199,7 @@ export default function ClientInvoicesPage() {
               </div>
               <div>
                 <h4 className="font-semibold text-slate-200 text-sm">{inv.project?.projectName || "General Consulting"}</h4>
-                <p className="text-[11px] text-slate-500 mt-0.5">Due: {new Date(inv.dueDate).toLocaleDateString()}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">Due: {formatDisplayDate(inv.dueDate)}</p>
               </div>
               <div className="flex justify-between items-center border-t border-[#0E204A]/40 pt-2.5">
                 <span className="font-mono font-bold text-slate-200 text-sm">AED {inv.grandTotal.toLocaleString()}</span>

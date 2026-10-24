@@ -40,7 +40,7 @@ export function paymentReceiptEmail(params: PaymentReceiptParams): string {
 
     <p>We appreciate your business.</p>
     
-    <p>Best regards,<br><strong>PKIT Accounts Dept.</strong></p>
+    <p>Best regards,<br><strong>PK IT Accounts Dept.</strong></p>
   `;
 
   return getBaseLayout({

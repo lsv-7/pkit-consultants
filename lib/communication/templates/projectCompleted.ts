@@ -23,9 +23,9 @@ export function projectCompletedEmail(params: ProjectCompletedParams): string {
       <a href="${params.portalUrl}" class="btn-primary" style="background-color: #16a34a;">Access Project Deliverables</a>
     </p>
 
-    <p>We want to thank you for choosing PKIT Consultants. We look forward to supporting your maintenance phases and partnering with you on future technology initiatives.</p>
+    <p>We want to thank you for choosing PK IT Consultants. We look forward to supporting your maintenance phases and partnering with you on future technology initiatives.</p>
     
-    <p>Best regards,<br><strong>M. Prasanna Kumar</strong><br>Founder & Managing Director<br>PKIT Consultants</p>
+    <p>Best regards,<br><strong>M. Prasanna Kumar</strong><br>Founder & Managing Director<br>PK IT Consultants</p>
   `;
 
   return getBaseLayout({

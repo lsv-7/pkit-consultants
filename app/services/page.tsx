@@ -33,7 +33,7 @@ export default async function ServicesPage() {
   }));
 
   const companyInfo = {
-    name: settings.companyName || "PKIT Consultants",
+    name: settings.companyName || "PK IT Consultants",
     tagline: settings.tagline || "Technology. Consulting. Solutions.",
     whatsappLink: settings.whatsapp || COMPANY.whatsappUrl,
   };

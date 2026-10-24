@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Briefcase, LogOut, ChevronLeft, ChevronRight, X, Settings, Home, Cpu, Network, Layers, HelpCircle, Image, Globe, Users, FileText, Mail } from "lucide-react";
+import { LayoutDashboard, Briefcase, LogOut, ChevronLeft, ChevronRight, X, Settings, Home, Cpu, Network, Layers, HelpCircle, Image, Globe, Users, FileText, Mail, FileSignature } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { COMPANY } from "@/lib/company";
 
@@ -57,6 +57,11 @@ export default function Sidebar({
       name: "Communications",
       href: "/admin/communications",
       icon: Mail,
+    },
+    {
+      name: "Letterhead",
+      href: "/admin/letterhead",
+      icon: FileSignature,
     },
   ];
 

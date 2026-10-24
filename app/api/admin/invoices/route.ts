@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/auth";
 import { COMPANY } from "@/lib/company";
+import { parseDateMiddayUtc, isValidDateString, isDueDateValid } from "@/lib/date";
 
 // Number to Words Helper for UAE Dirhams
 function numberToWords(amount: number): string {
@@ -113,6 +114,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Missing required fields or item list is empty" }, { status: 400 });
     }
 
+    if (!isValidDateString(invoiceDate) || !isValidDateString(dueDate)) {
+      return NextResponse.json({ success: false, message: "Invalid invoice date or due date format" }, { status: 400 });
+    }
+
+    if (!isDueDateValid(invoiceDate, dueDate)) {
+      return NextResponse.json({ success: false, message: "Due date cannot be prior to the invoice date" }, { status: 400 });
+    }
+
     let actualClientId = clientId;
     let actualProjectId = projectId;
 
@@ -189,8 +198,8 @@ export async function POST(req: Request) {
     const invoice = await prisma.invoice.create({
       data: {
         invoiceNumber,
-        invoiceDate: new Date(invoiceDate),
-        dueDate: new Date(dueDate),
+        invoiceDate: parseDateMiddayUtc(invoiceDate),
+        dueDate: parseDateMiddayUtc(dueDate),
         clientId: actualClientId,
         projectId: actualProjectId || null,
         status,

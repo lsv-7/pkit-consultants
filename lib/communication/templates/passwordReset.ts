@@ -9,7 +9,7 @@ interface PasswordResetParams {
 export function passwordResetEmail(params: PasswordResetParams): string {
   const contentHtml = `
     <p>Dear ${params.clientName},</p>
-    <p>We received a request to reset the password for your PKIT Client Portal account. Click the button below to secure your account and set a new password:</p>
+    <p>We received a request to reset the password for your PK IT Client Portal account. Click the button below to secure your account and set a new password:</p>
     
     <p style="text-align: center;">
       <a href="${params.resetUrl}" class="btn-primary">Reset Password</a>
@@ -24,12 +24,12 @@ export function passwordResetEmail(params: PasswordResetParams): string {
     <p>If the button above does not work, copy and paste the following URL into your browser:</p>
     <p style="word-break: break-all; font-size: 12px; color: #64748b;"><a href="${params.resetUrl}">${params.resetUrl}</a></p>
 
-    <p>Best regards,<br><strong>PKIT Client Operations</strong></p>
+    <p>Best regards,<br><strong>PK IT Client Operations</strong></p>
   `;
 
   return getBaseLayout({
-    title: "Reset Your PKIT Portal Password",
-    previewText: "Reset your PKIT Client Portal password using this link.",
+    title: "Reset Your PK IT Portal Password",
+    previewText: "Reset your PK IT Client Portal password using this link.",
     contentHtml,
   });
 }

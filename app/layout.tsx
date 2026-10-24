@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Chatbot from "@/components/Chatbot";
 import { getSettings } from "@/lib/services/settings";
 import { getServices } from "@/lib/services/services";
 import { COMPANY } from "@/lib/company";
@@ -149,6 +150,7 @@ export default async function RootLayout({
           <Navbar settings={mappedSettings} />
           <main style={{ flex: 1 }}>{children}</main>
           <Footer settings={mappedSettings} services={mappedServices} />
+          <Chatbot />
         </ThemeProvider>
       </body>
     </html>

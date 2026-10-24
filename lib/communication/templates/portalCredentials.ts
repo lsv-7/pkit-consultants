@@ -10,7 +10,7 @@ interface PortalCredentialsParams {
 export function portalCredentialsEmail(params: PortalCredentialsParams): string {
   const contentHtml = `
     <p>Dear ${params.clientName},</p>
-    <p>Your portal user account has been successfully provisioned. You can now log in to the secure PKIT Client Portal using the credentials below:</p>
+    <p>Your portal user account has been successfully provisioned. You can now log in to the secure PK IT Client Portal using the credentials below:</p>
     
     <div class="highlight-box">
       <p style="margin: 0 0 8px 0;"><strong>Portal Login URL:</strong> <a href="${params.loginUrl}" style="color: #0066FF; text-decoration: underline;">${params.loginUrl}</a></p>
@@ -29,12 +29,12 @@ export function portalCredentialsEmail(params: PortalCredentialsParams): string 
       <li style="margin-bottom: 6px;">Ensure you connect to the portal using a secure network environment.</li>
     </ul>
 
-    <p>Best regards,<br><strong>PKIT Client Operations</strong></p>
+    <p>Best regards,<br><strong>PK IT Client Operations</strong></p>
   `;
 
   return getBaseLayout({
-    title: "Your PKIT Client Portal Credentials",
-    previewText: "Your secure PKIT Client Portal credentials have been generated.",
+    title: "Your PK IT Client Portal Credentials",
+    previewText: "Your secure PK IT Client Portal credentials have been generated.",
     contentHtml,
   });
 }

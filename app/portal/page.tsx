@@ -190,7 +190,7 @@ export default function PortalDashboard() {
         <div className="space-y-6">
           {/* PM Card */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">PKIT Support</h3>
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">PK IT Support</h3>
             <Card className="border border-[#0E204A] bg-[#060F24]/50 p-5 rounded-xl space-y-4">
               <div className="flex items-center gap-3.5 pb-2 border-b border-[#0E204A]/60">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#0066FF] to-[#38BDF8] flex items-center justify-center text-sm font-bold text-white shadow-md shadow-blue-500/10">

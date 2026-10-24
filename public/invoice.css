@@ -1,4 +1,4 @@
-/* PKIT Consultants Professional Invoice Stylesheet */
+/* PK IT Consultants Professional Invoice Stylesheet */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Playball&display=swap');
 
@@ -131,7 +131,7 @@
 }
 
 .invoice-watermark::after {
-  content: var(--watermark-text, "PKIT CONSULTANTS");
+  content: var(--watermark-text, "PK IT CONSULTANTS");
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-size: 38px;
   font-weight: 700;

@@ -3,11 +3,12 @@
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Plus, Trash2, Check, Loader2, ChevronUp, ChevronDown, Copy } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Check, Loader2, ChevronUp, ChevronDown, Copy, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/ToastProvider";
 import { COMPANY } from "@/lib/company";
+import { formatDisplayDate, formatDateInput } from "@/lib/date";
 
 interface Project {
   id: string;
@@ -76,8 +77,8 @@ export default function EditInvoicePage({ params }: Props) {
       if (dataInvoice.success) {
         const inv = dataInvoice.invoice;
         setInvoiceNumber(inv.invoiceNumber);
-        setInvoiceDate(new Date(inv.invoiceDate).toISOString().split("T")[0]);
-        setDueDate(new Date(inv.dueDate).toISOString().split("T")[0]);
+        setInvoiceDate(formatDateInput(inv.invoiceDate));
+        setDueDate(formatDateInput(inv.dueDate));
         setSelectedClientId(inv.clientId);
         setSelectedProjectId(inv.projectId || "");
         setStatus(inv.status);
@@ -178,6 +179,10 @@ export default function EditInvoicePage({ params }: Props) {
       toast.error("Please fill in descriptions for all invoice item rows.");
       return;
     }
+    if (dueDate && invoiceDate && dueDate < invoiceDate) {
+      toast.error("Due date cannot be earlier than the invoice issue date.");
+      return;
+    }
     setSaving(true);
 
     try {
@@ -264,9 +269,17 @@ export default function EditInvoicePage({ params }: Props) {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                Invoice Date
-              </label>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Calendar size={12} className="text-[#2563EB]" />
+                  Invoice Date
+                </label>
+                {invoiceDate && (
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    {formatDisplayDate(invoiceDate)}
+                  </span>
+                )}
+              </div>
               <input
                 type="date"
                 required
@@ -277,9 +290,17 @@ export default function EditInvoicePage({ params }: Props) {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                Due Date
-              </label>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Calendar size={12} className="text-amber-500" />
+                  Due Date
+                </label>
+                {dueDate && (
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    {formatDisplayDate(dueDate)}
+                  </span>
+                )}
+              </div>
               <input
                 type="date"
                 required

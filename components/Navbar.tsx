@@ -110,7 +110,7 @@ export default function Navbar({ settings }: NavbarProps) {
                 }}
               >
                 <span className="brand-name-full">{companyInfo.name || COMPANY.name}</span>
-                <span className="brand-name-abbr">{COMPANY.name.split(" ")[0]}</span>
+                <span className="brand-name-abbr">{COMPANY.shortName || "PK IT"}</span>
               </span>
               <span
                 className="brand-tagline"

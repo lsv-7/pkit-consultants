@@ -41,7 +41,7 @@ export function projectStatusUpdatedEmail(params: ProjectStatusUpdatedParams): s
 
     <p>We will keep you informed as we make progress toward our next key deliverables. Please log in to the Client Portal for a detailed breakdown of the tasks completed.</p>
     
-    <p>Best regards,<br><strong>PKIT Engineering Ops</strong></p>
+    <p>Best regards,<br><strong>PK IT Engineering Ops</strong></p>
   `;
 
   return getBaseLayout({

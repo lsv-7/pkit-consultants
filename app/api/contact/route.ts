@@ -83,7 +83,7 @@ export async function POST(req: Request) {
       await prisma.sentEmail.create({
         data: {
           recipient: lead.email,
-          subject: "Thank you for contacting PKIT Consultants",
+          subject: "Thank you for contacting PK IT Consultants",
           body: "Failed to render or queue confirmation email.",
           type: "CONSULTATION_CONFIRMATION",
           status: "FAILED",

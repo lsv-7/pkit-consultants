@@ -37,7 +37,7 @@ export function projectAssignedEmail(params: ProjectAssignedParams): string {
 
     <p>Our engineering and architectural leads will schedule a kick-off session with your team shortly.</p>
     
-    <p>Best regards,<br><strong>PKIT Engineering Ops</strong></p>
+    <p>Best regards,<br><strong>PK IT Engineering Ops</strong></p>
   `;
 
   return getBaseLayout({

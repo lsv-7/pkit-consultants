@@ -12,7 +12,7 @@ interface ConsultationReceivedParams {
 export function consultationReceivedEmail(params: ConsultationReceivedParams): string {
   const contentHtml = `
     <p>Hello Admin Team,</p>
-    <p>A new consultation request has been submitted on the PKIT website. Please review the details below to follow up with the lead:</p>
+    <p>A new consultation request has been submitted on the PK IT website. Please review the details below to follow up with the lead:</p>
     
     <div class="highlight-box">
       <table style="width: 100%; border: none;">
@@ -44,7 +44,7 @@ export function consultationReceivedEmail(params: ConsultationReceivedParams): s
     </div>
 
     <p>Please log in to the CRM Admin Panel to view details and convert this request into a project.</p>
-    <p>Regards,<br><strong>PKIT Notification System</strong></p>
+    <p>Regards,<br><strong>PK IT Notification System</strong></p>
   `;
 
   return getBaseLayout({

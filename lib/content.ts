@@ -1,4 +1,4 @@
-// PKIT Consultants — Public Website Content Layer
+// PK IT Consultants — Public Website Content Layer
 // Company constants live in lib/company.ts (single source of truth).
 import { COMPANY, getAddressLine } from "@/lib/company";
 
@@ -75,7 +75,7 @@ export function getHeroContent() {
     eyebrow: COMPANY.name,
     headingNormal: "Connecting Business",
     headingHighlight: "Technology",
-    subheading: "PKIT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
+    subheading: "PK IT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
     primaryCta: "Get Free Consultation",
     secondaryCta: "Explore Services",
   };
@@ -251,7 +251,7 @@ const faqs: FAQItem[] = [
   },
   {
     id: "faq-2",
-    question: "Where is the PKIT team located?",
+    question: "Where is the PK IT team located?",
     answer: "Our leadership and senior software architects are located in Dubai, United Arab Emirates. We manage all direct system scoping and client deliveries locally to maintain alignment with your business workflows.",
     category: "Company",
   },
@@ -270,7 +270,7 @@ const faqs: FAQItem[] = [
   {
     id: "faq-5",
     question: "Will the scoping team be the same team building our software?",
-    answer: "Yes. At PKIT Consultants, we follow a senior-engineers-only delivery model. The architects who examine your systems and design your technical blueprint are the same engineers who write your production code.",
+    answer: "Yes. At PK IT Consultants, we follow a senior-engineers-only delivery model. The architects who examine your systems and design your technical blueprint are the same engineers who write your production code.",
     category: "Quality",
   },
 ];
@@ -284,7 +284,7 @@ export function getAboutContent() {
   return {
     storyTitle: "Established in Dubai for Global Impact",
     storyParagraphs: [
-      "Originally founded in 2026, PKIT Consultants was born out of a simple observation: most businesses struggle to get genuine ROI from technology. Large agencies build bloated, standard systems, while outsourcing shops often lack accountability.",
+      "Originally founded in 2026, PK IT Consultants was born out of a simple observation: most businesses struggle to get genuine ROI from technology. Large agencies build bloated, standard systems, while outsourcing shops often lack accountability.",
       "We set out to build a consultancy where engineering excellence meets commercial business goals. Today, we provide elite custom software, mobile apps, generative AI integrations, and cloud architectures for organizations across the UAE and globally.",
     ],
     mission: "To empower companies with customized, performant digital infrastructure. We solve business challenges with strategic software development, ensuring our clients achieve long-term growth and operational efficiency.",
@@ -293,8 +293,8 @@ export function getAboutContent() {
       name: "M. Prasanna Kumar",
       title: "Founder & Managing Director",
       bio: [
-        "M. Prasanna Kumar founded PKIT Consultants with a deep passion for clean engineering and a commitment to helping UAE businesses bridge the technical gap. Originally from Andhra Pradesh, India, he established the firm in Dubai, UAE, to assemble an elite squad of engineers capable of executing high-complexity software systems.",
-        "Under his leadership, PKIT operates with a customer-centric delivery framework. We strictly focus on outcomes, engineering robustness, and absolute technical transparency.",
+        "M. Prasanna Kumar founded PK IT Consultants with a deep passion for clean engineering and a commitment to helping UAE businesses bridge the technical gap. Originally from Andhra Pradesh, India, he established the firm in Dubai, UAE, to assemble an elite squad of engineers capable of executing high-complexity software systems.",
+        "Under his leadership, PK IT operates with a customer-centric delivery framework. We strictly focus on outcomes, engineering robustness, and absolute technical transparency.",
       ],
     },
     values: [

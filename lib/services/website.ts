@@ -13,7 +13,7 @@ export interface HomepageData {
 export const DEFAULT_HOMEPAGE: HomepageData = {
   heroTitleNormal: "Connecting Business",
   heroTitleHighlight: "Technology",
-  heroSubtitle: "PKIT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
+  heroSubtitle: "PK IT Consultants helps startups, enterprises, and growing businesses accelerate digital transformation through AI solutions, custom software development, mobile applications, and strategic IT consultancy services.",
   ctaText: "Get Free Consultation",
   ctaLink: "/contact",
   whyChooseUs: [
