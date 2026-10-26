@@ -207,9 +207,12 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
         <section style={{ paddingTop: 80, paddingBottom: 80 }} className="max-wrap">
           <div style={{ maxWidth: 840, margin: "0 auto", textAlign: "center", padding: "0 20px" }}>
             <Reveal>
-              <span className="eyebrow" style={{ letterSpacing: "0.08em" }}>
-                Technology Solutions
-              </span>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+                <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
+                  Dubai, UAE • DIFC &amp; GCC Engineering Standards
+                </span>
+              </div>
             </Reveal>
             <Reveal delay={80}>
               <h1

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
-import { Target, Eye, ShieldCheck, Zap, HeartHandshake, Award, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Target, Eye, ShieldCheck, Zap, HeartHandshake, Award, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { getAboutContent } from "@/lib/content";
 import { getSettings } from "@/lib/services/settings";
 import { COMPANY } from "@/lib/company";
@@ -20,17 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function About() {
   const content = getAboutContent();
-  const settings = await getSettings();
-  const companyInfo = {
-    name: settings.companyName,
-    tagline: settings.tagline,
-    email: settings.email,
-    phone: settings.phone,
-    whatsappLink: settings.whatsapp,
-    address: settings.officeAddress,
-    hours: settings.workingHours,
-    mapEmbedUrl: settings.googleMapsLink,
-  };
+  await getSettings();
 
   // Map values to local icons dynamically
   const valueIcons: Record<string, any> = {
@@ -49,7 +40,12 @@ export default async function About() {
 
       <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1 }}>
         {/* Hero Section */}
-        <div style={{ marginBottom: 80 }}>
+        <div style={{ marginBottom: 72 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+            <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              DUBAI, UNITED ARAB EMIRATES • FOUNDED TO LEAD
+            </span>
+          </div>
           <SectionHeader
             eyebrow="About PK IT"
             heading="Connecting Business with Technology"
@@ -57,7 +53,7 @@ export default async function About() {
           />
         </div>
 
-        {/* Company Story */}
+        {/* Company Story with Museum of the Future Visual */}
         <section style={{ marginBottom: 96 }}>
           <Reveal>
             <div
@@ -67,21 +63,22 @@ export default async function About() {
                 gap: 40,
                 background: "var(--surface)",
                 border: "1px solid var(--border-soft)",
-                borderRadius: 16,
-                padding: "48px 32px",
+                borderRadius: 18,
+                padding: "44px 32px",
                 position: "relative",
+                overflow: "hidden",
               }}
               className="about-story-grid"
             >
               <div style={{ position: "relative" }}>
-                <span className="eyebrow">Our Story</span>
+                <span className="eyebrow">Our Dubai Heritage</span>
                 <h2
                   className="font-display"
                   style={{
-                    fontSize: "clamp(24px, 3.5vw, 32px)",
+                    fontSize: "clamp(24px, 3.5vw, 34px)",
                     fontWeight: 700,
                     marginTop: 14,
-                    letterSpacing: "-0.01em",
+                    letterSpacing: "-0.015em",
                     lineHeight: 1.2,
                   }}
                 >
@@ -92,6 +89,47 @@ export default async function About() {
                     {para}
                   </p>
                 ))}
+
+                <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CheckCircle2 size={16} style={{ color: "var(--cyan)" }} />
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>DIFC &amp; Downtown Tech Hub</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CheckCircle2 size={16} style={{ color: "var(--gold)" }} />
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>100% Senior Engineers</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CheckCircle2 size={16} style={{ color: "var(--blue)" }} />
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>UAE Data Compliance</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Architectural Image */}
+              <div style={{ position: "relative", width: "100%", minHeight: 320, borderRadius: 12, overflow: "hidden", border: "1px solid rgba(200, 155, 60, 0.25)" }}>
+                <Image
+                  src="/images/dubai/museum-of-the-future.png"
+                  alt="Museum of the Future in Dubai, representing PK IT Consultants' forward-looking engineering philosophy"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 480px"
+                  style={{ objectFit: "cover", objectPosition: "center 30%" }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(7, 19, 33, 0.85) 0%, transparent 60%)",
+                  }}
+                />
+                <div style={{ position: "absolute", bottom: 16, left: 18, right: 18 }}>
+                  <span className="font-mono" style={{ fontSize: 11, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                    DUBAI INNOVATION CORRIDOR
+                  </span>
+                  <p style={{ color: "#fff", fontSize: 13, fontWeight: 500, marginTop: 2 }}>
+                    Engineering tomorrow&apos;s digital infrastructure from the UAE to global scale.
+                  </p>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -161,47 +199,62 @@ export default async function About() {
             <div
               style={{
                 background: "radial-gradient(ellipse at top left, var(--surface-2), var(--surface))",
-                border: "1px solid var(--border)",
-                borderRadius: 16,
-                padding: "56px 40px",
+                border: "1px solid rgba(200, 155, 60, 0.28)",
+                borderRadius: 18,
+                padding: "52px 36px",
                 display: "grid",
                 gridTemplateColumns: "1fr",
                 gap: 40,
                 alignItems: "center",
+                boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)",
               }}
               className="founder-grid"
             >
-              <div style={{ display: "flex", justifyContent: "center" }} className="founder-image-container">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/founder.jpg"
-                  alt={content.founder.name}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="founder-image-container">
+                <div
                   style={{
+                    position: "relative",
                     width: "100%",
-                    maxWidth: 320,
+                    maxWidth: 300,
                     aspectRatio: "1/1",
-                    objectFit: "cover",
-                    borderRadius: 12,
-                    border: "1px solid var(--border)",
-                    boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
+                    borderRadius: 14,
+                    overflow: "hidden",
+                    border: "2px solid rgba(200, 155, 60, 0.35)",
+                    boxShadow: "0 14px 34px -8px rgba(0,0,0,0.6)",
                   }}
-                />
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/founder.jpg"
+                    alt={content.founder.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+                <div style={{ marginTop: 14, textAlign: "center" }}>
+                  <span className="badge-gold font-mono" style={{ padding: "4px 12px", borderRadius: 999, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                    FOUNDER &amp; MANAGING DIRECTOR
+                  </span>
+                </div>
               </div>
               <div>
-                <span className="eyebrow">Leadership</span>
-                <h3 className="font-display" style={{ fontSize: 32, fontWeight: 700, marginTop: 14, color: "var(--text)" }}>
+                <span className="eyebrow">Executive Leadership</span>
+                <h3 className="font-display" style={{ fontSize: 32, fontWeight: 700, marginTop: 12, color: "var(--text)" }}>
                   {content.founder.name}
                 </h3>
-                <p className="font-mono" style={{ fontSize: 13, color: "var(--cyan)", marginTop: 6, letterSpacing: "0.05em" }}>
-                  {content.founder.title}
+                <p className="font-mono" style={{ fontSize: 13, color: "var(--gold)", marginTop: 6, letterSpacing: "0.05em" }}>
+                  {content.founder.title} • PK IT Consultants
                 </p>
 
                 <div
                   style={{
                     width: 48,
                     height: 2,
-                    background: "var(--blue)",
-                    margin: "24px 0",
+                    background: "var(--gold)",
+                    margin: "20px 0",
                   }}
                 />
 
@@ -271,8 +324,9 @@ export default async function About() {
       <style>{`
         @media (min-width: 900px) {
           .about-story-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1.2fr 0.8fr !important;
             padding: 56px 48px !important;
+            align-items: center;
           }
           .founder-grid {
             grid-template-columns: 320px 1fr !important;

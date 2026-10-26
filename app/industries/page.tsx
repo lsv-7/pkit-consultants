@@ -56,6 +56,12 @@ export default async function Industries() {
       <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1 }}>
         {/* Page Header */}
         <div style={{ marginBottom: 72 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+            <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
+              Dubai &amp; GCC Enterprise Sectors
+            </span>
+          </div>
           <SectionHeader
             eyebrow="Sectors We Serve"
             heading="Technical Expertise Across Key Industries"

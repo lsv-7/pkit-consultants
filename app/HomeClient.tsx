@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Brain,
   Code2,
@@ -12,7 +13,6 @@ import {
   Globe,
   ArrowRight,
   ArrowUpRight,
-  ChevronDown,
   Activity,
   Award,
   Users,
@@ -25,12 +25,12 @@ import {
   Mail,
   Phone,
   MessageCircle,
+  Sparkles,
+  CheckCircle2,
+  Server,
 } from "lucide-react";
-import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { useTheme } from "@/components/ThemeProvider";
-import HeroConnectionGraphic from "@/components/sections/HeroConnectionGraphic";
 import HomeFaqAccordion from "@/components/sections/HomeFaqAccordion";
 
 // Dynamic Icon Maps for clean rendering
@@ -48,7 +48,7 @@ const iconMap: Record<string, any> = {
   Layers: Layers,
   MessageSquare: MessageSquare,
   RefreshCw: RefreshCw,
-  
+
   // Industries mapping
   Heart: Activity,
   GraduationCap: Award,
@@ -59,8 +59,6 @@ const iconMap: Record<string, any> = {
   Building2: Shield,
   Rocket: Zap,
 };
-
-
 
 interface HomeClientProps {
   companyInfo: any;
@@ -79,8 +77,6 @@ export default function HomeClient({
   faqs,
   aboutContent,
 }: HomeClientProps) {
-
-
   const heroContent = {
     eyebrow: companyInfo.name,
     headingNormal: homepageData.heroTitleNormal,
@@ -107,7 +103,7 @@ export default function HomeClient({
         .pkit-root * { box-sizing: border-box; }
         .font-display { font-family: 'Space Grotesk', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
+
         .bg-grid {
           position: absolute;
           inset: 0;
@@ -116,7 +112,7 @@ export default function HomeClient({
             linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px);
           background-size: 64px 64px;
           mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%);
-          opacity: 0.5;
+          opacity: 0.45;
           pointer-events: none;
         }
         .glow-blue {
@@ -126,63 +122,199 @@ export default function HomeClient({
           background: radial-gradient(circle, var(--blue-soft) 0%, transparent 70%);
           pointer-events: none;
         }
-        .graphic-svg { width: 100%; height: auto; }
-        .graphic-label {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.15em;
-          fill: var(--muted);
+        .badge-gold {
+          background: var(--gold-soft);
+          color: var(--gold);
+          border: 1px solid rgba(200, 155, 60, 0.32);
         }
-        .trace-line {
-          animation: dash-travel 3.5s linear infinite;
+        .architectural-card {
+          position: relative;
+          border-radius: 18px;
+          overflow: hidden;
+          border: 1px solid rgba(200, 155, 60, 0.25);
+          box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.4);
+          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        @keyframes dash-travel {
-          0% { stroke-dashoffset: 220; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { stroke-dashoffset: -220; opacity: 0; }
+        .architectural-card:hover {
+          border-color: rgba(200, 155, 60, 0.45);
+          transform: translateY(-2px);
+          box-shadow: 0 24px 60px -8px rgba(0, 0, 0, 0.5);
         }
-        @media (prefers-reduced-motion: reduce) {
-          .trace-line { animation: none; opacity: 0.6; }
+        .architectural-caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 22px 24px;
+          background: linear-gradient(to top, rgba(7, 19, 33, 0.95) 0%, rgba(7, 19, 33, 0.75) 60%, transparent 100%);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .process-line {
+          background: linear-gradient(
+            to bottom,
+            var(--border) 0%,
+            var(--blue) 50%,
+            var(--border) 100%
+          );
         }
       `}</style>
 
-      {/* ─── HERO SECTION ────────────────────────────────────────────────── */}
-      <header className="section-pad" style={{ position: "relative", paddingTop: 88, paddingBottom: 64 }}>
+      {/* ─── HERO SECTION: DUBAI ARCHITECTURAL EXCELLENCE ─────────────────── */}
+      <header className="section-pad" style={{ position: "relative", paddingTop: 88, paddingBottom: 72 }}>
         <div className="bg-grid" />
         <div className="glow-blue" style={{ top: -200, left: "50%", transform: "translateX(-50%)" }} />
-        <div className="max-wrap" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr", gap: 48, alignItems: "center" }}>
+
+        <div className="max-wrap" style={{ position: "relative" }}>
           <div className="hero-grid-cols">
+            {/* Left Column: Typography & CTAs */}
             <div>
               <Reveal>
-                <span className="eyebrow">{heroContent.eyebrow}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 18 }}>
+                  <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
+                    Dubai, UAE • DIFC & Downtown Tech Hub
+                  </span>
+                </div>
               </Reveal>
+
               <Reveal delay={80}>
-                <h1 className="font-display" style={{ fontSize: "clamp(34px, 6vw, 58px)", lineHeight: 1.08, fontWeight: 700, marginTop: 18, letterSpacing: "-0.02em" }}>
+                <h1
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(34px, 5.5vw, 56px)",
+                    lineHeight: 1.1,
+                    fontWeight: 700,
+                    letterSpacing: "-0.025em",
+                  }}
+                >
                   {heroContent.headingNormal}
                   <br />
                   with <span style={{ color: "var(--blue)" }}>{heroContent.headingHighlight}</span>
                 </h1>
               </Reveal>
+
               <Reveal delay={160}>
-                <p style={{ color: "var(--muted)", fontSize: 17.5, lineHeight: 1.7, marginTop: 22, maxWidth: 520 }}>
+                <p
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: 17,
+                    lineHeight: 1.75,
+                    marginTop: 22,
+                    maxWidth: 530,
+                  }}
+                >
                   {heroContent.subheading}
                 </p>
               </Reveal>
+
               <Reveal delay={240}>
-                <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href="/contact" className="btn-primary">
+                <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap", alignItems: "center" }}>
+                  <Link href="/contact" className="btn-primary" style={{ padding: "13px 26px" }}>
                     {heroContent.primaryCta} <ArrowRight size={16} />
                   </Link>
-                  <Link href="/services" className="btn-secondary">
+                  <Link href="/services" className="btn-secondary" style={{ padding: "13px 24px" }}>
                     {heroContent.secondaryCta}
                   </Link>
                 </div>
               </Reveal>
+
+              {/* Trust Indicators */}
+              <Reveal delay={300}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gap: 16,
+                    marginTop: 40,
+                    paddingTop: 28,
+                    borderTop: "1px solid var(--border-soft)",
+                    maxWidth: 520,
+                  }}
+                >
+                  <div>
+                    <span className="font-display" style={{ fontSize: 20, fontWeight: 700, color: "var(--text)" }}>
+                      100%
+                    </span>
+                    <p style={{ color: "var(--muted)", fontSize: 12, marginTop: 4, lineHeight: 1.4 }}>
+                      Senior Architects & Engineers
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-display" style={{ fontSize: 20, fontWeight: 700, color: "var(--gold)" }}>
+                      GCC
+                    </span>
+                    <p style={{ color: "var(--muted)", fontSize: 12, marginTop: 4, lineHeight: 1.4 }}>
+                      Enterprise Compliance & Data Residency
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-display" style={{ fontSize: 20, fontWeight: 700, color: "var(--cyan)" }}>
+                      Zero
+                    </span>
+                    <p style={{ color: "var(--muted)", fontSize: 12, marginTop: 4, lineHeight: 1.4 }}>
+                      Legacy Technical Debt
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
             </div>
 
+            {/* Right Column: Authentic Dubai Architectural Showcase */}
             <Reveal delay={200}>
-                <HeroConnectionGraphic />
+              <div className="architectural-card" style={{ width: "100%", maxWidth: 540, marginInline: "auto" }}>
+                <div style={{ position: "relative", width: "100%", height: 420 }}>
+                  <Image
+                    src="/images/dubai/dubai-frame-sunset.png"
+                    alt="Dubai Frame framing Burj Khalifa and the Downtown Dubai skyline at golden sunset"
+                    fill
+                    priority
+                    sizes="(max-width: 900px) 100vw, 540px"
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center 40%",
+                    }}
+                  />
+                  {/* Subtle lighting vignette */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "radial-gradient(ellipse at center, transparent 30%, rgba(7, 19, 33, 0.45) 80%, rgba(7, 19, 33, 0.85) 100%)",
+                      pointerEvents: "none",
+                    }}
+                  />
+                </div>
+
+                {/* Overlaid Architecture Glassmorphism Telemetry */}
+                <div className="architectural-caption">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                    <span className="font-mono" style={{ fontSize: 11, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                      HEADQUARTERS • DUBAI, UAE
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 600,
+                        padding: "3px 8px",
+                        borderRadius: 4,
+                        background: "rgba(37, 99, 235, 0.2)",
+                        color: "var(--cyan)",
+                        border: "1px solid rgba(56, 189, 248, 0.3)",
+                      }}
+                    >
+                      ENTERPRISE CONSULTING
+                    </span>
+                  </div>
+                  <h3 className="font-display" style={{ fontSize: 17, fontWeight: 600, color: "#fff", lineHeight: 1.35 }}>
+                    Framing the Future of Enterprise Systems
+                  </h3>
+                  <p style={{ color: "rgba(255, 255, 255, 0.72)", fontSize: 13, lineHeight: 1.5, marginTop: 4 }}>
+                    Deploying sovereign AI models, resilient cloud architectures, and mission-critical software across the Middle East.
+                  </p>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -191,59 +323,107 @@ export default function HomeClient({
           @media (min-width: 900px) {
             .hero-grid-cols {
               display: grid !important;
-              grid-template-columns: 1.1fr 0.9fr;
-              gap: 48px;
+              grid-template-columns: 1.08fr 0.92fr;
+              gap: 52px;
               align-items: center;
             }
           }
         `}</style>
       </header>
 
-      {/* ─── ABOUT PKIT SUMMARY ─────────────────────────────────────────── */}
-      <section className="section-pad" style={{ borderTop: "1px solid var(--border-soft)" }}>
+      {/* ─── ABOUT PK IT & DUBAI INNOVATION SECTION ──────────────────────── */}
+      <section className="section-pad" style={{ borderTop: "1px solid var(--border-soft)", position: "relative" }}>
         <div className="max-wrap">
           <div className="about-summary-grid">
+            {/* Story & Vision */}
             <Reveal>
-              <span className="eyebrow">About Our Firm</span>
-              <h2 className="font-display" style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 700, marginTop: 14, letterSpacing: "-0.01em" }}>
-                Dubai-Based Engineers Driving Digital Growth
-              </h2>
-              <p style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.8, marginTop: 18, maxWidth: 520 }}>
-                {aboutContent.storyParagraphs[0]}
-              </p>
-              <div style={{ marginTop: 28 }}>
-                <Link href="/about" className="btn-secondary" style={{ paddingInline: 24 }}>
-                  Read Our Story <ArrowRight size={15} />
-                </Link>
+              <div>
+                <span className="eyebrow">Dubai Innovation Engine</span>
+                <h2
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(26px, 4vw, 36px)",
+                    fontWeight: 700,
+                    marginTop: 14,
+                    letterSpacing: "-0.015em",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Dubai-Based Engineers Driving Digital Growth
+                </h2>
+                <p style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.8, marginTop: 18, maxWidth: 520 }}>
+                  {aboutContent.storyParagraphs[0]}
+                </p>
+
+                <div
+                  style={{
+                    marginTop: 28,
+                    background: "var(--surface)",
+                    border: "1px solid var(--border-soft)",
+                    borderRadius: 14,
+                    padding: 24,
+                    maxWidth: 520,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                    <div className="icon-box" style={{ width: 40, height: 40, flexShrink: 0 }}>
+                      <Sparkles size={18} />
+                    </div>
+                    <div>
+                      <h3 className="font-display" style={{ fontSize: 16, fontWeight: 600, color: "var(--text)" }}>
+                        Founder & Leadership
+                      </h3>
+                      <p style={{ color: "var(--muted)", fontSize: 13.5, lineHeight: 1.6, marginTop: 4 }}>
+                        Led by <strong style={{ fontWeight: 600, color: "var(--text)" }}>{aboutContent.founder.name}</strong>, Founder &amp; Managing Director, {companyInfo.name} operates on a transparent, senior-only engineering model for Middle East enterprises and global ventures.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: 28 }}>
+                  <Link href="/about" className="btn-secondary" style={{ paddingInline: 24 }}>
+                    Read Our Full Story <ArrowRight size={15} />
+                  </Link>
+                </div>
               </div>
             </Reveal>
 
-            <Reveal delay={120}>
-              <div
-                style={{
-                  background: "var(--surface)",
-                  border: "1px solid var(--border-soft)",
-                  borderRadius: 16,
-                  padding: 32,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 16,
-                }}
-              >
-                <div style={{ borderBottom: "1px solid var(--border-soft)", paddingBottom: 16 }}>
-                  <h3 className="font-display" style={{ fontSize: 18, fontWeight: 600, color: "var(--text)" }}>
-                    Our Core Vision
-                  </h3>
-                  <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>
-                    {aboutContent.vision}
-                  </p>
+            {/* Museum of the Future Visual Card */}
+            <Reveal delay={160}>
+              <div className="architectural-card" style={{ width: "100%", maxWidth: 520, marginInline: "auto" }}>
+                <div style={{ position: "relative", width: "100%", height: 440 }}>
+                  <Image
+                    src="/images/dubai/museum-of-the-future.png"
+                    alt="Museum of the Future on Sheikh Zayed Road in Dubai with Arabic calligraphy"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 520px"
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "center 30%",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(7, 19, 33, 0.95) 0%, rgba(7, 19, 33, 0.4) 60%, rgba(7, 19, 33, 0.2) 100%)",
+                      pointerEvents: "none",
+                    }}
+                  />
                 </div>
-                <div>
-                  <h3 className="font-display" style={{ fontSize: 18, fontWeight: 600, color: "var(--text)" }}>
-                    Founder & Leadership
+
+                <div className="architectural-caption">
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--cyan)" }} />
+                    <span className="font-mono" style={{ fontSize: 11, color: "var(--cyan)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                      DUBAI FUTURE BLUEPRINT
+                    </span>
+                  </div>
+                  <h3 className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>
+                    Pioneering Enterprise AI &amp; Software Systems
                   </h3>
-                  <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.6, marginTop: 8 }}>
-                    Led by <strong style={{ fontWeight: 600 }}>{aboutContent.founder.name}</strong>, {companyInfo.name} acts as a transparent tech-partner for Middle East enterprises and fast-growing ventures.
+                  <p style={{ color: "rgba(255, 255, 255, 0.72)", fontSize: 13, lineHeight: 1.55, marginTop: 4 }}>
+                    Inspired by Dubai&apos;s relentless technological vision, we engineer software architectures engineered to scale from regional hubs to global footprints.
                   </p>
                 </div>
               </div>
@@ -254,9 +434,9 @@ export default function HomeClient({
         <style>{`
           @media (min-width: 900px) {
             .about-summary-grid {
-              display: grid;
+              display: grid !important;
               grid-template-columns: 1fr 1fr;
-              gap: 64px;
+              gap: 60px;
               align-items: center;
             }
           }
@@ -297,6 +477,146 @@ export default function HomeClient({
                         Explore capabilities <ArrowUpRight size={13} />
                       </Link>
                     </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FULL-WIDTH ARCHITECTURAL INTERLUDE: PALM JUMEIRAH ─────────── */}
+      <section
+        style={{
+          position: "relative",
+          padding: "100px 24px",
+          overflow: "hidden",
+          borderTop: "1px solid rgba(200, 155, 60, 0.2)",
+          borderBottom: "1px solid rgba(200, 155, 60, 0.2)",
+        }}
+      >
+        {/* Cinematic Backdrop Image */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <Image
+            src="/images/dubai/palm-jumeirah.png"
+            alt="Aerial view of Palm Jumeirah and the Arabian Gulf in Dubai, UAE"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center 45%",
+            }}
+          />
+          {/* Deep Navy Midnight Gradient Overlay for Absolute Text Legibility */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(7, 19, 33, 0.92) 0%, rgba(10, 37, 64, 0.82) 50%, rgba(7, 19, 33, 0.94) 100%)",
+            }}
+          />
+          <div className="bg-blueprint" style={{ position: "absolute", inset: 0, opacity: 0.3, pointerEvents: "none" }} />
+        </div>
+
+        <div className="max-wrap" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+          <Reveal>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+              <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                SCALE &amp; PRECISION • 25.1124° N, 55.1390° E
+              </span>
+            </div>
+            <h2
+              className="font-display"
+              style={{
+                fontSize: "clamp(28px, 4.5vw, 44px)",
+                fontWeight: 700,
+                color: "#ffffff",
+                letterSpacing: "-0.02em",
+                maxWidth: 860,
+                marginInline: "auto",
+                lineHeight: 1.15,
+              }}
+            >
+              Architected for Uncompromised Scale Across the Arabian Gulf &amp; Global Enterprises
+            </h2>
+            <p
+              style={{
+                color: "rgba(247, 248, 250, 0.8)",
+                fontSize: 16.5,
+                lineHeight: 1.75,
+                marginTop: 18,
+                maxWidth: 680,
+                marginInline: "auto",
+              }}
+            >
+              From Dubai Internet City and DIFC to international multi-region deployments, our architectures handle heavy throughput, strict regional data governance, and non-negotiable operational reliability.
+            </p>
+          </Reveal>
+
+          {/* 4 Pillars of Engineering Assurance */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 20,
+              marginTop: 48,
+              textAlign: "left",
+            }}
+          >
+            {[
+              {
+                icon: Shield,
+                title: "GCC Data Sovereignty",
+                desc: "Full compliance with UAE federal and regional data residency mandates, sovereign clouds, and enterprise security policies.",
+              },
+              {
+                icon: Users,
+                title: "100% Senior Squads",
+                desc: "No junior handoffs. Every technical spec, architecture design, and database schema is authored by experienced practitioners.",
+              },
+              {
+                icon: Server,
+                title: "Zero-Legacy Modernity",
+                desc: "Modern TypeScript, Next.js, and containerized backends designed to eliminate long-term technical debt from day one.",
+              },
+              {
+                icon: CheckCircle2,
+                title: "Executive Accountability",
+                desc: "Direct engagement with leadership, transparent project milestones, and guaranteed delivery SLAs on every commercial contract.",
+              },
+            ].map((pillar, idx) => {
+              const IconComp = pillar.icon;
+              return (
+                <Reveal key={pillar.title} delay={idx * 80}>
+                  <div
+                    style={{
+                      background: "rgba(11, 23, 42, 0.65)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "1px solid rgba(200, 155, 60, 0.22)",
+                      borderRadius: 14,
+                      padding: "24px 22px",
+                      height: "100%",
+                      transition: "border-color 0.25s ease, transform 0.25s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(200, 155, 60, 0.5)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(200, 155, 60, 0.22)";
+                      e.currentTarget.style.transform = "none";
+                    }}
+                  >
+                    <div style={{ width: 38, height: 38, borderRadius: 8, background: "rgba(200, 155, 60, 0.12)", border: "1px solid rgba(200, 155, 60, 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--gold)", marginBottom: 14 }}>
+                      <IconComp size={18} />
+                    </div>
+                    <h3 className="font-display" style={{ fontSize: 17, fontWeight: 600, color: "#ffffff" }}>
+                      {pillar.title}
+                    </h3>
+                    <p style={{ color: "rgba(247, 248, 250, 0.7)", fontSize: 13.5, lineHeight: 1.6, marginTop: 8 }}>
+                      {pillar.desc}
+                    </p>
                   </div>
                 </Reveal>
               );
@@ -507,23 +827,80 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* ─── BOOK CONSULTATION CTA ──────────────────────────────────────── */}
-      <section id="cta" className="section-pad" style={{ position: "relative", textAlign: "center" }}>
-        <div className="glow-blue" style={{ bottom: -200, left: "50%", transform: "translateX(-50%)" }} />
-        <div className="max-wrap" style={{ position: "relative" }}>
+      {/* ─── BOOK CONSULTATION CTA: BURJ KHALIFA BACKDROP ────────────────── */}
+      <section
+        id="cta"
+        style={{
+          position: "relative",
+          padding: "110px 24px",
+          textAlign: "center",
+          overflow: "hidden",
+          borderTop: "1px solid rgba(200, 155, 60, 0.25)",
+        }}
+      >
+        {/* Soaring Burj Khalifa Night Backdrop */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <Image
+            src="/images/dubai/burj-khalifa.png"
+            alt="Burj Khalifa towering over the Downtown Dubai skyline and fountains at dusk"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center 30%",
+            }}
+          />
+          {/* Deep Navy/Black Vignette Mask for High Contrast Readability */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(7, 19, 33, 0.94) 0%, rgba(10, 37, 64, 0.88) 50%, rgba(7, 19, 33, 0.96) 100%)",
+            }}
+          />
+          <div className="glow-blue" style={{ bottom: -200, left: "50%", transform: "translateX(-50%)" }} />
+        </div>
+
+        <div className="max-wrap" style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <h2 className="font-display" style={{ fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 700, letterSpacing: "-0.02em", maxWidth: 680, margin: "0 auto" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 18 }}>
+              <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                START AN ENGAGEMENT • DUBAI &amp; WORLDWIDE
+              </span>
+            </div>
+            <h2
+              className="font-display"
+              style={{
+                fontSize: "clamp(28px, 5vw, 46px)",
+                fontWeight: 700,
+                color: "#ffffff",
+                letterSpacing: "-0.02em",
+                maxWidth: 720,
+                margin: "0 auto",
+                lineHeight: 1.15,
+              }}
+            >
               Ready to connect your business with the right technology?
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ color: "var(--muted)", fontSize: 16, marginTop: 16, maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
+            <p
+              style={{
+                color: "rgba(247, 248, 250, 0.82)",
+                fontSize: 16.5,
+                lineHeight: 1.7,
+                marginTop: 18,
+                maxWidth: 520,
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
               Book an initial architecture audit or scoping review. Our senior consultants will evaluate your infrastructure honestly.
             </p>
           </Reveal>
           <Reveal delay={180}>
-            <div style={{ marginTop: 36, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-              <Link href="/contact" className="btn-primary" style={{ padding: "13px 28px", fontSize: 15 }}>
+            <div style={{ marginTop: 38, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
+              <Link href="/contact" className="btn-primary" style={{ padding: "14px 30px", fontSize: 15, background: "var(--blue)" }}>
                 Book Consultation <ArrowRight size={16} />
               </Link>
               <a
@@ -534,10 +911,10 @@ export default function HomeClient({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 10,
-                  background: "rgba(37, 211, 102, 0.08)",
-                  border: "1px solid rgba(37, 211, 102, 0.3)",
+                  background: "rgba(37, 211, 102, 0.12)",
+                  border: "1px solid rgba(37, 211, 102, 0.35)",
                   color: "#25D366",
-                  padding: "13px 28px",
+                  padding: "14px 28px",
                   borderRadius: 8,
                   fontSize: 15,
                   fontWeight: 600,
@@ -545,11 +922,11 @@ export default function HomeClient({
                   transition: "all 0.25s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(37, 211, 102, 0.15)";
+                  e.currentTarget.style.background = "rgba(37, 211, 102, 0.22)";
                   e.currentTarget.style.transform = "translateY(-1px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(37, 211, 102, 0.08)";
+                  e.currentTarget.style.background = "rgba(37, 211, 102, 0.12)";
                   e.currentTarget.style.transform = "none";
                 }}
               >
@@ -561,24 +938,25 @@ export default function HomeClient({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 10,
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid var(--border-soft)",
-                  color: "var(--text)",
-                  padding: "13px 28px",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.16)",
+                  color: "#ffffff",
+                  padding: "14px 26px",
                   borderRadius: 8,
                   fontSize: 15,
                   fontWeight: 500,
                   textDecoration: "none",
+                  backdropFilter: "blur(8px)",
                   transition: "all 0.25s ease",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "var(--blue)";
-                  e.currentTarget.style.background = "var(--surface)";
+                  e.currentTarget.style.background = "rgba(37, 99, 235, 0.2)";
                   e.currentTarget.style.transform = "translateY(-1px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-soft)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.04)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.16)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
                   e.currentTarget.style.transform = "none";
                 }}
               >
@@ -590,24 +968,25 @@ export default function HomeClient({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 10,
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid var(--border-soft)",
-                  color: "var(--text)",
-                  padding: "13px 28px",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.16)",
+                  color: "#ffffff",
+                  padding: "14px 26px",
                   borderRadius: 8,
                   fontSize: 15,
                   fontWeight: 500,
                   textDecoration: "none",
+                  backdropFilter: "blur(8px)",
                   transition: "all 0.25s ease",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "var(--blue)";
-                  e.currentTarget.style.background = "var(--surface)";
+                  e.currentTarget.style.background = "rgba(37, 99, 235, 0.2)";
                   e.currentTarget.style.transform = "translateY(-1px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-soft)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.04)";
+                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.16)";
+                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
                   e.currentTarget.style.transform = "none";
                 }}
               >
