@@ -49,9 +49,14 @@ export class SmtpProvider implements EmailProvider {
       host,
       port,
       secure: port === 465,
+      requireTLS: port === 587,
       auth: {
         user,
         pass,
+      },
+      tls: {
+        ciphers: "SSLv3",
+        rejectUnauthorized: true,
       },
     });
 
@@ -59,7 +64,7 @@ export class SmtpProvider implements EmailProvider {
   }
 
   async send(options: MailOptions) {
-    const fromEmail = process.env.FROM_EMAIL || "mpkitconsultants@gmail.com";
+    const fromEmail = process.env.FROM_EMAIL || "info@pkitconsultants.com";
     const fromName = process.env.FROM_NAME || "PK IT Consultants";
 
     try {

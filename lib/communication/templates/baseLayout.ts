@@ -8,6 +8,7 @@ interface BaseLayoutOptions {
 
 export function getBaseLayout(options: BaseLayoutOptions): string {
   const preview = options.previewText ? `<div style="display: none; max-height: 0px; overflow: hidden;">${options.previewText}</div>` : "";
+  const publicEmail = process.env.FROM_EMAIL || COMPANY.email;
   
   return `<!DOCTYPE html>
 <html>
@@ -142,7 +143,7 @@ export function getBaseLayout(options: BaseLayoutOptions): string {
               <p style="margin: 0 0 16px 0; line-height: 1.5;">${COMPANY.address.line1}, ${COMPANY.address.line2}, ${COMPANY.address.line3}</p>
               <p class="footer-links" style="margin: 0 0 16px 0;">
                 <a href="tel:${COMPANY.phone}">Call Us: ${COMPANY.phone}</a> | 
-                <a href="mailto:${COMPANY.email}">Email: ${COMPANY.email}</a>
+                <a href="mailto:${publicEmail}">Email: ${publicEmail}</a>
               </p>
               <p style="margin: 0; font-size: 11px;">
                 &copy; ${new Date().getFullYear()} ${COMPANY.name}. All rights reserved.

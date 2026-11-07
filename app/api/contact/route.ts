@@ -100,7 +100,7 @@ export async function POST(req: Request) {
       console.error("[Contact API] Failed to trigger admin notification email:", err);
       await prisma.sentEmail.create({
         data: {
-          recipient: "mpkitconsultants@gmail.com",
+          recipient: process.env.ADMIN_NOTIFICATION_EMAIL || process.env.FROM_EMAIL || "info@pkitconsultants.com",
           subject: `New Consultation Request – ${lead.company || "Individual"}`,
           body: "Failed to render or queue admin alert email.",
           type: "ADMIN_NOTIFICATION",

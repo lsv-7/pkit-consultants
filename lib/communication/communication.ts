@@ -217,7 +217,7 @@ export class CommunicationService {
       submissionTime: new Date().toLocaleString(),
     });
     return this.sendEmail({
-      recipient: COMPANY.email,
+      recipient: process.env.ADMIN_NOTIFICATION_EMAIL || process.env.FROM_EMAIL || COMPANY.email,
       subject: `New Consultation Request – ${company || "Individual"}`,
       html,
       type: "ADMIN_NOTIFICATION",
