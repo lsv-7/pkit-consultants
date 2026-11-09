@@ -145,17 +145,31 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
     <Reveal>
       <div
         style={{
-          background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
-          border: "1px solid rgba(200, 155, 60, 0.32)",
+          background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
+          border: "1px solid rgba(213, 172, 66, 0.3)",
           borderRadius: 18,
           padding: "40px 32px",
-          boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
+          boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)",
         }}
       >
-        <span className="badge-gold font-mono" style={{ padding: "4px 12px", borderRadius: 999, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", display: "inline-block", marginBottom: 14 }}>
+        <span
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 10,
+            fontWeight: 600,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "#D5AC42",
+            display: "inline-block",
+            marginBottom: 14,
+          }}
+        >
           CONCIERGE INQUIRY
         </span>
-        <h2 className="font-display" style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", marginBottom: 24 }}>
+        <h2
+          className="font-serif"
+          style={{ fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 700, color: "#F4F0E8", marginBottom: 24 }}
+        >
           Request Architecture Scoping
         </h2>
 
@@ -166,19 +180,19 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
               <input
                 id="fullName"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Full Name *"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 style={{
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: "var(--text)",
+                  background: "rgba(7, 19, 38, 0.7)",
+                  border: "1px solid rgba(213, 172, 66, 0.25)",
+                  color: "#F4F0E8",
                   fontSize: 14,
                 }}
-                className="form-input"
+                className="form-input focus:border-[#D5AC42] outline-none"
                 required
               />
             </div>
@@ -187,19 +201,19 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
               <input
                 id="email"
                 type="email"
-                placeholder="Email Address"
+                placeholder="Email Address *"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 style={{
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: "var(--text)",
+                  background: "rgba(7, 19, 38, 0.7)",
+                  border: "1px solid rgba(213, 172, 66, 0.25)",
+                  color: "#F4F0E8",
                   fontSize: 14,
                 }}
-                className="form-input"
+                className="form-input focus:border-[#D5AC42] outline-none"
                 required
               />
             </div>
@@ -218,12 +232,12 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: "var(--text)",
+                  background: "rgba(7, 19, 38, 0.7)",
+                  border: "1px solid rgba(213, 172, 66, 0.25)",
+                  color: "#F4F0E8",
                   fontSize: 14,
                 }}
-                className="form-input"
+                className="form-input focus:border-[#D5AC42] outline-none"
               />
             </div>
             <div>
@@ -238,18 +252,38 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
                   width: "100%",
                   padding: "13px 16px",
                   borderRadius: 8,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  color: "var(--text)",
+                  background: "rgba(7, 19, 38, 0.7)",
+                  border: "1px solid rgba(213, 172, 66, 0.25)",
+                  color: "#F4F0E8",
                   fontSize: 14,
                 }}
-                className="form-input"
+                className="form-input focus:border-[#D5AC42] outline-none"
                 required
               />
             </div>
           </div>
 
-
+          <div>
+            <label htmlFor="projectDescription" style={{ display: "none" }}>Project Overview</label>
+            <textarea
+              id="projectDescription"
+              rows={4}
+              placeholder="Tell us about your project requirements, goals, or architectural bottlenecks..."
+              value={formData.projectDescription}
+              onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
+              style={{
+                width: "100%",
+                padding: "13px 16px",
+                borderRadius: 8,
+                background: "rgba(7, 19, 38, 0.7)",
+                border: "1px solid rgba(213, 172, 66, 0.25)",
+                color: "#F4F0E8",
+                fontSize: 14,
+                resize: "vertical",
+              }}
+              className="form-input focus:border-[#D5AC42] outline-none"
+            />
+          </div>
 
           <button
             type="submit"
@@ -258,10 +292,9 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
               width: "100%",
               justifyContent: "center",
               paddingBlock: 14,
-              fontSize: 15,
               cursor: loading ? "not-allowed" : "pointer",
             }}
-            className="btn-primary"
+            className="btn-gold-pill"
           >
             {loading ? (
               <>
@@ -269,7 +302,7 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
               </>
             ) : (
               <>
-                Request Consultation <ArrowRight size={16} />
+                <span>Book Architecture Scoping</span> <ArrowRight size={15} />
               </>
             )}
           </button>
@@ -283,26 +316,59 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#06111F" }}>
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#071326", color: "#F4F0E8" }}>
       {/* Background patterns */}
-      <div className="bg-grid" style={{ opacity: 0.35 }} />
-      <div className="glow-blue" style={{ top: -150, left: "10%" }} />
-      <div className="glow-blue" style={{ bottom: -200, right: "15%" }} />
+      <div
+        className="bg-islamic-pattern"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.12,
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
+      <div className="max-wrap" style={{ position: "relative", zIndex: 1, padding: "80px 28px 110px" }}>
         {/* Header */}
-        <div style={{ marginBottom: 64 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-            <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
-              Dubai, UAE • Downtown Dubai &amp; DIFC Tech Hub
-            </span>
-          </div>
-          <SectionHeader
-            eyebrow="Get In Touch"
-            heading="Initiate Your Architecture Review"
-            description="Discuss your project specs, AI integrations, or consulting roadmap. Complete the form or contact our Dubai office directly."
-          />
+        <div style={{ marginBottom: 64, textAlign: "center", maxWidth: 820, marginInline: "auto" }}>
+          <Reveal>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "0.26em",
+                  textTransform: "uppercase",
+                  color: "#D5AC42",
+                }}
+              >
+                DUBAI CONCIERGE CONSULTATION
+              </span>
+              <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <h1
+              className="font-serif"
+              style={{
+                fontSize: "clamp(34px, 4.8vw, 56px)",
+                fontWeight: 700,
+                color: "#F4F0E8",
+                textTransform: "uppercase",
+                margin: "0 0 18px",
+                lineHeight: 1.15,
+              }}
+            >
+              Initiate Your Architecture Review
+            </h1>
+          </Reveal>
+          <Reveal delay={200}>
+            <p style={{ color: "#9CAAC0", fontSize: 16, lineHeight: 1.7, maxWidth: 660, margin: "0 auto" }}>
+              Discuss your project specifications, AI integrations, or software modernization roadmap with our senior architects in Dubai.
+            </p>
+          </Reveal>
         </div>
 
         {/* 2 Column Layout */}
@@ -319,27 +385,58 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
             <Reveal>
               <div
                 style={{
-                  background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
-                  border: "1px solid rgba(200, 155, 60, 0.3)",
+                  background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
+                  border: "1px solid rgba(213, 172, 66, 0.28)",
                   borderRadius: 18,
                   padding: 36,
                   display: "grid",
                   gridTemplateColumns: "1fr",
                   gap: 24,
-                  boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
+                  boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)",
                 }}
                 className="contact-info-grid"
               >
                 {/* Phone & Call */}
                 <div style={{ display: "flex", gap: 16 }}>
-                  <div className="icon-box" style={{ width: 40, height: 40 }}>
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 10,
+                      background: "rgba(213, 172, 66, 0.12)",
+                      border: "1px solid rgba(213, 172, 66, 0.3)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#D5AC42",
+                    }}
+                  >
                     <Phone size={18} />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: 13, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: "0.05em" }} className="font-mono">
+                    <h4
+                      style={{
+                        fontSize: 11,
+                        color: "#D5AC42",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        margin: 0,
+                      }}
+                      className="font-mono"
+                    >
                       Phone & Call
                     </h4>
-                    <a href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`} style={{ color: "var(--text)", textDecoration: "none", fontSize: 16, fontWeight: 600, display: "block", marginTop: 4 }}>
+                    <a
+                      href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
+                      style={{
+                        color: "#F4F0E8",
+                        textDecoration: "none",
+                        fontSize: 16,
+                        fontWeight: 600,
+                        display: "block",
+                        marginTop: 4,
+                      }}
+                    >
                       {companyInfo.phone}
                     </a>
                   </div>
@@ -347,18 +444,48 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
 
                 {/* WhatsApp Chat Card */}
                 <div style={{ display: "flex", gap: 16 }}>
-                  <div className="icon-box" style={{ width: 40, height: 40, color: "#25D366", background: "rgba(37,211,102,0.08)", border: "1px solid rgba(37,211,102,0.25)" }}>
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 10,
+                      color: "#25D366",
+                      background: "rgba(37,211,102,0.1)",
+                      border: "1px solid rgba(37,211,102,0.3)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <MessageSquare size={18} />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: 13, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: "0.05em" }} className="font-mono">
+                    <h4
+                      style={{
+                        fontSize: 11,
+                        color: "#D5AC42",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        margin: 0,
+                      }}
+                      className="font-mono"
+                    >
                       WhatsApp Business
                     </h4>
                     <a
                       href={companyInfo.whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "#25D366", textDecoration: "none", fontSize: 15, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, marginTop: 4 }}
+                      style={{
+                        color: "#25D366",
+                        textDecoration: "none",
+                        fontSize: 15,
+                        fontWeight: 600,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        marginTop: 4,
+                      }}
                       className="whatsapp-btn"
                     >
                       Chat on WhatsApp <ArrowRight size={14} />
@@ -368,14 +495,45 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
 
                 {/* Email */}
                 <div style={{ display: "flex", gap: 16 }}>
-                  <div className="icon-box" style={{ width: 40, height: 40 }}>
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 10,
+                      background: "rgba(213, 172, 66, 0.12)",
+                      border: "1px solid rgba(213, 172, 66, 0.3)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#D5AC42",
+                    }}
+                  >
                     <Mail size={18} />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: 13, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: "0.05em" }} className="font-mono">
+                    <h4
+                      style={{
+                        fontSize: 11,
+                        color: "#D5AC42",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                        margin: 0,
+                      }}
+                      className="font-mono"
+                    >
                       Email Address
                     </h4>
-                    <a href={`mailto:${companyInfo.email}`} style={{ color: "var(--text)", textDecoration: "none", fontSize: 16, fontWeight: 600, display: "block", marginTop: 4 }}>
+                    <a
+                      href={`mailto:${companyInfo.email}`}
+                      style={{
+                        color: "#F4F0E8",
+                        textDecoration: "none",
+                        fontSize: 16,
+                        fontWeight: 600,
+                        display: "block",
+                        marginTop: 4,
+                      }}
+                    >
                       {companyInfo.email}
                     </a>
                   </div>

@@ -48,44 +48,80 @@ export default async function Industries() {
   };
 
   const complianceBadges: Record<string, string> = {
-    healthcare: "DHA & NABIDH Compliance",
-    education: "UAE KHDA Data Security",
-    retail: "PCI-DSS Level 1 & Sub-Second Latency",
-    construction: "BIM & Mobile Field Sync",
-    manufacturing: "Jebel Ali Port / DP World Logistics",
-    "real-estate": "Dubai Land Department (DLD) & RERA",
-    government: "UAE Federal Data Sovereignty",
-    startups: "VC Technical Due Diligence Ready",
+    healthcare: "Healthcare Systems Engineering",
+    education: "Education Technology Platforms",
+    retail: "High-Volume E-Commerce Systems",
+    construction: "Field Operations & Mobile Sync",
+    manufacturing: "Supply Chain & Logistics Portals",
+    "real-estate": "PropTech & Property Management",
+    government: "Enterprise Data Privacy Architecture",
+    startups: "Scalable Cloud & MVP Architecture",
   };
 
   return (
-    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#06111F" }}>
-      {/* Background patterns */}
-      <div className="bg-grid" style={{ opacity: 0.35 }} />
-      <div className="glow-blue" style={{ top: -200, left: "50%", transform: "translateX(-50%)" }} />
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#071326", color: "#F4F0E8" }}>
+      {/* Geometric Islamic Background Pattern */}
+      <div
+        className="bg-islamic-pattern"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.12,
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
+      <div className="max-wrap" style={{ position: "relative", zIndex: 1, padding: "80px 28px 110px" }}>
         {/* Page Header */}
-        <div style={{ marginBottom: 64 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-            <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
-              Dubai &amp; GCC Enterprise Sectors
-            </span>
-          </div>
-          <SectionHeader
-            eyebrow="Sectors We Empower"
-            heading="Technical Architectures Tuned to Middle East Compliance"
-            description="We build customized, secure, and compliant digital infrastructures engineered around the specific regulatory mandates, sovereign data laws, and operational workflows of your sector."
-          />
+        <div style={{ marginBottom: 64, textAlign: "center", maxWidth: 840, marginInline: "auto" }}>
+          <Reveal>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "0.26em",
+                  textTransform: "uppercase",
+                  color: "#D5AC42",
+                }}
+              >
+                DUBAI &amp; GCC SECTOR SPECIALIZATION
+              </span>
+              <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <h1
+              className="font-serif"
+              style={{
+                fontSize: "clamp(34px, 4.8vw, 56px)",
+                fontWeight: 700,
+                color: "#F4F0E8",
+                textTransform: "uppercase",
+                margin: "0 0 20px",
+                lineHeight: 1.15,
+              }}
+            >
+              Enterprise Architectures Engineered for Regional Scale
+            </h1>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <p style={{ color: "#9CAAC0", fontSize: 16, lineHeight: 1.7, maxWidth: 680, margin: "0 auto" }}>
+              We build customized, secure digital infrastructures engineered around the specific operational workflows, performance demands, and data privacy requirements of your sector.
+            </p>
+          </Reveal>
         </div>
 
         {/* Industries Grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 24,
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: 28,
             marginBottom: 88,
           }}
         >
@@ -97,8 +133,8 @@ export default async function Industries() {
               <Reveal key={ind.title} delay={i * 60}>
                 <div
                   style={{
-                    background: "linear-gradient(180deg, #0A2540 0%, #06111F 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    background: "rgba(16, 30, 54, 0.6)",
+                    border: "1px solid rgba(213, 172, 66, 0.22)",
                     borderRadius: 16,
                     padding: 32,
                     height: "100%",
@@ -108,23 +144,36 @@ export default async function Industries() {
                     position: "relative",
                     transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
-                  className="industry-card"
+                  className="hover:border-[#D5AC42] hover:-translate-y-1"
                 >
                   <div>
                     {/* Header: Icon + Compliance Badge */}
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-                      <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(37, 99, 235, 0.15)", border: "1px solid rgba(37, 99, 235, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--cyan)" }}>
+                      <div
+                        style={{
+                          width: 42,
+                          height: 42,
+                          borderRadius: 10,
+                          background: "rgba(213, 172, 66, 0.12)",
+                          border: "1px solid rgba(213, 172, 66, 0.3)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#D5AC42",
+                        }}
+                      >
                         <IconComponent size={20} />
                       </div>
                       <span
-                        className="font-mono"
                         style={{
+                          fontFamily: "'Inter', sans-serif",
                           fontSize: 10,
-                          color: "var(--gold)",
-                          background: "rgba(200, 155, 60, 0.1)",
-                          border: "1px solid rgba(200, 155, 60, 0.25)",
-                          padding: "4px 8px",
-                          borderRadius: 6,
+                          fontWeight: 600,
+                          color: "#EBD68C",
+                          background: "rgba(16, 30, 54, 0.8)",
+                          border: "1px solid rgba(213, 172, 66, 0.3)",
+                          padding: "4px 10px",
+                          borderRadius: 9999,
                           letterSpacing: "0.06em",
                         }}
                       >
@@ -133,7 +182,10 @@ export default async function Industries() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="font-display" style={{ fontSize: 21, fontWeight: 700, color: "#ffffff" }}>
+                    <h3
+                      className="font-serif"
+                      style={{ fontSize: 24, fontWeight: 700, color: "#F4F0E8", margin: "0 0 12px" }}
+                    >
                       {ind.title}
                     </h3>
 
@@ -142,7 +194,7 @@ export default async function Industries() {
                       style={{
                         listStyle: "none",
                         padding: 0,
-                        margin: "16px 0 20px 0",
+                        margin: "12px 0 18px 0",
                         display: "flex",
                         flexWrap: "wrap",
                         gap: "6px 8px",
@@ -151,14 +203,14 @@ export default async function Industries() {
                       {ind.solutions.map((sol) => (
                         <li
                           key={sol}
-                          className="font-mono"
                           style={{
+                            fontFamily: "'Inter', sans-serif",
                             fontSize: 11,
-                            color: "var(--cyan)",
-                            background: "rgba(37, 99, 235, 0.1)",
-                            border: "1px solid rgba(37, 99, 235, 0.2)",
-                            padding: "3px 8px",
-                            borderRadius: 6,
+                            color: "#EBD68C",
+                            background: "rgba(10, 23, 48, 0.6)",
+                            border: "1px solid rgba(213, 172, 66, 0.2)",
+                            padding: "3px 10px",
+                            borderRadius: 9999,
                           }}
                         >
                           {sol}
@@ -167,29 +219,31 @@ export default async function Industries() {
                     </ul>
 
                     {/* Description */}
-                    <p style={{ color: "var(--muted)", fontSize: 14.5, lineHeight: 1.65 }}>
+                    <p style={{ color: "#9CAAC0", fontSize: 14, lineHeight: 1.65, margin: 0 }}>
                       {ind.desc}
                     </p>
                   </div>
 
                   {/* Sub-CTA */}
-                  <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                  <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid rgba(213, 172, 66, 0.15)" }}>
                     <Link
                       href={`/contact?industry=${encodeURIComponent(ind.title)}`}
                       style={{
-                        fontSize: 13.5,
+                        fontSize: 12.5,
                         fontWeight: 600,
-                        color: "var(--gold)",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "#EBD68C",
                         textDecoration: "none",
                         display: "inline-flex",
                         alignItems: "center",
                         gap: 6,
                         transition: "all 0.2s ease",
                       }}
-                      className="industry-link"
+                      className="hover-gold"
                     >
                       <span>Scope {ind.title} Architecture</span>
-                      <ArrowUpRight size={14} />
+                      <ArrowUpRight size={14} style={{ color: "#D5AC42" }} />
                     </Link>
                   </div>
                 </div>
@@ -201,50 +255,53 @@ export default async function Industries() {
         {/* Bottom CTA Block */}
         <div
           style={{
-            background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
-            border: "1px solid rgba(200, 155, 60, 0.35)",
+            background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
+            border: "1px solid rgba(213, 172, 66, 0.3)",
             borderRadius: 20,
             padding: "56px 40px",
             textAlign: "center",
             position: "relative",
-            boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.6)",
+            boxShadow: "0 20px 50px rgba(0, 0, 0, 0.6)",
           }}
         >
           <Reveal>
-            <span className="badge-gold font-mono" style={{ padding: "5px 14px", borderRadius: 999, fontSize: 10.5, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 14 }}>
-              REGULATORY COMPLIANCE ADVISORY
+            <span
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 10.5,
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#D5AC42",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                marginBottom: 14,
+              }}
+            >
+              TECHNICAL ARCHITECTURE ADVISORY
             </span>
-            <h3 className="font-display" style={{ fontSize: 28, fontWeight: 700, color: "#ffffff" }}>
-              Operating in a highly regulated UAE sector?
+            <h3
+              className="font-serif"
+              style={{ fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 700, color: "#F4F0E8", margin: "0 0 14px" }}
+            >
+              Operating high-stakes digital platforms in the UAE?
             </h3>
-            <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: 15.5, lineHeight: 1.7, marginTop: 14, maxWidth: 600, marginInline: "auto" }}>
-              We understand the compliance mandates, sovereign data residency laws, and security standards required in Dubai. Speak directly with a senior software architect to evaluate your technical roadmap.
+            <p style={{ color: "#9CAAC0", fontSize: 15.5, lineHeight: 1.7, maxWidth: 640, margin: "0 auto 28px" }}>
+              We design secure, reliable digital systems engineered to support high transaction volumes and regional data privacy standards. Speak directly with a senior software architect to evaluate your technical roadmap.
             </p>
-            <div style={{ marginTop: 32, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+            <div style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
               <Link
                 href="/contact"
-                className="btn-primary"
-                style={{
-                  padding: "13px 30px",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  borderRadius: 10,
-                  background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
-                }}
+                className="btn-gold-pill"
+                style={{ padding: "14px 34px", fontSize: 13 }}
               >
-                Schedule Technical Scoping <ArrowUpRight size={15} />
+                Schedule Technical Scoping <ArrowUpRight size={14} />
               </Link>
               <a
                 href="mailto:info@pkitconsultants.com"
-                className="btn-secondary"
-                style={{
-                  padding: "13px 26px",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  borderRadius: 10,
-                  borderColor: "rgba(200, 155, 60, 0.35)",
-                  color: "var(--gold)",
-                }}
+                className="btn-gold-outline"
+                style={{ padding: "14px 28px", fontSize: 13 }}
               >
                 info@pkitconsultants.com
               </a>

@@ -2,8 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { Mail, Phone, MapPin, ArrowUpRight, Shield, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, Shield } from "lucide-react";
 import { getCompanyInfo } from "@/lib/content";
 
 const COMPANY_LINKS = [
@@ -37,91 +36,137 @@ export default function Footer({ settings }: FooterProps) {
   return (
     <footer
       style={{
-        background: "linear-gradient(180deg, #06111F 0%, #0A2540 100%)",
-        borderTop: "1px solid rgba(200, 155, 60, 0.28)",
+        background: "#071326",
+        borderTop: "1px solid rgba(213, 172, 66, 0.22)",
         position: "relative",
         overflow: "hidden",
       }}
       aria-label="Site footer"
     >
-      {/* Subtle blueprint grid overlay */}
+      {/* Subtle Geometric Background Pattern */}
       <div
-        className="bg-blueprint"
+        className="bg-islamic-pattern"
         style={{
           position: "absolute",
           inset: 0,
-          opacity: 0.2,
+          opacity: 0.1,
           pointerEvents: "none",
         }}
       />
 
-      {/* Main footer grid */}
       <div
         className="max-wrap"
         style={{
-          padding: "80px 24px 48px",
+          padding: "80px 28px 40px",
           position: "relative",
           zIndex: 1,
         }}
       >
-        <div className="footer-layout-grid">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 48,
+            marginBottom: 60,
+          }}
+        >
           {/* Brand Column */}
-          <div className="footer-col-brand">
+          <div style={{ maxWidth: 360 }}>
             <Link
               href="/"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: 12,
+                gap: 14,
                 textDecoration: "none",
                 marginBottom: 20,
               }}
             >
+              {/* PK Monogram */}
               <div
                 style={{
-                  width: 42,
-                  height: 42,
-                  borderRadius: 10,
-                  border: "1px solid rgba(200, 155, 60, 0.4)",
-                  background: "#06111F",
-                  padding: 2,
+                  width: 36,
+                  height: 36,
+                  transform: "rotate(45deg)",
+                  border: "1px solid rgba(213, 172, 66, 0.7)",
+                  background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  flexShrink: 0,
                 }}
               >
-                <Image src="/logo.png" alt={companyInfo.name} width={38} height={38} style={{ borderRadius: 8 }} />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <span className="font-display" style={{ fontSize: 19, fontWeight: 700, color: "#ffffff", letterSpacing: "-0.02em" }}>
-                  PK IT <span style={{ color: "var(--blue)" }}>Consultants</span>
+                <span
+                  style={{
+                    transform: "rotate(-45deg)",
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontWeight: 700,
+                    fontSize: 13,
+                    color: "#EBD68C",
+                  }}
+                >
+                  PK
                 </span>
-                <span className="font-mono" style={{ fontSize: 10, color: "var(--gold)", letterSpacing: "0.1em" }}>
-                  DUBAI, UNITED ARAB EMIRATES
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span
+                  style={{
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    letterSpacing: "0.14em",
+                    color: "#F4F0E8",
+                  }}
+                >
+                  PK IT CONSULTANTS
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 8.5,
+                    fontWeight: 600,
+                    letterSpacing: "0.26em",
+                    textTransform: "uppercase",
+                    color: "#D5AC42",
+                    marginTop: 2,
+                  }}
+                >
+                  TECHNOLOGY · CONSULTING · SOLUTIONS
                 </span>
               </div>
             </Link>
 
-            <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.8, maxWidth: 320 }}>
-              Connecting Business with Technology. We architect mission-critical software, custom AI solutions, and high-performance cloud systems for startups, SMBs, and enterprises across the Arabian Gulf and internationally.
+            <p style={{ color: "#9CAAC0", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+              Connecting Business with Technology. We architect high-concurrency software, custom AI solutions, and high-performance mobile systems for startups, SMBs, and enterprises.
             </p>
 
-            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <a
                 href={`mailto:${companyInfo.email}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: 10,
-                  color: "#ffffff",
+                  color: "#F4F0E8",
                   fontSize: 13.5,
                   textDecoration: "none",
-                  transition: "color 0.2s ease",
                 }}
-                className="footer-contact-link"
+                className="hover-gold"
               >
-                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(200, 155, 60, 0.12)", border: "1px solid rgba(200, 155, 60, 0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Mail size={13} style={{ color: "var(--gold)" }} />
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    background: "rgba(213, 172, 66, 0.12)",
+                    border: "1px solid rgba(213, 172, 66, 0.3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Mail size={13} style={{ color: "#D5AC42" }} />
                 </div>
                 <span>{companyInfo.email}</span>
               </a>
@@ -132,305 +177,221 @@ export default function Footer({ settings }: FooterProps) {
                   display: "flex",
                   alignItems: "center",
                   gap: 10,
-                  color: "var(--muted)",
+                  color: "#9CAAC0",
                   fontSize: 13.5,
                   textDecoration: "none",
-                  transition: "color 0.2s ease",
                 }}
-                className="footer-contact-link"
+                className="hover-gold"
               >
-                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(37, 99, 235, 0.12)", border: "1px solid rgba(37, 99, 235, 0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Phone size={13} style={{ color: "var(--cyan)" }} />
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    background: "rgba(16, 30, 54, 0.8)",
+                    border: "1px solid rgba(213, 172, 66, 0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Phone size={13} style={{ color: "#D5AC42" }} />
                 </div>
                 <span>{companyInfo.phone}</span>
               </a>
 
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "var(--muted)", fontSize: 13.5 }}>
-                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                  <MapPin size={13} style={{ color: "var(--muted)" }} />
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "#9CAAC0", fontSize: 13 }}>
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    background: "rgba(16, 30, 54, 0.8)",
+                    border: "1px solid rgba(213, 172, 66, 0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    marginTop: 2,
+                  }}
+                >
+                  <MapPin size={13} style={{ color: "#D5AC42" }} />
                 </div>
                 <span>{companyInfo.address}</span>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--muted)", fontSize: 13 }}>
-                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Clock size={13} style={{ color: "var(--gold)" }} />
-                </div>
-                <span>{companyInfo.hours || "Mon - Fri: 9:00 AM - 6:00 PM GST"}</span>
               </div>
             </div>
           </div>
 
-          {/* Disciplines Column */}
+          {/* Core Disciplines */}
           <div>
-            <h3
-              className="font-mono"
+            <h4
               style={{
-                fontSize: 12,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 11,
                 fontWeight: 600,
-                color: "var(--gold)",
-                letterSpacing: "0.12em",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                marginBottom: 22,
+                color: "#D5AC42",
+                marginBottom: 20,
               }}
             >
               DISCIPLINES
-            </h3>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+            </h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
               {[
-                { title: "AI Solutions & Enterprise LLMs", href: "/services#ai-solutions" },
-                { title: "Custom Software Engineering", href: "/services#software-dev" },
-                { title: "Strategic IT Consultancy", href: "/services#it-consulting" },
-                { title: "Mobile Application Systems", href: "/services#mobile-apps" },
-                { title: "Cloud Architecture & DevOps", href: "/services#cloud-solutions" },
-                { title: "Cybersecurity & Governance", href: "/services#cybersecurity" },
-              ].map((s) => (
-                <li key={s.title}>
-                  <Link
-                    href={s.href}
-                    style={{
-                      color: "var(--muted)",
-                      fontSize: 14,
-                      textDecoration: "none",
-                      transition: "all 0.2s ease",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                    }}
-                    className="footer-sub-link"
-                  >
-                    <span>{s.title}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company & Client Access Column */}
-          <div>
-            <h3
-              className="font-mono"
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "var(--gold)",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 22,
-              }}
-            >
-              COMPANY
-            </h3>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 14 }}>
-              {COMPANY_LINKS.map((item) => (
-                <li key={item.href}>
+                { label: "AI Solutions & Agent Swarms", href: "/services" },
+                { label: "Custom Software Development", href: "/services" },
+                { label: "Strategic IT Consultancy", href: "/services" },
+                { label: "Mobile Application Systems", href: "/services" },
+                { label: "Enterprise Cloud Architecture", href: "/services" },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
                     href={item.href}
                     style={{
-                      color: "var(--muted)",
-                      fontSize: 14,
+                      color: "#9CAAC0",
+                      fontSize: 13.5,
                       textDecoration: "none",
-                      transition: "all 0.2s ease",
+                      transition: "color 0.2s ease",
                     }}
-                    className="footer-sub-link"
+                    className="hover-gold"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
+          </div>
 
-            <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-              <span className="font-mono" style={{ fontSize: 11, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                CLIENT ECOSYSTEM
-              </span>
-              <div style={{ marginTop: 10 }}>
-                <Link
-                  href="/portal/login"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "var(--cyan)",
-                    textDecoration: "none",
-                    background: "rgba(37, 99, 235, 0.12)",
-                    border: "1px solid rgba(37, 99, 235, 0.3)",
-                    padding: "8px 14px",
-                    borderRadius: 8,
-                    transition: "all 0.2s ease",
-                  }}
-                  className="portal-badge-link"
-                >
-                  <Shield size={14} /> Client Portal Login
-                </Link>
+          {/* Company Links */}
+          <div>
+            <h4
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#D5AC42",
+                marginBottom: 20,
+              }}
+            >
+              COMPANY
+            </h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+              {COMPANY_LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    style={{
+                      color: "#9CAAC0",
+                      fontSize: 13.5,
+                      textDecoration: "none",
+                      transition: "color 0.2s ease",
+                    }}
+                    className="hover-gold"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Client Portal & Compliance */}
+          <div>
+            <h4
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#D5AC42",
+                marginBottom: 20,
+              }}
+            >
+              CLIENT ECOSYSTEM
+            </h4>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <Link
+                href="/portal/login"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "12px 18px",
+                  borderRadius: 8,
+                  background: "rgba(16, 30, 54, 0.8)",
+                  border: "1px solid rgba(213, 172, 66, 0.25)",
+                  color: "#F4F0E8",
+                  fontSize: 12.5,
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                }}
+                className="hover:border-[#D5AC42]"
+              >
+                <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <Shield size={14} style={{ color: "#D5AC42" }} />
+                  <span>Client Portal</span>
+                </span>
+                <ArrowRight size={13} style={{ color: "#D5AC42" }} />
+              </Link>
+
+              <div
+                style={{
+                  padding: "14px 16px",
+                  borderRadius: 8,
+                  border: "1px solid rgba(213, 172, 66, 0.15)",
+                  background: "rgba(10, 23, 48, 0.4)",
+                  fontSize: 11.5,
+                  color: "#9CAAC0",
+                  lineHeight: 1.5,
+                }}
+              >
+                <strong style={{ color: "#D5AC42", display: "block", marginBottom: 2 }}>
+                  ENTERPRISE DATA PRIVACY
+                </strong>
+                Architecting secure digital platforms aligned with regional standards and enterprise SLAs.
               </div>
             </div>
           </div>
-
-          {/* Dubai Scoping Column */}
-          <div>
-            <h3
-              className="font-mono"
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "var(--gold)",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 22,
-              }}
-            >
-              ENGAGE OUR ARCHITECTS
-            </h3>
-            <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
-              Initiate an architecture audit or technical scoping session with our senior engineers in Dubai.
-            </p>
-
-            <Link
-              href="/contact"
-              className="btn-primary"
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                padding: "11px 18px",
-                borderRadius: 8,
-                width: "100%",
-                justifyContent: "center",
-                background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
-                boxShadow: "0 6px 20px -6px rgba(37, 99, 235, 0.5)",
-              }}
-            >
-              Book Consultation <ArrowUpRight size={14} />
-            </Link>
-
-            <div style={{ marginTop: 14 }}>
-              <a
-                href={companyInfo.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 8,
-                  color: "#25D366",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  border: "1px solid rgba(37, 211, 102, 0.35)",
-                  background: "rgba(37, 211, 102, 0.08)",
-                  borderRadius: 8,
-                  padding: "11px 16px",
-                  transition: "all 0.2s ease",
-                }}
-                className="whatsapp-footer-btn"
-              >
-                <MessageCircle size={15} /> WhatsApp Concierge
-              </a>
-            </div>
-
-            <div
-              style={{
-                marginTop: 22,
-                padding: "12px 14px",
-                background: "rgba(6, 17, 31, 0.7)",
-                border: "1px solid rgba(200, 155, 60, 0.2)",
-                borderRadius: 8,
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
-              <CheckCircle2 size={15} style={{ color: "var(--gold)", flexShrink: 0 }} />
-              <span style={{ fontSize: 11.5, color: "var(--muted)", lineHeight: 1.4 }}>
-                UAE Federal Data Sovereignty Compliant
-              </span>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* Bottom Legal & Regulatory Bar */}
-      <div
-        style={{
-          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-          background: "#040B15",
-          padding: "22px 24px",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+        {/* Bottom Legal / Regulatory Bar */}
         <div
-          className="max-wrap"
           style={{
+            paddingTop: 28,
+            borderTop: "1px solid rgba(213, 172, 66, 0.14)",
             display: "flex",
-            flexWrap: "wrap",
-            gap: 16,
             alignItems: "center",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 16,
+            fontSize: 11.5,
+            color: "#6B7B96",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-            <p style={{ color: "var(--muted-2)", fontSize: 13, margin: 0 }}>
-              © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
-            </p>
-            <span style={{ color: "var(--muted-2)" }}>•</span>
-            <span className="font-mono" style={{ color: "var(--muted-2)", fontSize: 12 }}>
-              Dubai, United Arab Emirates
-            </span>
+          <div>
+            © {new Date().getFullYear()} PK IT Consultants. All rights reserved.
           </div>
-
           <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
-            <span style={{ color: "var(--muted-2)", fontSize: 12 }}>
-              Connecting Business with Technology
-            </span>
-            <span style={{ color: "var(--muted-2)" }}>•</span>
-            <a
-              href={`mailto:${companyInfo.email}`}
-              style={{ color: "var(--gold)", fontSize: 12, textDecoration: "none" }}
+            <Link
+              href="/attribution"
+              style={{ color: "#9CAAC0", textDecoration: "none", transition: "color 0.2s" }}
+              className="hover-gold"
             >
-              {companyInfo.email}
-            </a>
+              Photography Credits &amp; Licensing
+            </Link>
+            <span>•</span>
+            <span style={{ color: "#D5AC42" }}>Connecting Business with Technology</span>
+            <span>•</span>
+            <span>Deira, Dubai, UAE</span>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .footer-layout-grid {
-          display: grid;
-          grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-          gap: 48px 36px;
-        }
-        .footer-contact-link:hover {
-          color: var(--gold) !important;
-        }
-        .footer-sub-link:hover {
-          color: #ffffff !important;
-          transform: translateX(3px);
-        }
-        .portal-badge-link:hover {
-          background: rgba(37, 99, 235, 0.22) !important;
-          border-color: var(--blue) !important;
-        }
-        .whatsapp-footer-btn:hover {
-          background: rgba(37, 211, 102, 0.18) !important;
-        }
-
-        @media (max-width: 1024px) {
-          .footer-layout-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 40px 32px;
-          }
-        }
-        @media (max-width: 640px) {
-          .footer-layout-grid {
-            grid-template-columns: 1fr;
-            gap: 36px;
-          }
-        }
-      `}</style>
     </footer>
   );
 }

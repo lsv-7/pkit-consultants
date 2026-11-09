@@ -98,7 +98,7 @@ const detailedServiceDetails: Record<
     headline: "Zero-trust system design to safeguard intellectual property",
     problems: [
       "Vulnerability to ransomware, SQL injections, and data breaches",
-      "Lack of compliance with local and international data security standards (GDPR, UAE NESA)",
+      "Lack of alignment with regional and international data security best practices (e.g. encryption, least-privilege access)",
       "Unsecured API endpoints exposing private user coordinates to external threats",
     ],
     idealFor: "Fintech applications, healthcare systems, and corporate entities storing sensitive client or transaction records.",
@@ -192,52 +192,68 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
   ];
 
   return (
-    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Dynamic Backgrounds matching home */}
-      <div className="bg-grid" style={{ opacity: 0.3 }} />
-      <div className="glow-blue" style={{ top: -100, right: "10%", opacity: 0.25 }} />
-      <div className="glow-blue" style={{ top: 800, left: "-10%", opacity: 0.15 }} />
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#071326", color: "#F4F0E8" }}>
+      {/* Geometric Background Lattice */}
+      <div
+        className="bg-islamic-pattern"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.12,
+          pointerEvents: "none",
+        }}
+      />
 
       <div style={{ position: "relative", zIndex: 1 }}>
         {/* 1. HERO SECTION */}
-        <section style={{ paddingTop: 80, paddingBottom: 80 }} className="max-wrap">
-          <div style={{ maxWidth: 840, margin: "0 auto", textAlign: "center", padding: "0 20px" }}>
+        <section style={{ paddingTop: 90, paddingBottom: 80 }} className="max-wrap">
+          <div style={{ maxWidth: 880, margin: "0 auto", textAlign: "center", padding: "0 24px" }}>
             <Reveal>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-                <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
-                  Dubai, UAE • DIFC &amp; GCC Engineering Standards
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
+                <span
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 600,
+                    letterSpacing: "0.26em",
+                    textTransform: "uppercase",
+                    color: "#D5AC42",
+                  }}
+                >
+                  OUR CAPABILITIES
                 </span>
+                <span style={{ width: 6, height: 6, transform: "rotate(45deg)", background: "#D5AC42" }} />
               </div>
             </Reveal>
             <Reveal delay={80}>
               <h1
-                className="font-display"
+                className="font-serif"
                 style={{
-                  fontSize: "clamp(34px, 5.5vw, 62px)",
-                  fontWeight: 800,
-                  color: "var(--text)",
+                  fontSize: "clamp(34px, 5.5vw, 64px)",
+                  fontWeight: 700,
+                  color: "#F4F0E8",
                   lineHeight: 1.1,
-                  letterSpacing: "-0.03em",
-                  marginTop: 18,
+                  letterSpacing: "-0.015em",
+                  textTransform: "uppercase",
+                  marginTop: 14,
                 }}
               >
-                Engineering Digital Solutions That Scale Businesses
+                CAPABILITIES ENGINEERED FOR AMBITION
               </h1>
             </Reveal>
             <Reveal delay={160}>
               <p
                 style={{
-                  color: "var(--muted)",
-                  fontSize: "clamp(15px, 2vw, 18.5px)",
+                  color: "#9CAAC0",
+                  fontSize: "clamp(15px, 1.8vw, 17.5px)",
                   lineHeight: 1.7,
-                  marginTop: 22,
-                  maxWidth: 680,
+                  marginTop: 20,
+                  maxWidth: 720,
                   marginInline: "auto",
                 }}
               >
-                At {companyInfo.name}, we build robust digital platforms, deploy secure artificial intelligence solutions,
-                architect cloud environments, and modernize legacy software. We write clean, tested code that drives profit.
+                At {companyInfo.name}, we architect high-concurrency software platforms, deploy sovereign artificial intelligence pipelines, and modernize mission-critical systems with veteran senior engineers.
               </p>
             </Reveal>
             <Reveal delay={240}>
@@ -251,12 +267,12 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
                   flexWrap: "wrap",
                 }}
               >
-                <Link href="/contact" className="btn-primary" style={{ padding: "13px 28px", fontSize: 15 }}>
-                  Book Consultation <ArrowRight size={16} />
+                <Link href="/contact" className="btn-gold-pill" style={{ padding: "14px 32px" }}>
+                  Book Architecture Scoping <ArrowRight size={14} />
                 </Link>
-                <Link href="/contact" className="btn-secondary" style={{ padding: "13px 28px", fontSize: 15 }}>
-                  Contact Us
-                </Link>
+                <a href="#services-overview" className="btn-gold-outline" style={{ padding: "14px 28px" }}>
+                  Explore Capabilities
+                </a>
               </div>
             </Reveal>
           </div>
@@ -774,7 +790,7 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
                     color: "#ffffff",
                   }}
                 >
-                  Ready to Build Your Next Sovereign Digital Platform?
+                  Ready to Build Your Next Scalable Digital Platform?
                 </h2>
                 <p
                   style={{

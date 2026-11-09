@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Menu,
   X,
@@ -13,18 +12,16 @@ import {
   Shield,
   Phone,
   Mail,
-  ChevronRight,
-  MessageCircle,
 } from "lucide-react";
 import { getCompanyInfo } from "@/lib/content";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/industries", label: "Industries" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "HOME" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/services", label: "SERVICES" },
+  { href: "/industries", label: "INDUSTRIES" },
+  { href: "/contact", label: "CONTACT" },
 ];
 
 interface NavbarProps {
@@ -49,7 +46,7 @@ export default function Navbar({ settings }: NavbarProps) {
   const companyInfo = settings || getCompanyInfo();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 15);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -60,7 +57,7 @@ export default function Navbar({ settings }: NavbarProps) {
     setMenuOpen(false);
   }, [pathname]);
 
-  // Prevent background scroll when mobile menu is open
+  // Prevent background scroll when mobile drawer is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -76,101 +73,22 @@ export default function Navbar({ settings }: NavbarProps) {
 
   return (
     <>
-      {/* ─── ARCHITECTURAL TELEMETRY TOP BAR ─────────────────────────────── */}
-      <div
-        className="top-telemetry-bar"
-        style={{
-          background: "linear-gradient(90deg, #06111F 0%, #0A2540 50%, #06111F 100%)",
-          borderBottom: "1px solid rgba(200, 155, 60, 0.2)",
-          color: "var(--muted)",
-          fontSize: 11,
-          fontFamily: "'JetBrains Mono', monospace",
-          letterSpacing: "0.06em",
-          padding: "6px 24px",
-          position: "relative",
-          zIndex: 51,
-        }}
-      >
-        <div
-          className="max-wrap"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--gold)" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)", boxShadow: "0 0 6px var(--gold)" }} />
-              DUBAI, UAE (GST / UTC+4)
-            </span>
-            <span className="telemetry-separator" style={{ color: "rgba(255, 255, 255, 0.2)" }}>•</span>
-            <span className="telemetry-hide-sm" style={{ color: "rgba(255, 255, 255, 0.75)" }}>
-              DIFC & DOWNTOWN TECH HUB
-            </span>
-            <span className="telemetry-separator telemetry-hide-sm" style={{ color: "rgba(255, 255, 255, 0.2)" }}>•</span>
-            <span className="telemetry-hide-md" style={{ color: "var(--cyan)" }}>
-              100% SENIOR ARCHITECTS
-            </span>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <a
-              href={`mailto:${companyInfo.email}`}
-              style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                transition: "color 0.2s ease",
-              }}
-              className="hover-gold"
-            >
-              <Mail size={12} style={{ color: "var(--gold)" }} />
-              <span>{companyInfo.email}</span>
-            </a>
-            <span className="telemetry-separator telemetry-hide-sm" style={{ color: "rgba(255, 255, 255, 0.2)" }}>•</span>
-            <a
-              href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
-              style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                transition: "color 0.2s ease",
-              }}
-              className="telemetry-hide-sm hover-gold"
-            >
-              <Phone size={12} style={{ color: "var(--gold)" }} />
-              <span>{companyInfo.phone}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── MAIN STICKY NAVIGATION ───────────────────────────────────────── */}
-      <nav
-        aria-label="Main navigation"
+      <header
+        aria-label="Main navigation header"
         style={{
           position: "sticky",
           top: 0,
           zIndex: 50,
-          backdropFilter: "blur(18px)",
-          WebkitBackdropFilter: "blur(18px)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
           background: scrolled
-            ? "var(--nav-bg-scroll)"
-            : "var(--nav-bg-idle)",
-          borderBottom: scrolled
-            ? "1px solid rgba(200, 155, 60, 0.22)"
-            : "1px solid rgba(37, 99, 235, 0.12)",
+            ? "rgba(7, 19, 38, 0.94)"
+            : "rgba(7, 19, 38, 0.85)",
+          borderBottom: "1px solid rgba(213, 172, 66, 0.2)",
+          transition: "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
           boxShadow: scrolled
-            ? "0 10px 30px -10px rgba(0, 0, 0, 0.45)"
-            : "none",
-          transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            ? "0 10px 30px -10px rgba(0, 0, 0, 0.6)"
+            : "0 2px 10px rgba(0, 0, 0, 0.2)",
         }}
       >
         <div
@@ -179,368 +97,366 @@ export default function Navbar({ settings }: NavbarProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 24px",
-            height: scrolled ? 72 : 82,
-            transition: "height 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            padding: "0 28px",
+            height: 72,
           }}
         >
-          {/* Brand Logo & Editorial Typography */}
+          {/* ─── LEFT: PK Geometric Monogram + Wordmark ─── */}
           <Link
             href="/"
             aria-label={`${companyInfo.name} — Home`}
-            style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}
-            className="navbar-brand"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              textDecoration: "none",
+            }}
+            className="group"
           >
+            {/* Geometric Diamond Monogram */}
             <div
               style={{
                 position: "relative",
-                width: 44,
-                height: 44,
-                borderRadius: 10,
-                border: "1px solid rgba(200, 155, 60, 0.35)",
-                background: "radial-gradient(circle at top left, #0A2540, #06111F)",
-                padding: 2,
-                boxShadow: "0 4px 14px -2px rgba(0, 0, 0, 0.5)",
+                width: 38,
+                height: 38,
+                transform: "rotate(45deg)",
+                border: "1px solid rgba(213, 172, 66, 0.7)",
+                background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
+                boxShadow: "0 0 16px rgba(213, 172, 66, 0.18)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                flexShrink: 0,
+                transition: "border-color 0.3s ease, box-shadow 0.3s ease",
               }}
             >
-              <Image
-                src="/logo.png"
-                alt={`${companyInfo.name} logo`}
-                width={40}
-                height={40}
-                priority
-                style={{
-                  borderRadius: 8,
-                  objectFit: "contain",
-                }}
-              />
               <span
                 style={{
-                  position: "absolute",
-                  bottom: -2,
-                  right: -2,
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: "var(--gold)",
-                  border: "2px solid #06111F",
+                  transform: "rotate(-45deg)",
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontWeight: 700,
+                  fontSize: 14,
+                  letterSpacing: "0.02em",
+                  color: "#EBD68C",
                 }}
-              />
+              >
+                PK
+              </span>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                <span
-                  className="font-display"
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 800,
-                    color: "var(--text)",
-                    letterSpacing: "-0.025em",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  PK IT
-                </span>
-                <span
-                  className="font-display brand-subword"
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 600,
-                    color: "var(--blue)",
-                    letterSpacing: "-0.015em",
-                  }}
-                >
-                  Consultants
-                </span>
-              </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <span
-                className="font-mono brand-tagline-text"
                 style={{
-                  fontSize: 10,
-                  color: "var(--muted)",
-                  letterSpacing: "0.08em",
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  letterSpacing: "0.14em",
+                  color: "#F4F0E8",
+                  lineHeight: 1.15,
+                }}
+              >
+                PK IT CONSULTANTS
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 8.5,
+                  fontWeight: 600,
+                  letterSpacing: "0.26em",
                   textTransform: "uppercase",
+                  color: "#D5AC42",
                   marginTop: 3,
                 }}
               >
-                Dubai Technology Consultancy
+                TECHNOLOGY · CONSULTING · SOLUTIONS
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <div
-            style={{ display: "flex", alignItems: "center", gap: 32 }}
+          {/* ─── CENTRE: Navigation Links ─── */}
+          <nav
+            style={{
+              display: "none",
+              alignItems: "center",
+              gap: 36,
+            }}
             className="nav-desktop"
           >
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+              const active = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-link-item ${isActive ? "active" : ""}`}
                   style={{
-                    fontSize: 14,
-                    fontWeight: isActive ? 600 : 500,
-                    color: isActive ? "var(--text)" : "var(--muted)",
-                    textDecoration: "none",
                     position: "relative",
+                    fontSize: 11.5,
+                    fontFamily: "'Inter', sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: active ? "#EBD68C" : "#9CAAC0",
+                    textDecoration: "none",
                     padding: "8px 0",
-                    transition: "color 0.25s ease",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
+                    transition: "color 0.2s ease",
                   }}
+                  className="hover-gold"
                 >
-                  {isActive && (
+                  {link.label}
+                  {active && (
                     <span
                       style={{
-                        width: 5,
-                        height: 5,
-                        borderRadius: "50%",
-                        background: "var(--gold)",
-                        boxShadow: "0 0 6px var(--gold)",
+                        position: "absolute",
+                        bottom: -4,
+                        left: 0,
+                        right: 0,
+                        height: 2,
+                        background: "linear-gradient(90deg, transparent, #D5AC42, transparent)",
+                        borderRadius: 2,
                       }}
                     />
                   )}
-                  {link.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Desktop Controls: Theme Toggle + Client Portal + CTA */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }} className="nav-desktop">
-            <button
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              style={{
-                background: "var(--surface-2)",
-                border: "1px solid var(--border-soft)",
-                borderRadius: 8,
-                color: "var(--text)",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 36,
-                height: 36,
-                transition: "all 0.25s ease",
-              }}
-              className="theme-btn"
-            >
-              {theme === "dark" ? <Sun size={17} style={{ color: "var(--gold)" }} /> : <Moon size={17} style={{ color: "var(--blue)" }} />}
-            </button>
-
+          {/* ─── RIGHT: Theme Toggle + Portal + Book Consultation Pill ─── */}
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            {/* Client Portal Link */}
             <Link
               href="/portal/login"
               style={{
-                fontSize: 13,
-                fontWeight: 500,
-                color: "var(--muted)",
-                textDecoration: "none",
-                display: "inline-flex",
+                display: "none",
                 alignItems: "center",
                 gap: 6,
-                padding: "8px 12px",
-                borderRadius: 6,
-                border: "1px solid transparent",
+                fontSize: 11,
+                fontFamily: "'Inter', sans-serif",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#9CAAC0",
+                textDecoration: "none",
+                border: "1px solid rgba(213, 172, 66, 0.2)",
+                padding: "6px 14px",
+                borderRadius: 9999,
+                background: "rgba(16, 30, 54, 0.4)",
                 transition: "all 0.2s ease",
               }}
-              className="portal-login-ghost"
+              className="portal-link-desktop hover:border-[#D5AC42] hover:text-[#F4F0E8]"
             >
-              <Shield size={14} style={{ color: "var(--cyan)" }} />
-              <span>Portal</span>
+              <Shield size={12} style={{ color: "#D5AC42" }} />
+              <span>Client Portal</span>
             </Link>
 
-            <Link
-              href="/contact"
-              className="btn-primary"
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                padding: "10px 18px",
-                borderRadius: 8,
-                background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
-                boxShadow: "0 4px 16px -4px rgba(37, 99, 235, 0.5)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
-              <span>Consultation</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-
-          {/* Mobile Actions: Theme Toggle + Menu Toggle */}
-          <div style={{ display: "none", alignItems: "center", gap: 10 }} className="nav-mobile-actions">
+            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
               style={{
-                background: "var(--surface-2)",
-                border: "1px solid var(--border-soft)",
-                borderRadius: 8,
-                color: "var(--text)",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 width: 36,
                 height: 36,
-              }}
-            >
-              {theme === "dark" ? <Sun size={16} style={{ color: "var(--gold)" }} /> : <Moon size={16} style={{ color: "var(--blue)" }} />}
-            </button>
-
-            <button
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              style={{
-                background: menuOpen ? "var(--surface-2)" : "transparent",
-                border: "1px solid var(--border-soft)",
-                borderRadius: 8,
-                color: "var(--text)",
-                cursor: "pointer",
-                padding: 6,
-                width: 36,
-                height: 36,
-                display: "flex",
+                borderRadius: "50%",
+                border: "1px solid rgba(213, 172, 66, 0.25)",
+                background: "rgba(16, 30, 54, 0.5)",
+                color: "#D5AC42",
+                display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
+                cursor: "pointer",
                 transition: "all 0.2s ease",
               }}
+              className="hover:border-[#D5AC42] hover:bg-[#D5AC42]/10"
+            >
+              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+
+            {/* Gold Pill CTA Button */}
+            <Link
+              href="/contact"
+              className="btn-gold-pill"
+              style={{ display: "none" }}
+            >
+              <span>Book Consultation</span>
+              <ArrowRight size={13} />
+            </Link>
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={menuOpen}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 8,
+                border: "1px solid rgba(213, 172, 66, 0.3)",
+                background: "rgba(16, 30, 54, 0.7)",
+                color: "#EBD68C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+              className="mobile-toggle"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* ─── FULL-SCREEN ARCHITECTURAL MOBILE DRAWER ─────────────────────── */}
-        {menuOpen && (
+      {/* ─── LUXURY MOBILE ARCHITECTURAL DRAWER ─────────────────────── */}
+      {menuOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(7, 19, 38, 0.98)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+          }}
+          className="bg-islamic-pattern"
+        >
+          {/* Drawer Top Header */}
           <div
-            className="mobile-drawer-overlay"
             style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: "100vh",
-              background: "rgba(6, 17, 31, 0.98)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-              zIndex: 9999,
               display: "flex",
-              flexDirection: "column",
-              padding: "24px",
-              overflowY: "auto",
-              animation: "drawerFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "20px 24px",
+              borderBottom: "1px solid rgba(213, 172, 66, 0.2)",
             }}
           >
-            {/* Drawer Header */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingBottom: 20,
-                borderBottom: "1px solid rgba(200, 155, 60, 0.2)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Image src="/logo.png" alt={companyInfo.name} width={34} height={34} style={{ borderRadius: 6 }} />
-                <div>
-                  <span className="font-display" style={{ fontSize: 17, fontWeight: 700, color: "var(--text)" }}>
-                    PK IT <span style={{ color: "var(--blue)" }}>Consultants</span>
-                  </span>
-                  <p className="font-mono" style={{ fontSize: 10, color: "var(--gold)", letterSpacing: "0.08em" }}>
-                    DUBAI, UAE
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <div
                 style={{
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border-soft)",
-                  borderRadius: 8,
-                  color: "var(--text)",
-                  width: 36,
-                  height: 36,
+                  width: 32,
+                  height: 32,
+                  transform: "rotate(45deg)",
+                  border: "1px solid rgba(213, 172, 66, 0.7)",
+                  background: "#101E36",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  cursor: "pointer",
                 }}
               >
-                <X size={18} />
-              </button>
+                <span
+                  style={{
+                    transform: "rotate(-45deg)",
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontWeight: 700,
+                    fontSize: 12,
+                    color: "#EBD68C",
+                  }}
+                >
+                  PK
+                </span>
+              </div>
+              <span
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontSize: 17,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  color: "#F4F0E8",
+                }}
+              >
+                PK IT CONSULTANTS
+              </span>
             </div>
 
-            {/* Navigation Links */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, margin: "24px 0" }}>
-              <span className="font-mono" style={{ fontSize: 11, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>
-                NAVIGATION
-              </span>
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
+            <button
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: "50%",
+                border: "1px solid rgba(213, 172, 66, 0.3)",
+                background: "rgba(16, 30, 54, 0.8)",
+                color: "#EBD68C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          {/* Drawer Navigation Links */}
+          <div style={{ padding: "36px 28px", flex: 1, display: "flex", flexDirection: "column", gap: 20 }}>
+            <span
+              style={{
+                fontSize: 10,
+                fontFamily: "'Inter', sans-serif",
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                color: "#D5AC42",
+              }}
+            >
+              NAVIGATION DIRECTORY
+            </span>
+
+            {NAV_LINKS.map((link, idx) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "12px 0",
+                    borderBottom: "1px solid rgba(213, 172, 66, 0.1)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "14px 16px",
-                      borderRadius: 10,
-                      background: isActive ? "rgba(37, 99, 235, 0.12)" : "transparent",
-                      border: isActive ? "1px solid rgba(37, 99, 235, 0.3)" : "1px solid transparent",
-                      color: isActive ? "#ffffff" : "var(--muted)",
-                      fontSize: 16,
-                      fontWeight: isActive ? 600 : 500,
-                      textDecoration: "none",
-                      transition: "all 0.2s ease",
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontSize: 24,
+                      fontWeight: 600,
+                      letterSpacing: "0.08em",
+                      color: active ? "#EBD68C" : "#F4F0E8",
                     }}
                   >
-                    <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      {isActive && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />}
-                      {link.label}
-                    </span>
-                    <ChevronRight size={16} style={{ color: isActive ? "var(--gold)" : "var(--muted-2)" }} />
-                  </Link>
-                );
-              })}
-            </div>
+                    {link.label}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 11,
+                      letterSpacing: "0.1em",
+                      color: "#D5AC42",
+                    }}
+                  >
+                    0{idx + 1}
+                  </span>
+                </Link>
+              );
+            })}
 
-            {/* Quick Consultation CTAs */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: "auto", paddingTop: 18, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+            {/* Mobile Actions */}
+            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 14 }}>
               <Link
                 href="/contact"
                 onClick={() => setMenuOpen(false)}
-                className="btn-primary"
-                style={{
-                  justifyContent: "center",
-                  padding: "14px",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  borderRadius: 10,
-                  background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
-                }}
+                className="btn-gold-pill"
+                style={{ width: "100%", justifyContent: "center", padding: "14px 20px" }}
               >
-                Book Technical Consultation <ArrowRight size={16} />
+                <span>Book Consultation</span>
+                <ArrowRight size={14} />
               </Link>
 
               <Link
@@ -551,110 +467,70 @@ export default function Navbar({ settings }: NavbarProps) {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 8,
-                  padding: "12px",
-                  borderRadius: 10,
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border-soft)",
-                  color: "var(--text)",
-                  fontSize: 14,
-                  fontWeight: 500,
+                  fontSize: 12,
+                  fontFamily: "'Inter', sans-serif",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#F4F0E8",
                   textDecoration: "none",
+                  border: "1px solid rgba(213, 172, 66, 0.3)",
+                  padding: "13px 20px",
+                  borderRadius: 9999,
+                  background: "rgba(16, 30, 54, 0.6)",
                 }}
               >
-                <Shield size={16} style={{ color: "var(--cyan)" }} />
+                <Shield size={14} style={{ color: "#D5AC42" }} />
                 <span>Client Portal Access</span>
               </Link>
+            </div>
 
-              {/* Direct Dubai Office Channels */}
-              <div
-                style={{
-                  background: "rgba(10, 37, 64, 0.5)",
-                  border: "1px solid rgba(200, 155, 60, 0.25)",
-                  borderRadius: 12,
-                  padding: "16px",
-                  marginTop: 6,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 10,
-                }}
+            {/* Mobile Direct Concierge Coordinates */}
+            <div
+              style={{
+                marginTop: "auto",
+                paddingTop: 28,
+                borderTop: "1px solid rgba(213, 172, 66, 0.15)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+                fontSize: 12,
+                color: "#9CAAC0",
+              }}
+            >
+              <a
+                href={`mailto:${companyInfo.email}`}
+                style={{ display: "flex", alignItems: "center", gap: 8, color: "#9CAAC0", textDecoration: "none" }}
               >
-                <span className="font-mono" style={{ fontSize: 10, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                  DUBAI CONCIERGE DESK
-                </span>
-                <a
-                  href={`mailto:${companyInfo.email}`}
-                  style={{ display: "flex", alignItems: "center", gap: 10, color: "#ffffff", fontSize: 13, textDecoration: "none" }}
-                >
-                  <Mail size={14} style={{ color: "var(--gold)" }} />
-                  <span>{companyInfo.email}</span>
-                </a>
-                <a
-                  href={companyInfo.whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", gap: 10, color: "#25D366", fontSize: 13, textDecoration: "none" }}
-                >
-                  <MessageCircle size={14} />
-                  <span>WhatsApp Business Direct</span>
-                </a>
-                <a
-                  href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
-                  style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--muted)", fontSize: 13, textDecoration: "none" }}
-                >
-                  <Phone size={14} style={{ color: "var(--cyan)" }} />
-                  <span>{companyInfo.phone}</span>
-                </a>
-              </div>
+                <Mail size={13} style={{ color: "#D5AC42" }} />
+                <span>{companyInfo.email}</span>
+              </a>
+              <a
+                href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
+                style={{ display: "flex", alignItems: "center", gap: 8, color: "#9CAAC0", textDecoration: "none" }}
+              >
+                <Phone size={13} style={{ color: "#D5AC42" }} />
+                <span>{companyInfo.phone}</span>
+              </a>
             </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
 
-      <style>{`
-        .top-telemetry-bar a:hover {
-          color: var(--gold) !important;
-        }
-        .portal-login-ghost:hover {
-          color: var(--text) !important;
-          background: var(--surface-2) !important;
-          border-color: var(--border-soft) !important;
-        }
-        .nav-link-item:hover {
-          color: var(--text) !important;
-        }
-        .nav-link-item::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, var(--gold), var(--blue));
-          transform: scaleX(0);
-          transform-origin: right;
-          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .nav-link-item:hover::after {
-          transform: scaleX(1);
-          transform-origin: left;
-        }
-        .nav-link-item.active::after {
-          transform: scaleX(1);
-        }
-
-        @keyframes drawerFadeIn {
-          from { opacity: 0; transform: translateY(-8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 900px) {
-          .nav-desktop { display: none !important; }
-          .nav-mobile-actions { display: flex !important; }
-          .telemetry-hide-sm { display: none !important; }
-        }
-        @media (max-width: 600px) {
-          .telemetry-hide-md { display: none !important; }
-          .brand-tagline-text { display: none !important; }
+      {/* Responsive helper styles for header */}
+      <style jsx global>{`
+        @media (min-width: 1024px) {
+          .nav-desktop {
+            display: flex !important;
+          }
+          .portal-link-desktop {
+            display: inline-flex !important;
+          }
+          .btn-gold-pill {
+            display: inline-flex !important;
+          }
+          .mobile-toggle {
+            display: none !important;
+          }
         }
       `}</style>
     </>

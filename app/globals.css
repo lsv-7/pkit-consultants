@@ -1,29 +1,34 @@
 @import "tailwindcss";
 
-/* ─── PKIT Design Tokens (Dubai Enterprise Brand System) ────────────── */
+/* ─── PKIT Reference Luxury Dubai Brand Tokens ────────────── */
 :root {
-  --bg: #06111F;               /* Midnight background */
-  --surface: #0A2540;          /* Deep corporate navy */
-  --surface-2: #0B1B2D;        /* Secondary surface */
-  --border: #1E293B;           /* Modern charcoal border */
-  --border-soft: rgba(37, 99, 235, 0.2); /* Subtle architectural border */
+  --bg: #071326;               /* Midnight Navy */
+  --surface: #0A1730;          /* Deep Navy */
+  --surface-2: #101E36;        /* Elevated Surface */
+  --border: #1E2D48;           /* Modern subtle charcoal border */
+  --border-gold: rgba(213, 172, 66, 0.22); /* Hairline Gold Border */
+  --border-gold-subtle: rgba(213, 172, 66, 0.12);
+  --border-soft: rgba(213, 172, 66, 0.16);
   --blue: #2563EB;             /* Electric blue */
   --blue-soft: rgba(37, 99, 235, 0.12); /* Soft blue highlights */
   --blue-hover: #1D4ED8;       /* Deep electric blue hover */
   --cyan: #60A5FA;             /* Subtle blue highlight */
-  --text: #FFFFFF;             /* Clean white typography text */
-  --muted: #A7B4C5;            /* Muted cool slate text */
-  --muted-2: #64748B;          /* Subtle metadata text */
-  --logo-dark-blue: #0A2540;
-  --gold: #C89B3C;             /* Dubai prestige gold accent */
-  --gold-soft: rgba(200, 155, 60, 0.14);
+  --text: #F4F0E8;             /* Ivory typography text */
+  --text-ivory: #F4F0E8;       /* Ivory */
+  --muted: #9CAAC0;            /* Muted blue grey */
+  --muted-2: #6B7B96;          /* Subtle metadata text */
+  --logo-dark-blue: #0A1730;
+  --gold: #D5AC42;             /* Dubai prestige gold accent */
+  --gold-champagne: #EBD68C;   /* Champagne gold */
+  --gold-soft: rgba(213, 172, 66, 0.14);
+  --gold-glow: rgba(213, 172, 66, 0.25);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
-  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-  --nav-bg-idle: rgba(6, 17, 31, 0.65);
-  --nav-bg-scroll: rgba(6, 17, 31, 0.94);
-  --nav-border-scroll: rgba(37, 99, 235, 0.22);
+  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+  --nav-bg-idle: rgba(7, 19, 38, 0.75);
+  --nav-bg-scroll: rgba(7, 19, 38, 0.94);
+  --nav-border-scroll: rgba(213, 172, 66, 0.22);
 }
 
 :root[data-theme="light"] {
@@ -31,24 +36,29 @@
   --surface: #FFFFFF;          /* Pure white surface */
   --surface-2: #F1F5F9;        /* Slate 100 */
   --border: #CBD5E1;           /* Slate 300 */
+  --border-gold: rgba(180, 133, 40, 0.25);
+  --border-gold-subtle: rgba(180, 133, 40, 0.12);
   --border-soft: #E2E8F0;      /* Slate 200 */
   --blue: #2563EB;             /* Electric blue */
   --blue-soft: rgba(37, 99, 235, 0.08); /* Subtle highlight */
   --blue-hover: #1D4ED8;       /* Darker hover blue */
   --cyan: #2563EB;             /* Contrast blue */
-  --text: #0A2540;             /* Deep navy typography */
+  --text: #071326;             /* Deep navy typography */
+  --text-ivory: #071326;
   --muted: #475569;            /* Slate 600 description text */
   --muted-2: #94A3B8;          /* Slate 400 subtle text */
   --logo-dark-blue: #E2E8F0;
   --gold: #B48528;             /* Rich gold for light mode */
+  --gold-champagne: #C89B3C;
   --gold-soft: rgba(180, 133, 40, 0.1);
+  --gold-glow: rgba(180, 133, 40, 0.2);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
   --shadow-premium: 0 4px 20px -2px rgba(10, 37, 64, 0.08);
   --nav-bg-idle: rgba(255, 255, 255, 0.7);
   --nav-bg-scroll: rgba(255, 255, 255, 0.95);
-  --nav-border-scroll: rgba(10, 37, 64, 0.08);
+  --nav-border-scroll: rgba(180, 133, 40, 0.18);
 }
 
 /* Global color property transitions for theme changes */
@@ -78,21 +88,55 @@ body {
 }
 
 /* ─── Typography ─────────────────────────────────────────────────────── */
+.font-serif {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+}
+
+.font-sans {
+  font-family: "Inter", "Geist", system-ui, sans-serif;
+}
+
+.font-cinzel {
+  font-family: "Cinzel", Georgia, serif;
+}
+
 .font-display {
-  font-family: "Space Grotesk", "Geist", system-ui, sans-serif;
+  font-family: "Cormorant Garamond", "Space Grotesk", Georgia, serif;
 }
 
 .font-mono {
-  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* ─── Reference Geometric Background Pattern (Islamic Diamond & Square) ─── */
+.bg-islamic-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D5AC42' stroke-width='0.75' stroke-opacity='0.12'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z'/%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ─── Gold Gradients & Accents ───────────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D5AC42 0%, #EBD68C 50%, #D5AC42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-subtle {
+  border-color: rgba(213, 172, 66, 0.22);
+}
+
+.border-gold-hairline {
+  border: 1px solid rgba(213, 172, 66, 0.18);
 }
 
 /* ─── Eyebrow label ──────────────────────────────────────────────────── */
 .eyebrow {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", sans-serif;
   font-size: 11px;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--gold);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -100,58 +144,113 @@ body {
 
 .eyebrow::before {
   content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 8px var(--cyan);
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
   flex-shrink: 0;
 }
 
 /* ─── Buttons ────────────────────────────────────────────────────────── */
-.btn-primary {
-  background: var(--blue);
-  color: #fff;
+.btn-gold-pill {
+  background: linear-gradient(135deg, #D5AC42 0%, #EBD68C 50%, #D5AC42 100%);
+  color: #071326 !important;
   font-weight: 600;
-  font-size: 14px;
-  border-radius: 8px;
-  padding: 11px 22px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  padding: 10px 24px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(213, 172, 66, 0.22);
   white-space: nowrap;
 }
 
-.btn-primary:hover {
-  background: var(--blue-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px rgba(47, 111, 237, 0.6);
+.btn-gold-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(213, 172, 66, 0.38);
+  filter: brightness(1.06);
 }
 
-.btn-secondary {
-  border: 1px solid var(--border);
-  color: var(--text);
+.btn-gold-outline {
+  border: 1px solid rgba(213, 172, 66, 0.4);
+  color: #F4F0E8 !important;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(10, 23, 48, 0.45);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-gold-outline:hover {
+  border-color: #D5AC42;
+  background: rgba(213, 172, 66, 0.12);
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #D5AC42 0%, #EBD68C 50%, #D5AC42 100%);
+  color: #071326;
   font-weight: 600;
-  font-size: 14px;
-  border-radius: 8px;
-  padding: 11px 22px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 11px 24px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(213, 172, 66, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(213, 172, 66, 0.35);
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(213, 172, 66, 0.35);
+  color: var(--text);
+  font-weight: 500;
+  font-size: 13px;
+  border-radius: 9999px;
+  padding: 11px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 23, 48, 0.3);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
   white-space: nowrap;
 }
 
 .btn-secondary:hover {
-  border-color: var(--blue);
-  background: var(--surface);
+  border-color: var(--gold);
+  background: rgba(213, 172, 66, 0.1);
+  color: #FFFFFF;
 }
 
 /* ─── Cards ──────────────────────────────────────────────────────────── */
 .card {
   background: var(--surface);
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--border-gold-subtle);
   border-radius: 14px;
   box-shadow: var(--shadow-premium);
   transition: border-color 0.25s ease, transform 0.25s ease,
@@ -159,7 +258,7 @@ body {
 }
 
 .card:hover {
-  border-color: var(--blue);
+  border-color: var(--gold);
   transform: translateY(-3px);
   background: var(--surface-2);
 }
@@ -169,12 +268,12 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: var(--blue-soft);
-  border: 1px solid rgba(47, 111, 237, 0.3);
+  background: var(--gold-soft);
+  border: 1px solid rgba(213, 172, 66, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--cyan);
+  color: var(--gold);
   flex-shrink: 0;
 }
 
