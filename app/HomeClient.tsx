@@ -61,17 +61,17 @@ export default function HomeClient({
       `}</style>
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 1: HERO — RECREATE PRIMARY REFERENCE SCREENSHOT
+          SECTION 1: HERO — CINEMATIC DUBAI SKYLINE & EDITORIAL REFINEMENT
       ───────────────────────────────────────────────────────────────── */}
       <section
         style={{
           position: "relative",
-          minHeight: "94vh",
+          minHeight: "92vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          padding: "100px 24px 80px",
+          padding: "100px 24px 72px",
         }}
       >
         {/* Authentic Dubai Skyline Background (Burj Khalifa Nocturnal Cityscape) */}
@@ -80,6 +80,7 @@ export default function HomeClient({
             position: "absolute",
             inset: 0,
             zIndex: 0,
+            overflow: "hidden",
           }}
         >
           <Image
@@ -87,42 +88,59 @@ export default function HomeClient({
             alt="Burj Khalifa and Downtown Dubai architectural skyline at night"
             fill
             priority
-            quality={90}
+            quality={92}
             sizes="100vw"
             style={{
               objectFit: "cover",
-              objectPosition: "center 25%",
-              filter: "brightness(0.75) contrast(1.1)",
+              objectPosition: "center 32%",
+              filter: "brightness(0.9) contrast(1.12)",
             }}
+            className="hero-skyline-animated"
           />
 
-          {/* Strong Midnight Navy Gradient Overlay */}
+          {/* Layered Cinematic Navy Gradient Overlay (Preserves Skyline Visibility) */}
           <div
             style={{
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(180deg, rgba(7, 19, 38, 0.78) 0%, rgba(7, 19, 38, 0.88) 65%, #071326 100%)",
+                "linear-gradient(180deg, rgba(7, 19, 38, 0.62) 0%, rgba(7, 19, 38, 0.28) 32%, rgba(7, 19, 38, 0.66) 70%, #071326 100%)",
             }}
           />
 
-          {/* Fine Repeating Geometric Pattern Over the Background */}
+          {/* Atmospheric Gentle Ambient Lighting Pulse */}
+          <div
+            className="atmospheric-pulse"
+            style={{
+              position: "absolute",
+              top: "28%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 760,
+              height: 520,
+              background:
+                "radial-gradient(ellipse at center, rgba(37, 99, 235, 0.16) 0%, rgba(213, 172, 66, 0.08) 45%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Subtle Geometric Pattern Over the Background */}
           <div
             className="bg-islamic-pattern"
             style={{
               position: "absolute",
               inset: 0,
-              opacity: 0.22,
+              opacity: 0.07,
               pointerEvents: "none",
             }}
           />
 
-          {/* Vignette Overlay */}
+          {/* Subtle Vignette Overlay */}
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: "radial-gradient(circle at 50% 50%, transparent 40%, rgba(7, 19, 38, 0.75) 100%)",
+              background: "radial-gradient(circle at 50% 45%, transparent 48%, rgba(7, 19, 38, 0.68) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -135,42 +153,45 @@ export default function HomeClient({
             position: "relative",
             zIndex: 10,
             textAlign: "center",
-            maxWidth: 960,
+            maxWidth: 900,
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          {/* Small Gold Label */}
+          {/* Refined Gold Eyebrow Badge */}
           <Reveal delay={100}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: 12,
-                padding: "8px 20px",
+                gap: 10,
+                padding: "6px 16px",
                 borderRadius: 9999,
-                background: "rgba(16, 30, 54, 0.65)",
+                background: "rgba(16, 30, 54, 0.7)",
                 border: "1px solid rgba(213, 172, 66, 0.35)",
                 backdropFilter: "blur(12px)",
-                marginBottom: 28,
+                marginBottom: 20,
+                boxShadow: "0 2px 14px rgba(0, 0, 0, 0.25)",
+                maxWidth: "92vw",
               }}
             >
-              <span style={{ color: "#D5AC42", fontSize: 11 }}>✦</span>
+              <span style={{ color: "#D5AC42", fontSize: 9 }}>✦</span>
               <span
                 style={{
                   fontFamily: "'Inter', sans-serif",
-                  fontSize: 11,
+                  fontSize: "clamp(9.5px, 2.5vw, 11px)",
                   fontWeight: 600,
-                  letterSpacing: "0.26em",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "#EBD68C",
+                  whiteSpace: "nowrap",
                 }}
               >
                 PK IT CONSULTANTS — DUBAI, UAE
               </span>
-              <span style={{ color: "#D5AC42", fontSize: 11 }}>✦</span>
+              <span style={{ color: "#D5AC42", fontSize: 9 }}>✦</span>
             </div>
           </Reveal>
 
@@ -179,14 +200,14 @@ export default function HomeClient({
             <h1
               className="font-serif"
               style={{
-                fontSize: "clamp(38px, 6.5vw, 76px)",
+                fontSize: "clamp(26px, 6.5vw, 54px)",
                 fontWeight: 700,
-                lineHeight: 1.08,
+                lineHeight: 1.14,
                 letterSpacing: "-0.015em",
                 color: "#F4F0E8",
                 textTransform: "uppercase",
-                margin: "0 0 24px",
-                maxWidth: 920,
+                margin: "0 0 18px",
+                maxWidth: 820,
               }}
             >
               DUBAI-BASED ENGINEERS
@@ -207,16 +228,16 @@ export default function HomeClient({
             </h1>
           </Reveal>
 
-          {/* Supporting Text */}
+          {/* Supporting Text with Controlled Proportions */}
           <Reveal delay={300}>
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: "clamp(15px, 1.8vw, 17.5px)",
+                fontSize: "clamp(14px, 2.5vw, 16px)",
                 lineHeight: 1.7,
                 color: "#9CAAC0",
-                maxWidth: 720,
-                margin: "0 auto 40px",
+                maxWidth: 620,
+                margin: "0 auto 36px",
                 fontWeight: 400,
               }}
             >
@@ -224,14 +245,14 @@ export default function HomeClient({
             </p>
           </Reveal>
 
-          {/* Buttons */}
+          {/* Proportional Action Buttons */}
           <Reveal delay={400}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 18,
+                gap: 16,
                 flexWrap: "wrap",
               }}
             >
@@ -239,25 +260,25 @@ export default function HomeClient({
                 href="/services"
                 className="btn-gold-outline"
                 style={{
-                  padding: "14px 32px",
-                  fontSize: 12.5,
-                  letterSpacing: "0.14em",
+                  padding: "12px 28px",
+                  fontSize: 12,
+                  letterSpacing: "0.12em",
                 }}
               >
-                <span>Explore Our Services</span>
+                <span>Explore Capabilities</span>
               </Link>
 
               <Link
                 href="/contact"
-                className="btn-gold-pill"
+                className="btn-gold-pill group"
                 style={{
-                  padding: "14px 32px",
-                  fontSize: 12.5,
-                  letterSpacing: "0.14em",
+                  padding: "12px 28px",
+                  fontSize: 12,
+                  letterSpacing: "0.12em",
                 }}
               >
                 <span>Book Consultation</span>
-                <ArrowRight size={14} />
+                <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
           </Reveal>
@@ -266,12 +287,12 @@ export default function HomeClient({
           <Reveal delay={500}>
             <div
               style={{
-                marginTop: 64,
+                marginTop: 56,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: 8,
-                opacity: 0.75,
+                opacity: 0.7,
               }}
             >
               <span
@@ -289,7 +310,7 @@ export default function HomeClient({
               <div
                 style={{
                   width: 1,
-                  height: 32,
+                  height: 28,
                   background: "linear-gradient(180deg, #D5AC42 0%, transparent 100%)",
                 }}
               />
@@ -299,41 +320,51 @@ export default function HomeClient({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTION 2: REFINED GOLD MARQUEE TICKER
+          SECTION 2: CONTINUOUS CINEMATIC MARQUEE DISCIPLINE TICKER
       ───────────────────────────────────────────────────────────────── */}
       <div
+        className="marquee-container"
         style={{
           borderTop: "1px solid rgba(213, 172, 66, 0.18)",
           borderBottom: "1px solid rgba(213, 172, 66, 0.18)",
-          background: "rgba(10, 23, 48, 0.7)",
-          padding: "14px 0",
+          background: "rgba(10, 23, 48, 0.75)",
+          padding: "15px 0",
           overflow: "hidden",
+          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            gap: 32,
-            whiteSpace: "nowrap",
-            fontSize: 11,
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 600,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "#D5AC42",
-          }}
-        >
-          <span>AI SOLUTIONS</span>
-          <span style={{ color: "rgba(213, 172, 66, 0.3)" }}>◆</span>
-          <span>CUSTOM SOFTWARE DEVELOPMENT</span>
-          <span style={{ color: "rgba(213, 172, 66, 0.3)" }}>◆</span>
-          <span>IT CONSULTANCY</span>
-          <span style={{ color: "rgba(213, 172, 66, 0.3)" }}>◆</span>
-          <span>MOBILE APPLICATION DEVELOPMENT</span>
-          <span style={{ color: "rgba(213, 172, 66, 0.3)" }}>◆</span>
-          <span>DUBAI & GCC ARCHITECTURE</span>
+        <div className="marquee-track">
+          {[1, 2].map((trackIdx) => (
+            <div
+              key={trackIdx}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 36,
+                whiteSpace: "nowrap",
+                paddingRight: 36,
+                fontSize: 11,
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#D5AC42",
+              }}
+            >
+              <span>AI SOLUTIONS</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+              <span>CLOUD ARCHITECTURE</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+              <span>SOFTWARE ENGINEERING</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+              <span>CYBERSECURITY</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+              <span>MOBILE APPLICATIONS</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+              <span>DIGITAL TRANSFORMATION</span>
+              <span style={{ color: "rgba(213, 172, 66, 0.4)", fontSize: 10 }}>✦</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -392,7 +423,7 @@ export default function HomeClient({
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(32px, 4.5vw, 54px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   letterSpacing: "-0.01em",
                   color: "#F4F0E8",
@@ -1062,7 +1093,7 @@ export default function HomeClient({
                 <h2
                   className="font-serif"
                   style={{
-                    fontSize: "clamp(34px, 4.2vw, 52px)",
+                    fontSize: "clamp(26px, 3.2vw, 38px)",
                     fontWeight: 700,
                     lineHeight: 1.15,
                     letterSpacing: "-0.01em",
@@ -1203,7 +1234,7 @@ export default function HomeClient({
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(28px, 3.8vw, 46px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
                   textTransform: "uppercase",
@@ -1392,7 +1423,7 @@ export default function HomeClient({
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(30px, 4vw, 50px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
                   textTransform: "uppercase",
@@ -1488,7 +1519,7 @@ export default function HomeClient({
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(28px, 3.8vw, 46px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
                   textTransform: "uppercase",
@@ -1589,7 +1620,7 @@ export default function HomeClient({
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(28px, 3.8vw, 44px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
                   textTransform: "uppercase",
@@ -1675,7 +1706,7 @@ export default function HomeClient({
             <h2
               className="font-serif"
               style={{
-                fontSize: "clamp(34px, 4.6vw, 56px)",
+                fontSize: "clamp(28px, 3.6vw, 42px)",
                 fontWeight: 700,
                 lineHeight: 1.15,
                 color: "#F4F0E8",

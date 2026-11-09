@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Menu,
   X,
@@ -79,11 +80,11 @@ export default function Navbar({ settings }: NavbarProps) {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
           background: scrolled
             ? "rgba(7, 19, 38, 0.94)"
-            : "rgba(7, 19, 38, 0.85)",
+            : "rgba(7, 19, 38, 0.86)",
           borderBottom: "1px solid rgba(213, 172, 66, 0.2)",
           transition: "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
           boxShadow: scrolled
@@ -98,50 +99,53 @@ export default function Navbar({ settings }: NavbarProps) {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "0 28px",
-            height: 72,
+            height: scrolled ? 64 : 76,
+            transition: "height 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         >
-          {/* ─── LEFT: PK Geometric Monogram + Wordmark ─── */}
+          {/* ─── LEFT: Finalized PK IT Consultants Logo + Wordmark ─── */}
           <Link
             href="/"
             aria-label={`${companyInfo.name} — Home`}
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              gap: 14,
               textDecoration: "none",
             }}
             className="group"
           >
-            {/* Geometric Diamond Monogram */}
+            {/* Original Finalized Logo Asset with Tailored Architectural Bezel */}
             <div
               style={{
                 position: "relative",
-                width: 38,
-                height: 38,
-                transform: "rotate(45deg)",
-                border: "1px solid rgba(213, 172, 66, 0.7)",
-                background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
-                boxShadow: "0 0 16px rgba(213, 172, 66, 0.18)",
+                width: scrolled ? 38 : 42,
+                height: scrolled ? 38 : 42,
+                borderRadius: 8,
+                overflow: "hidden",
+                border: "1px solid rgba(213, 172, 66, 0.28)",
+                background: "#FFFFFF",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
-                transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                boxShadow: "0 2px 8px -2px rgba(0, 0, 0, 0.3)",
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
               }}
             >
-              <span
+              <Image
+                src="/logo.png"
+                alt={`${companyInfo.name} logo`}
+                width={56}
+                height={56}
+                priority
                 style={{
-                  transform: "rotate(-45deg)",
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontWeight: 700,
-                  fontSize: 14,
-                  letterSpacing: "0.02em",
-                  color: "#EBD68C",
+                  width: "140%",
+                  height: "140%",
+                  maxWidth: "none",
+                  objectFit: "contain",
                 }}
-              >
-                PK
-              </span>
+              />
             </div>
 
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -150,7 +154,7 @@ export default function Navbar({ settings }: NavbarProps) {
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
                   fontSize: 18,
                   fontWeight: 700,
-                  letterSpacing: "0.14em",
+                  letterSpacing: "0.12em",
                   color: "#F4F0E8",
                   lineHeight: 1.15,
                 }}
@@ -162,10 +166,10 @@ export default function Navbar({ settings }: NavbarProps) {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: 8.5,
                   fontWeight: 600,
-                  letterSpacing: "0.26em",
+                  letterSpacing: "0.24em",
                   textTransform: "uppercase",
                   color: "#D5AC42",
-                  marginTop: 3,
+                  marginTop: 2,
                 }}
               >
                 TECHNOLOGY · CONSULTING · SOLUTIONS
@@ -178,7 +182,7 @@ export default function Navbar({ settings }: NavbarProps) {
             style={{
               display: "none",
               alignItems: "center",
-              gap: 36,
+              gap: 32,
             }}
             className="nav-desktop"
           >
@@ -190,39 +194,25 @@ export default function Navbar({ settings }: NavbarProps) {
                   href={link.href}
                   style={{
                     position: "relative",
-                    fontSize: 11.5,
+                    fontSize: 12,
                     fontFamily: "'Inter', sans-serif",
                     fontWeight: 500,
-                    letterSpacing: "0.22em",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
                     color: active ? "#EBD68C" : "#9CAAC0",
                     textDecoration: "none",
                     padding: "8px 0",
-                    transition: "color 0.2s ease",
                   }}
-                  className="hover-gold"
+                  className={`nav-link-hover ${active ? "active" : ""}`}
                 >
                   {link.label}
-                  {active && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        bottom: -4,
-                        left: 0,
-                        right: 0,
-                        height: 2,
-                        background: "linear-gradient(90deg, transparent, #D5AC42, transparent)",
-                        borderRadius: 2,
-                      }}
-                    />
-                  )}
                 </Link>
               );
             })}
           </nav>
 
           {/* ─── RIGHT: Theme Toggle + Portal + Book Consultation Pill ─── */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             {/* Client Portal Link */}
             <Link
               href="/portal/login"
@@ -236,10 +226,10 @@ export default function Navbar({ settings }: NavbarProps) {
                 textTransform: "uppercase",
                 color: "#9CAAC0",
                 textDecoration: "none",
-                border: "1px solid rgba(213, 172, 66, 0.2)",
+                border: "1px solid rgba(213, 172, 66, 0.22)",
                 padding: "6px 14px",
                 borderRadius: 9999,
-                background: "rgba(16, 30, 54, 0.4)",
+                background: "rgba(16, 30, 54, 0.5)",
                 transition: "all 0.2s ease",
               }}
               className="portal-link-desktop hover:border-[#D5AC42] hover:text-[#F4F0E8]"
@@ -273,11 +263,11 @@ export default function Navbar({ settings }: NavbarProps) {
             {/* Gold Pill CTA Button */}
             <Link
               href="/contact"
-              className="btn-gold-pill"
+              className="btn-gold-pill group"
               style={{ display: "none" }}
             >
               <span>Book Consultation</span>
-              <ArrowRight size={13} />
+              <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
             {/* Mobile Menu Toggle Button */}
@@ -337,27 +327,33 @@ export default function Navbar({ settings }: NavbarProps) {
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <div
                 style={{
-                  width: 32,
-                  height: 32,
-                  transform: "rotate(45deg)",
-                  border: "1px solid rgba(213, 172, 66, 0.7)",
-                  background: "#101E36",
+                  position: "relative",
+                  width: 34,
+                  height: 34,
+                  borderRadius: 6,
+                  overflow: "hidden",
+                  border: "1px solid rgba(213, 172, 66, 0.28)",
+                  background: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  flexShrink: 0,
+                  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
                 }}
               >
-                <span
+                <Image
+                  src="/logo.png"
+                  alt={`${companyInfo.name} logo`}
+                  width={46}
+                  height={46}
+                  priority
                   style={{
-                    transform: "rotate(-45deg)",
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontWeight: 700,
-                    fontSize: 12,
-                    color: "#EBD68C",
+                    width: "140%",
+                    height: "140%",
+                    maxWidth: "none",
+                    objectFit: "contain",
                   }}
-                >
-                  PK
-                </span>
+                />
               </div>
               <span
                 style={{

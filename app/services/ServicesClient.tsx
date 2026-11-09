@@ -230,10 +230,10 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
               <h1
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(34px, 5.5vw, 64px)",
+                  fontSize: "clamp(28px, 3.8vw, 46px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
-                  lineHeight: 1.1,
+                  lineHeight: 1.14,
                   letterSpacing: "-0.015em",
                   textTransform: "uppercase",
                   marginTop: 14,

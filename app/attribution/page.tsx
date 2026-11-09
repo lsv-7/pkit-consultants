@@ -126,7 +126,7 @@ export default function AttributionPage() {
           <h1
             className="font-serif"
             style={{
-              fontSize: "clamp(32px, 4.5vw, 52px)",
+              fontSize: "clamp(28px, 3.8vw, 44px)",
               fontWeight: 700,
               color: "#F4F0E8",
               textTransform: "uppercase",

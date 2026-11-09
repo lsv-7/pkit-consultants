@@ -149,9 +149,9 @@ export default async function About() {
                 <h1
                   className="font-serif"
                   style={{
-                    fontSize: "clamp(34px, 4.4vw, 56px)",
+                    fontSize: "clamp(28px, 3.8vw, 44px)",
                     fontWeight: 700,
-                    lineHeight: 1.12,
+                    lineHeight: 1.15,
                     letterSpacing: "-0.01em",
                     color: "#F4F0E8",
                     textTransform: "uppercase",
@@ -367,7 +367,7 @@ export default async function About() {
               <h2
                 className="font-serif"
                 style={{
-                  fontSize: "clamp(28px, 3.8vw, 44px)",
+                  fontSize: "clamp(26px, 3.2vw, 38px)",
                   fontWeight: 700,
                   color: "#F4F0E8",
                   textTransform: "uppercase",

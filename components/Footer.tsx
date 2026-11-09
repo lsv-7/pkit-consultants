@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, ArrowRight, Shield } from "lucide-react";
 import { getCompanyInfo } from "@/lib/content";
 
@@ -82,31 +83,35 @@ export default function Footer({ settings }: FooterProps) {
                 marginBottom: 20,
               }}
             >
-              {/* PK Monogram */}
+              {/* Original Finalized PK IT Consultants Logo */}
               <div
                 style={{
-                  width: 36,
-                  height: 36,
-                  transform: "rotate(45deg)",
-                  border: "1px solid rgba(213, 172, 66, 0.7)",
-                  background: "linear-gradient(135deg, #101E36 0%, #071326 100%)",
+                  position: "relative",
+                  width: 40,
+                  height: 40,
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  border: "1px solid rgba(213, 172, 66, 0.28)",
+                  background: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
+                  boxShadow: "0 2px 8px -2px rgba(0, 0, 0, 0.3)",
                 }}
               >
-                <span
+                <Image
+                  src="/logo.png"
+                  alt={companyInfo.name}
+                  width={54}
+                  height={54}
                   style={{
-                    transform: "rotate(-45deg)",
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontWeight: 700,
-                    fontSize: 13,
-                    color: "#EBD68C",
+                    width: "140%",
+                    height: "140%",
+                    maxWidth: "none",
+                    objectFit: "contain",
                   }}
-                >
-                  PK
-                </span>
+                />
               </div>
 
               <div style={{ display: "flex", flexDirection: "column" }}>
@@ -115,7 +120,7 @@ export default function Footer({ settings }: FooterProps) {
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
                     fontSize: 18,
                     fontWeight: 700,
-                    letterSpacing: "0.14em",
+                    letterSpacing: "0.12em",
                     color: "#F4F0E8",
                   }}
                 >
@@ -126,7 +131,7 @@ export default function Footer({ settings }: FooterProps) {
                     fontFamily: "'Inter', sans-serif",
                     fontSize: 8.5,
                     fontWeight: 600,
-                    letterSpacing: "0.26em",
+                    letterSpacing: "0.24em",
                     textTransform: "uppercase",
                     color: "#D5AC42",
                     marginTop: 2,

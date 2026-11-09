@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Key, Mail, AlertCircle, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import Link from "next/link";
@@ -54,10 +55,15 @@ export default function PortalLoginPage() {
         
         {/* Branding header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rotate-45 border border-[#D5AC42]/70 bg-[#101E36] flex items-center justify-center shadow-lg shadow-[#D5AC42]/20 mx-auto mb-5">
-            <span className="-rotate-45 font-serif font-bold text-[#EBD68C] text-base">
-              PK
-            </span>
+          <div className="w-14 h-14 rounded-xl border border-[#D5AC42]/30 bg-white overflow-hidden flex items-center justify-center shadow-lg shadow-black/40 mx-auto mb-4">
+            <Image
+              src="/logo.png"
+              alt="PK IT Consultants logo"
+              width={72}
+              height={72}
+              priority
+              className="w-[140%] h-[140%] max-w-none object-contain"
+            />
           </div>
           <span className="font-sans text-[10px] text-[#D5AC42] font-semibold tracking-[0.24em] uppercase block mb-1">
             DUBAI ENTERPRISE GATEWAY

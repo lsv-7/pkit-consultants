@@ -386,10 +386,93 @@ button:focus-visible {
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
+@keyframes heroSkylineZoom {
+  0% {
+    transform: scale(1) translateZ(0);
+  }
+  100% {
+    transform: scale(1.025) translateZ(0);
+  }
+}
+
+.hero-skyline-animated {
+  animation: heroSkylineZoom 36s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes atmosphericPulse {
+  0%, 100% {
+    opacity: 0.16;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.08);
+  }
+}
+
+.atmospheric-pulse {
+  animation: atmosphericPulse 16s ease-in-out infinite;
+}
+
+/* Nav Link Hover Micro-interaction */
+.nav-link-hover {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link-hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D5AC42, transparent);
+  transform: translateX(-50%);
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+
+.nav-link-hover:hover::after {
+  width: 100%;
+}
+
+.nav-link-hover.active::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(213, 172, 66, 0.4), #D5AC42, rgba(213, 172, 66, 0.4));
+  box-shadow: 0 0 8px rgba(213, 172, 66, 0.45);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .trace-line {
-    animation: none;
-    opacity: 0.6;
+  .trace-line,
+  .hero-skyline-animated,
+  .marquee-track,
+  .atmospheric-pulse {
+    animation: none !important;
   }
 
   * {

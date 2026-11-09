@@ -97,7 +97,7 @@ export default async function Industries() {
             <h1
               className="font-serif"
               style={{
-                fontSize: "clamp(34px, 4.8vw, 56px)",
+                fontSize: "clamp(28px, 3.8vw, 46px)",
                 fontWeight: 700,
                 color: "#F4F0E8",
                 textTransform: "uppercase",
