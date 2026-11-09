@@ -1,54 +1,54 @@
 @import "tailwindcss";
 
-/* ─── PKIT Design Tokens (Derived from Logo) ────────────────────────── */
+/* ─── PKIT Design Tokens (Dubai Enterprise Brand System) ────────────── */
 :root {
-  --bg: #0B1120;               /* Premium dark background */
-  --surface: #111827;          /* Premium card surface */
-  --surface-2: #1F2937;        /* Elevated hover surface */
+  --bg: #06111F;               /* Midnight background */
+  --surface: #0A2540;          /* Deep corporate navy */
+  --surface-2: #0B1B2D;        /* Secondary surface */
   --border: #1E293B;           /* Modern charcoal border */
-  --border-soft: #334155;      /* Subtle slate border */
-  --blue: #2563EB;             /* Stripe/Linear blue */
-  --blue-soft: rgba(37, 99, 235, 0.1); /* Soft blue highlights */
-  --blue-hover: #3B82F6;       /* Bright blue hover */
-  --cyan: #38BDF8;             /* Sky blue accent */
-  --text: #F8FAFC;             /* Clean typography text */
-  --muted: #94A3B8;            /* Slate descriptions */
-  --muted-2: #475569;          /* Slate subtle text */
-  --logo-dark-blue: #0F172A;
+  --border-soft: rgba(37, 99, 235, 0.2); /* Subtle architectural border */
+  --blue: #2563EB;             /* Electric blue */
+  --blue-soft: rgba(37, 99, 235, 0.12); /* Soft blue highlights */
+  --blue-hover: #1D4ED8;       /* Deep electric blue hover */
+  --cyan: #60A5FA;             /* Subtle blue highlight */
+  --text: #FFFFFF;             /* Clean white typography text */
+  --muted: #A7B4C5;            /* Muted cool slate text */
+  --muted-2: #64748B;          /* Subtle metadata text */
+  --logo-dark-blue: #0A2540;
   --gold: #C89B3C;             /* Dubai prestige gold accent */
-  --gold-soft: rgba(200, 155, 60, 0.12);
+  --gold-soft: rgba(200, 155, 60, 0.14);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
-  --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --nav-bg-idle: rgba(11, 17, 32, 0.4);
-  --nav-bg-scroll: rgba(11, 17, 32, 0.85);
-  --nav-border-scroll: var(--border);
+  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --nav-bg-idle: rgba(6, 17, 31, 0.65);
+  --nav-bg-scroll: rgba(6, 17, 31, 0.94);
+  --nav-border-scroll: rgba(37, 99, 235, 0.22);
 }
 
 :root[data-theme="light"] {
-  --bg: #ffffff;               /* Pure white background */
-  --surface: #f8fafc;          /* Slate 50 (very light gray) */
-  --surface-2: #f1f5f9;        /* Slate 100 */
-  --border: #cbd5e1;           /* Slate 300 */
-  --border-soft: #e2e8f0;      /* Slate 200 */
-  --blue: #2563EB;             /* Keep electric blue accent */
+  --bg: #F8FAFC;               /* Crisp light background */
+  --surface: #FFFFFF;          /* Pure white surface */
+  --surface-2: #F1F5F9;        /* Slate 100 */
+  --border: #CBD5E1;           /* Slate 300 */
+  --border-soft: #E2E8F0;      /* Slate 200 */
+  --blue: #2563EB;             /* Electric blue */
   --blue-soft: rgba(37, 99, 235, 0.08); /* Subtle highlight */
-  --blue-hover: #1d4ed8;       /* Darker hover blue */
-  --cyan: #0284c7;             /* Darker sky-blue for contrast */
-  --text: #0f172a;             /* Slate 900 typography */
+  --blue-hover: #1D4ED8;       /* Darker hover blue */
+  --cyan: #2563EB;             /* Contrast blue */
+  --text: #0A2540;             /* Deep navy typography */
   --muted: #475569;            /* Slate 600 description text */
-  --muted-2: #94a3b8;          /* Slate 400 subtle text */
-  --logo-dark-blue: #e2e8f0;   /* Light gray logo bg alternative */
-  --gold: #B48528;             /* Rich gold for light mode contrast */
+  --muted-2: #94A3B8;          /* Slate 400 subtle text */
+  --logo-dark-blue: #E2E8F0;
+  --gold: #B48528;             /* Rich gold for light mode */
   --gold-soft: rgba(180, 133, 40, 0.1);
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
-  --shadow-premium: 0 4px 20px -2px rgba(15, 23, 42, 0.05); /* Premium soft shadow */
-  --nav-bg-idle: rgba(255, 255, 255, 0.4);
-  --nav-bg-scroll: rgba(255, 255, 255, 0.85);
-  --nav-border-scroll: rgba(0, 0, 0, 0.06);
+  --shadow-premium: 0 4px 20px -2px rgba(10, 37, 64, 0.08);
+  --nav-bg-idle: rgba(255, 255, 255, 0.7);
+  --nav-bg-scroll: rgba(255, 255, 255, 0.95);
+  --nav-border-scroll: rgba(10, 37, 64, 0.08);
 }
 
 /* Global color property transitions for theme changes */

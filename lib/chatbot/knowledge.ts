@@ -17,7 +17,7 @@ Official Company Facts:
 - Tagline: Connecting Business with Technology
 - Founder & Managing Director: M. Prasanna Kumar
 - Headquarters: Deira, Dubai, United Arab Emirates
-- Email: mpkitconsultants@gmail.com
+- Email: info@pkitconsultants.com
 - Phone / WhatsApp: +971 50 116 4565
 - Website: www.pkitconsultants.com
 - Delivery Model: Senior-engineers-only. The software architects who scope client systems write production code. No junior outsourcers.

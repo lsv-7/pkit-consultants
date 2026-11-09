@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Shield, Key, Mail, AlertCircle, Eye, EyeOff, Check, ArrowRight } from "lucide-react";
+import { Key, Mail, AlertCircle, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import Link from "next/link";
@@ -36,7 +36,7 @@ export default function PortalLoginPage() {
       } else {
         setError(data.message || "Invalid credentials");
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please check your connection.");
     } finally {
       setLoading(false);
@@ -44,24 +44,27 @@ export default function PortalLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-[#020617] overflow-hidden px-4">
+    <div className="min-h-screen flex items-center justify-center relative bg-[#06111F] overflow-hidden px-4">
       {/* Background decoration */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
 
       {/* Form Container */}
-      <div className="w-full max-w-md bg-[#090f24]/60 border border-[#0e204a]/75 backdrop-blur-md rounded-2xl p-8 relative z-10 shadow-2xl shadow-black/60">
+      <div className="w-full max-w-md bg-gradient-to-b from-[#0A2540] to-[#06111F] border border-[#C89B3C]/35 backdrop-blur-md rounded-2xl p-8 relative z-10 shadow-2xl shadow-black/80">
         
         {/* Branding header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#0066FF] to-[#38BDF8] flex items-center justify-center font-bold text-white text-lg shadow-lg shadow-blue-500/25 mx-auto mb-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#0A2540] to-[#2563EB] border border-[#C89B3C]/40 flex items-center justify-center font-bold text-white text-lg shadow-lg shadow-blue-500/25 mx-auto mb-4">
             PK
           </div>
-          <h2 className="font-display font-bold text-2xl text-slate-100 tracking-tight">
-            Client Portal
+          <span className="font-mono text-[10px] text-[#C89B3C] tracking-widest uppercase">
+            DUBAI ENTERPRISE GATEWAY
+          </span>
+          <h2 className="font-display font-bold text-2xl text-white tracking-tight mt-1">
+            Client Portal Access
           </h2>
           <p className="text-xs text-slate-400 mt-1.5">
-            Log in to view project progress, access documents, and manage your account.
+            Log in to inspect milestones, access verified documents, and review invoices.
           </p>
         </div>
 

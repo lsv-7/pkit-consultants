@@ -7,7 +7,7 @@ export const COMPANY = {
   name: "PK IT Consultants",
   shortName: "PK IT",
   tagline: "Connecting Business with Technology",
-  email: "mpkitconsultants@gmail.com",
+  email: "info@pkitconsultants.com",
   website: "https://www.pkitconsultants.com",
   phone: "+971 50 116 4565",
   whatsappUrl: "https://wa.me/971501164565",

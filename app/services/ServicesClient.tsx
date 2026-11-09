@@ -15,10 +15,6 @@ import {
   ChevronDown,
   CheckCircle2,
   Calendar,
-  Layers,
-  Database,
-  Cpu,
-  GitBranch,
   PhoneCall,
 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
@@ -399,7 +395,7 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 88 }}>
-            {services.map((s, idx) => {
+            {services.map((s) => {
               const IconComp = iconMap[s.icon] || Code2;
               const details = detailedServiceDetails[s.slug] || {
                 headline: `High-quality development frameworks for ${s.title}`,
@@ -754,58 +750,43 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
         <section style={{ paddingBottom: 112, paddingTop: 64 }} className="max-wrap">
           <div
             style={{
-              background: "linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%)",
-              border: "1px solid var(--border)",
+              background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
+              border: "1px solid rgba(200, 155, 60, 0.35)",
               borderRadius: 20,
               padding: "64px 40px",
               textAlign: "center",
               position: "relative",
               overflow: "hidden",
-              boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.7)",
+              boxShadow: "0 22px 50px -10px rgba(0, 0, 0, 0.6)",
             }}
           >
-            {/* Subtle glow behind card */}
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: 250,
-                height: 250,
-                background: "var(--blue)",
-                borderRadius: "50%",
-                filter: "blur(140px)",
-                opacity: 0.15,
-                pointerEvents: "none",
-              }}
-            />
-
             <div style={{ position: "relative", zIndex: 1 }}>
               <Reveal>
-                <span className="eyebrow">Start Your Project</span>
+                <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 16 }}>
+                  DUBAI ARCHITECTURE REVIEW • SENIOR SQUADS
+                </span>
                 <h2
                   className="font-display"
                   style={{
                     fontSize: "clamp(26px, 4vw, 42px)",
                     fontWeight: 700,
                     marginTop: 14,
-                    color: "var(--text)",
+                    color: "#ffffff",
                   }}
                 >
-                  Ready to Build Your Next Digital Product?
+                  Ready to Build Your Next Sovereign Digital Platform?
                 </h2>
                 <p
                   style={{
-                    color: "var(--muted)",
+                    color: "rgba(255, 255, 255, 0.8)",
                     fontSize: 16.5,
-                    lineHeight: 1.65,
-                    marginTop: 14,
-                    maxWidth: 580,
+                    lineHeight: 1.7,
+                    marginTop: 16,
+                    maxWidth: 620,
                     marginInline: "auto",
                   }}
                 >
-                  Book a free technology audit or scoping review. Our senior engineers will evaluate your architecture and provide actionable insights.
+                  Book a technical architecture audit or scoping review. Our senior software engineers in Dubai will evaluate your systems and provide actionable architectural specifications.
                 </p>
               </Reveal>
               <Reveal delay={120}>
@@ -815,12 +796,23 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
                     gap: 16,
                     justifyContent: "center",
                     alignItems: "center",
-                    marginTop: 32,
+                    marginTop: 36,
                     flexWrap: "wrap",
                   }}
                 >
-                  <Link href="/contact" className="btn-primary" style={{ padding: "12px 26px" }}>
-                    <Calendar size={15} style={{ marginRight: 6 }} /> Book Consultation
+                  <Link
+                    href="/contact"
+                    className="btn-primary"
+                    style={{
+                      padding: "14px 30px",
+                      fontSize: 15,
+                      fontWeight: 600,
+                      borderRadius: 10,
+                      background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
+                      boxShadow: "0 6px 20px -4px rgba(37, 99, 235, 0.6)",
+                    }}
+                  >
+                    <Calendar size={16} style={{ marginRight: 6 }} /> Book Technical Consultation
                   </Link>
                   <a
                     href={companyInfo.whatsappLink}
@@ -828,25 +820,32 @@ export default function ServicesClient({ services, companyInfo }: ServicesClient
                     rel="noopener noreferrer"
                     className="btn-secondary"
                     style={{
-                      padding: "12px 26px",
-                      background: "rgba(37, 211, 102, 0.08)",
-                      borderColor: "rgba(37, 211, 102, 0.3)",
+                      padding: "14px 28px",
+                      background: "rgba(37, 211, 102, 0.1)",
+                      borderColor: "rgba(37, 211, 102, 0.35)",
                       color: "#25D366",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "rgba(37, 211, 102, 0.14)";
-                      e.currentTarget.style.borderColor = "rgba(37, 211, 102, 0.5)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "rgba(37, 211, 102, 0.08)";
-                      e.currentTarget.style.borderColor = "rgba(37, 211, 102, 0.3)";
+                      fontSize: 15,
+                      fontWeight: 600,
+                      borderRadius: 10,
                     }}
                   >
-                    <PhoneCall size={14} style={{ marginRight: 6 }} /> WhatsApp
+                    <PhoneCall size={15} style={{ marginRight: 6 }} /> WhatsApp Concierge
                   </a>
-                  <Link href="/contact" className="btn-secondary" style={{ padding: "12px 26px" }}>
-                    Contact Us
-                  </Link>
+                  <a
+                    href="mailto:info@pkitconsultants.com"
+                    className="btn-secondary"
+                    style={{
+                      padding: "14px 28px",
+                      background: "rgba(255, 255, 255, 0.06)",
+                      borderColor: "rgba(200, 155, 60, 0.35)",
+                      color: "var(--gold)",
+                      fontSize: 15,
+                      fontWeight: 600,
+                      borderRadius: 10,
+                    }}
+                  >
+                    info@pkitconsultants.com
+                  </a>
                 </div>
               </Reveal>
             </div>

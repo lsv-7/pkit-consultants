@@ -3,16 +3,15 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
-import { getCompanyInfo, getServices } from "@/lib/content";
-import { COMPANY } from "@/lib/company";
+import { Mail, Phone, MapPin, ArrowUpRight, Shield, MessageCircle, Clock, CheckCircle2 } from "lucide-react";
+import { getCompanyInfo } from "@/lib/content";
 
 const COMPANY_LINKS = [
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
-  { href: "/industries", label: "Industries" },
-  { href: "/contact", label: "Contact" },
-  { href: "/portal/login", label: "Client Login" },
+  { href: "/about", label: "About Our Firm" },
+  { href: "/services", label: "Engineering Disciplines" },
+  { href: "/industries", label: "Enterprise Sectors" },
+  { href: "/contact", label: "Book Consultation" },
+  { href: "/portal/login", label: "Client Portal Access" },
 ];
 
 interface FooterProps {
@@ -29,194 +28,408 @@ interface FooterProps {
   services?: any[];
 }
 
-export default function Footer({ settings, services }: FooterProps) {
+export default function Footer({ settings }: FooterProps) {
   const pathname = usePathname();
   const companyInfo = settings || getCompanyInfo();
-  const serviceList = services || getServices();
-
 
   if (pathname.startsWith("/admin")) return null;
 
   return (
     <footer
       style={{
-        background: "var(--surface)",
-        borderTop: "1px solid var(--border-soft)",
+        background: "linear-gradient(180deg, #06111F 0%, #0A2540 100%)",
+        borderTop: "1px solid rgba(200, 155, 60, 0.28)",
+        position: "relative",
+        overflow: "hidden",
       }}
       aria-label="Site footer"
     >
+      {/* Subtle blueprint grid overlay */}
+      <div
+        className="bg-blueprint"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.2,
+          pointerEvents: "none",
+        }}
+      />
+
       {/* Main footer grid */}
       <div
         className="max-wrap"
-        style={{ padding: "64px 24px 48px" }}
+        style={{
+          padding: "80px 24px 48px",
+          position: "relative",
+          zIndex: 1,
+        }}
       >
-        <div className="footer-grid">
-          {/* Brand column */}
-          <div style={{ gridColumn: "span 2" }} className="footer-brand-col">
+        <div className="footer-layout-grid">
+          {/* Brand Column */}
+          <div className="footer-col-brand">
             <Link
               href="/"
-              style={{ display: "inline-flex", alignItems: "center", gap: 12, textDecoration: "none", marginBottom: 20 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+                textDecoration: "none",
+                marginBottom: 20,
+              }}
             >
-              <Image src="/logo.png" alt={companyInfo.name} width={36} height={36} style={{ borderRadius: 8 }} />
-              <span className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>
-                {COMPANY.shortName || "PK IT"} <span style={{ color: "var(--blue)" }}>Consultants</span>
-              </span>
+              <div
+                style={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: 10,
+                  border: "1px solid rgba(200, 155, 60, 0.4)",
+                  background: "#06111F",
+                  padding: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image src="/logo.png" alt={companyInfo.name} width={38} height={38} style={{ borderRadius: 8 }} />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span className="font-display" style={{ fontSize: 19, fontWeight: 700, color: "#ffffff", letterSpacing: "-0.02em" }}>
+                  PK IT <span style={{ color: "var(--blue)" }}>Consultants</span>
+                </span>
+                <span className="font-mono" style={{ fontSize: 10, color: "var(--gold)", letterSpacing: "0.1em" }}>
+                  DUBAI, UNITED ARAB EMIRATES
+                </span>
+              </div>
             </Link>
-            <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.75, maxWidth: 280 }}>
-              {companyInfo.tagline}. Premium IT consultancy, AI solutions, and software development based in {companyInfo.address}.
+
+            <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.8, maxWidth: 320 }}>
+              Connecting Business with Technology. We architect mission-critical software, custom AI solutions, and high-performance cloud systems for startups, SMBs, and enterprises across the Arabian Gulf and internationally.
             </p>
-            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10 }}>
+
+            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 12 }}>
               <a
                 href={`mailto:${companyInfo.email}`}
-                style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--muted)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  color: "#ffffff",
+                  fontSize: 13.5,
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                }}
+                className="footer-contact-link"
               >
-                <Mail size={14} style={{ color: "var(--blue)", flexShrink: 0 }} />
-                {companyInfo.email}
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(200, 155, 60, 0.12)", border: "1px solid rgba(200, 155, 60, 0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Mail size={13} style={{ color: "var(--gold)" }} />
+                </div>
+                <span>{companyInfo.email}</span>
               </a>
+
               <a
                 href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
-                style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--muted)", fontSize: 13, textDecoration: "none" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  color: "var(--muted)",
+                  fontSize: 13.5,
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                }}
+                className="footer-contact-link"
               >
-                <Phone size={14} style={{ color: "var(--blue)", flexShrink: 0 }} />
-                {companyInfo.phone}
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(37, 99, 235, 0.12)", border: "1px solid rgba(37, 99, 235, 0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Phone size={13} style={{ color: "var(--cyan)" }} />
+                </div>
+                <span>{companyInfo.phone}</span>
               </a>
-              <span style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "var(--muted)", fontSize: 13 }}>
-                <MapPin size={14} style={{ color: "var(--blue)", flexShrink: 0, marginTop: 2 }} />
-                {companyInfo.address}
-              </span>
+
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "var(--muted)", fontSize: 13.5 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                  <MapPin size={13} style={{ color: "var(--muted)" }} />
+                </div>
+                <span>{companyInfo.address}</span>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 10, color: "var(--muted)", fontSize: 13 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Clock size={13} style={{ color: "var(--gold)" }} />
+                </div>
+                <span>{companyInfo.hours || "Mon - Fri: 9:00 AM - 6:00 PM GST"}</span>
+              </div>
             </div>
           </div>
 
-          {/* Company links */}
+          {/* Disciplines Column */}
           <div>
             <h3
-              className="font-display"
-              style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 20 }}
+              className="font-mono"
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                color: "var(--gold)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 22,
+              }}
             >
-              Company
+              DISCIPLINES
             </h3>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+              {[
+                { title: "AI Solutions & Enterprise LLMs", href: "/services#ai-solutions" },
+                { title: "Custom Software Engineering", href: "/services#software-dev" },
+                { title: "Strategic IT Consultancy", href: "/services#it-consulting" },
+                { title: "Mobile Application Systems", href: "/services#mobile-apps" },
+                { title: "Cloud Architecture & DevOps", href: "/services#cloud-solutions" },
+                { title: "Cybersecurity & Governance", href: "/services#cybersecurity" },
+              ].map((s) => (
+                <li key={s.title}>
+                  <Link
+                    href={s.href}
+                    style={{
+                      color: "var(--muted)",
+                      fontSize: 14,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                    }}
+                    className="footer-sub-link"
+                  >
+                    <span>{s.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company & Client Access Column */}
+          <div>
+            <h3
+              className="font-mono"
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                color: "var(--gold)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 22,
+              }}
+            >
+              COMPANY
+            </h3>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 14 }}>
               {COMPANY_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    style={{ color: "var(--muted)", fontSize: 14, textDecoration: "none", transition: "color 0.2s ease" }}
+                    style={{
+                      color: "var(--muted)",
+                      fontSize: 14,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                    className="footer-sub-link"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+              <span className="font-mono" style={{ fontSize: 11, color: "var(--muted-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                CLIENT ECOSYSTEM
+              </span>
+              <div style={{ marginTop: 10 }}>
+                <Link
+                  href="/portal/login"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--cyan)",
+                    textDecoration: "none",
+                    background: "rgba(37, 99, 235, 0.12)",
+                    border: "1px solid rgba(37, 99, 235, 0.3)",
+                    padding: "8px 14px",
+                    borderRadius: 8,
+                    transition: "all 0.2s ease",
+                  }}
+                  className="portal-badge-link"
+                >
+                  <Shield size={14} /> Client Portal Login
+                </Link>
+              </div>
+            </div>
           </div>
 
-          {/* Services links */}
+          {/* Dubai Scoping Column */}
           <div>
             <h3
-              className="font-display"
-              style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 20 }}
+              className="font-mono"
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                color: "var(--gold)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 22,
+              }}
             >
-              Services
-            </h3>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-              {serviceList.map((s) => (
-                <li key={s.id}>
-                  <Link
-                    href="/services"
-                    style={{ color: "var(--muted)", fontSize: 14, textDecoration: "none", transition: "color 0.2s ease" }}
-                  >
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA column */}
-          <div>
-            <h3
-              className="font-display"
-              style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 20 }}
-            >
-              Get Started
+              ENGAGE OUR ARCHITECTS
             </h3>
             <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
-              Ready to build something great? Let&apos;s start with a free consultation.
+              Initiate an architecture audit or technical scoping session with our senior engineers in Dubai.
             </p>
-            <Link href="/contact" className="btn-primary" style={{ fontSize: 13 }}>
+
+            <Link
+              href="/contact"
+              className="btn-primary"
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                padding: "11px 18px",
+                borderRadius: 8,
+                width: "100%",
+                justifyContent: "center",
+                background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
+                boxShadow: "0 6px 20px -6px rgba(37, 99, 235, 0.5)",
+              }}
+            >
               Book Consultation <ArrowUpRight size={14} />
             </Link>
-            <div style={{ marginTop: 28 }}>
+
+            <div style={{ marginTop: 14 }}>
               <a
                 href={companyInfo.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: 8,
                   color: "#25D366",
                   fontSize: 13,
-                  fontWeight: 500,
+                  fontWeight: 600,
                   textDecoration: "none",
-                  border: "1px solid rgba(37,211,102,0.3)",
+                  border: "1px solid rgba(37, 211, 102, 0.35)",
+                  background: "rgba(37, 211, 102, 0.08)",
                   borderRadius: 8,
-                  padding: "8px 14px",
-                  transition: "background 0.2s ease",
+                  padding: "11px 16px",
+                  transition: "all 0.2s ease",
                 }}
+                className="whatsapp-footer-btn"
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                Chat on WhatsApp
+                <MessageCircle size={15} /> WhatsApp Concierge
               </a>
+            </div>
+
+            <div
+              style={{
+                marginTop: 22,
+                padding: "12px 14px",
+                background: "rgba(6, 17, 31, 0.7)",
+                border: "1px solid rgba(200, 155, 60, 0.2)",
+                borderRadius: 8,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <CheckCircle2 size={15} style={{ color: "var(--gold)", flexShrink: 0 }} />
+              <span style={{ fontSize: 11.5, color: "var(--muted)", lineHeight: 1.4 }}>
+                UAE Federal Data Sovereignty Compliant
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* Bottom Legal & Regulatory Bar */}
       <div
-        style={{ borderTop: "1px solid var(--border-soft)", padding: "20px 24px" }}
+        style={{
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          background: "#040B15",
+          padding: "22px 24px",
+          position: "relative",
+          zIndex: 1,
+        }}
       >
         <div
           className="max-wrap"
-          style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between" }}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 16,
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
-          <p style={{ color: "var(--muted-2)", fontSize: 13 }}>
-            © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
-          </p>
-          <p style={{ color: "var(--muted-2)", fontSize: 13 }}>
-            {companyInfo.address}
-          </p>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+            <p style={{ color: "var(--muted-2)", fontSize: 13, margin: 0 }}>
+              © {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
+            </p>
+            <span style={{ color: "var(--muted-2)" }}>•</span>
+            <span className="font-mono" style={{ color: "var(--muted-2)", fontSize: 12 }}>
+              Dubai, United Arab Emirates
+            </span>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+            <span style={{ color: "var(--muted-2)", fontSize: 12 }}>
+              Connecting Business with Technology
+            </span>
+            <span style={{ color: "var(--muted-2)" }}>•</span>
+            <a
+              href={`mailto:${companyInfo.email}`}
+              style={{ color: "var(--gold)", fontSize: 12, textDecoration: "none" }}
+            >
+              {companyInfo.email}
+            </a>
+          </div>
         </div>
       </div>
 
       <style>{`
-        .footer-grid {
+        .footer-layout-grid {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr;
-          gap: 48px 40px;
+          grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+          gap: 48px 36px;
         }
-        .footer-brand-col {
-          grid-column: span 1 !important;
+        .footer-contact-link:hover {
+          color: var(--gold) !important;
         }
-        @media (max-width: 900px) {
-          .footer-grid {
+        .footer-sub-link:hover {
+          color: #ffffff !important;
+          transform: translateX(3px);
+        }
+        .portal-badge-link:hover {
+          background: rgba(37, 99, 235, 0.22) !important;
+          border-color: var(--blue) !important;
+        }
+        .whatsapp-footer-btn:hover {
+          background: rgba(37, 211, 102, 0.18) !important;
+        }
+
+        @media (max-width: 1024px) {
+          .footer-layout-grid {
             grid-template-columns: 1fr 1fr;
-          }
-          .footer-brand-col {
-            grid-column: span 2 !important;
+            gap: 40px 32px;
           }
         }
-        @media (max-width: 540px) {
-          .footer-grid {
+        @media (max-width: 640px) {
+          .footer-layout-grid {
             grid-template-columns: 1fr;
-          }
-          .footer-brand-col {
-            grid-column: span 1 !important;
+            gap: 36px;
           }
         }
-        footer a:hover { color: var(--text) !important; }
       `}</style>
     </footer>
   );

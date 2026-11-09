@@ -53,7 +53,11 @@ export async function getSettings(): Promise<SettingsData> {
       where: { id: "default" },
     });
     if (!settings) return DEFAULT_SETTINGS;
-    return settings as unknown as SettingsData;
+    const res = settings as unknown as SettingsData;
+    if (res.email === "mpkitconsultants@gmail.com") {
+      res.email = COMPANY.email;
+    }
+    return res;
   } catch (error) {
     console.error("Failed to fetch settings from DB, using fallback", error);
     return DEFAULT_SETTINGS;

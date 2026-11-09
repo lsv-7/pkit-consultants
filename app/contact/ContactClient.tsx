@@ -145,14 +145,18 @@ function ContactFormSection({ companyInfo }: { companyInfo: ContactClientProps["
     <Reveal>
       <div
         style={{
-          background: "var(--surface)",
-          border: "1px solid var(--border-soft)",
-          borderRadius: 16,
-          padding: "36px 32px",
+          background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
+          border: "1px solid rgba(200, 155, 60, 0.32)",
+          borderRadius: 18,
+          padding: "40px 32px",
+          boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
         }}
       >
-        <h2 className="font-display" style={{ fontSize: 22, fontWeight: 600, marginBottom: 24 }}>
-          Request a Free Consultation
+        <span className="badge-gold font-mono" style={{ padding: "4px 12px", borderRadius: 999, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", display: "inline-block", marginBottom: 14 }}>
+          CONCIERGE INQUIRY
+        </span>
+        <h2 className="font-display" style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", marginBottom: 24 }}>
+          Request Architecture Scoping
         </h2>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -279,13 +283,13 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#06111F" }}>
       {/* Background patterns */}
       <div className="bg-grid" style={{ opacity: 0.35 }} />
       <div className="glow-blue" style={{ top: -150, left: "10%" }} />
       <div className="glow-blue" style={{ bottom: -200, right: "15%" }} />
 
-      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1 }}>
+      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
         {/* Header */}
         <div style={{ marginBottom: 64 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
@@ -315,13 +319,14 @@ export default function ContactClient({ companyInfo }: ContactClientProps) {
             <Reveal>
               <div
                 style={{
-                  background: "var(--surface)",
-                  border: "1px solid var(--border-soft)",
-                  borderRadius: 16,
-                  padding: 32,
+                  background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
+                  border: "1px solid rgba(200, 155, 60, 0.3)",
+                  borderRadius: 18,
+                  padding: 36,
                   display: "grid",
                   gridTemplateColumns: "1fr",
                   gap: 24,
+                  boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
                 }}
                 className="contact-info-grid"
               >

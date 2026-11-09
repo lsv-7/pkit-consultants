@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
-import { Target, Eye, ShieldCheck, Zap, HeartHandshake, Award, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { Target, Eye, ShieldCheck, Zap, HeartHandshake, Award, ArrowUpRight, CheckCircle2, Mail } from "lucide-react";
 import { getAboutContent } from "@/lib/content";
 import { getSettings } from "@/lib/services/settings";
 import { COMPANY } from "@/lib/company";
@@ -21,9 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function About() {
   const content = getAboutContent();
-  await getSettings();
+  const settings = await getSettings();
 
-  // Map values to local icons dynamically
   const valueIcons: Record<string, any> = {
     Innovation: Zap,
     Reliability: ShieldCheck,
@@ -32,24 +31,23 @@ export default async function About() {
   };
 
   return (
-    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+    <div className="pkit-root-page" style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#06111F" }}>
       {/* Background patterns */}
       <div className="bg-grid" style={{ opacity: 0.35 }} />
       <div className="glow-blue" style={{ top: -200, left: "50%", transform: "translateX(-50%)" }} />
-      <div className="glow-blue" style={{ bottom: -200, right: "-10%" }} />
 
-      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1 }}>
-        {/* Hero Section */}
-        <div style={{ marginBottom: 72 }}>
+      <div className="max-wrap section-pad" style={{ position: "relative", zIndex: 1, padding: "80px 24px 100px" }}>
+        {/* Hero Section with Dubai Coordinates */}
+        <div style={{ marginBottom: 64 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
             <span className="badge-gold font-mono" style={{ padding: "6px 14px", borderRadius: 999, fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-              DUBAI, UNITED ARAB EMIRATES • FOUNDED TO LEAD
+              DUBAI, UNITED ARAB EMIRATES • ESTABLISHED TO LEAD
             </span>
           </div>
           <SectionHeader
-            eyebrow="About PK IT"
+            eyebrow="About PK IT Consultants"
             heading="Connecting Business with Technology"
-            description="Headquartered in Dubai, UAE, PK IT Consultants helps startups and enterprises accelerate digital transformation through high-end software development, AI solutions, and strategic technical consulting."
+            description="Headquartered in Dubai, UAE, PK IT Consultants helps startups, SMBs, and enterprises accelerate digital transformation through high-end software development, sovereign AI solutions, and strategic technical consulting."
           />
         </div>
 
@@ -61,12 +59,13 @@ export default async function About() {
                 display: "grid",
                 gridTemplateColumns: "1fr",
                 gap: 40,
-                background: "var(--surface)",
-                border: "1px solid var(--border-soft)",
-                borderRadius: 18,
-                padding: "44px 32px",
+                background: "linear-gradient(135deg, #0A2540 0%, #06111F 100%)",
+                border: "1px solid rgba(200, 155, 60, 0.3)",
+                borderRadius: 20,
+                padding: "48px 36px",
                 position: "relative",
                 overflow: "hidden",
+                boxShadow: "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
               }}
               className="about-story-grid"
             >
@@ -75,11 +74,12 @@ export default async function About() {
                 <h2
                   className="font-display"
                   style={{
-                    fontSize: "clamp(24px, 3.5vw, 34px)",
+                    fontSize: "clamp(26px, 3.5vw, 36px)",
                     fontWeight: 700,
                     marginTop: 14,
                     letterSpacing: "-0.015em",
                     lineHeight: 1.2,
+                    color: "#ffffff",
                   }}
                 >
                   {content.storyTitle}
@@ -90,24 +90,34 @@ export default async function About() {
                   </p>
                 ))}
 
-                <div style={{ marginTop: 28, display: "flex", gap: 16, flexWrap: "wrap" }}>
+                <div style={{ marginTop: 28, display: "flex", gap: 18, flexWrap: "wrap" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <CheckCircle2 size={16} style={{ color: "var(--cyan)" }} />
-                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>DIFC &amp; Downtown Tech Hub</span>
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "#ffffff" }}>DIFC &amp; Downtown Tech Hub</span>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <CheckCircle2 size={16} style={{ color: "var(--gold)" }} />
-                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>100% Senior Engineers</span>
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "#ffffff" }}>100% Senior Engineers</span>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <CheckCircle2 size={16} style={{ color: "var(--blue)" }} />
-                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "var(--text)" }}>UAE Data Compliance</span>
+                    <span style={{ fontSize: 13.5, fontWeight: 500, color: "#ffffff" }}>UAE Data Sovereignty</span>
                   </div>
                 </div>
               </div>
 
-              {/* Architectural Image */}
-              <div style={{ position: "relative", width: "100%", minHeight: 320, borderRadius: 12, overflow: "hidden", border: "1px solid rgba(200, 155, 60, 0.25)" }}>
+              {/* Architectural Visual Container */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  minHeight: 340,
+                  borderRadius: 14,
+                  overflow: "hidden",
+                  border: "1px solid rgba(200, 155, 60, 0.35)",
+                  boxShadow: "0 14px 40px -10px rgba(0, 0, 0, 0.6)",
+                }}
+              >
                 <Image
                   src="/images/dubai/museum-of-the-future.png"
                   alt="Museum of the Future in Dubai, representing PK IT Consultants' forward-looking engineering philosophy"
@@ -119,14 +129,14 @@ export default async function About() {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(to top, rgba(7, 19, 33, 0.85) 0%, transparent 60%)",
+                    background: "linear-gradient(to top, rgba(6, 17, 31, 0.95) 0%, rgba(6, 17, 31, 0.25) 60%, transparent 100%)",
                   }}
                 />
-                <div style={{ position: "absolute", bottom: 16, left: 18, right: 18 }}>
+                <div style={{ position: "absolute", bottom: 18, left: 20, right: 20 }}>
                   <span className="font-mono" style={{ fontSize: 11, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                     DUBAI INNOVATION CORRIDOR
                   </span>
-                  <p style={{ color: "#fff", fontSize: 13, fontWeight: 500, marginTop: 2 }}>
+                  <p style={{ color: "#ffffff", fontSize: 13.5, fontWeight: 500, marginTop: 4, lineHeight: 1.4 }}>
                     Engineering tomorrow&apos;s digital infrastructure from the UAE to global scale.
                   </p>
                 </div>
@@ -146,23 +156,24 @@ export default async function About() {
         >
           <Reveal delay={50}>
             <div
-              className="card"
               style={{
+                background: "linear-gradient(180deg, #0A2540 0%, #06111F 100%)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: 16,
                 padding: 36,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 gap: 18,
-                position: "relative",
               }}
             >
-              <div className="icon-box">
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(37, 99, 235, 0.15)", border: "1px solid rgba(37, 99, 235, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--cyan)" }}>
                 <Target size={22} />
               </div>
-              <h3 className="font-display" style={{ fontSize: 20, fontWeight: 600 }}>
+              <h3 className="font-display" style={{ fontSize: 22, fontWeight: 700, color: "#ffffff" }}>
                 Our Mission
               </h3>
-              <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.7 }}>
+              <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.75 }}>
                 {content.mission}
               </p>
             </div>
@@ -170,23 +181,24 @@ export default async function About() {
 
           <Reveal delay={120}>
             <div
-              className="card"
               style={{
+                background: "linear-gradient(180deg, #0A2540 0%, #06111F 100%)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                borderRadius: 16,
                 padding: 36,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 gap: 18,
-                position: "relative",
               }}
             >
-              <div className="icon-box">
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(200, 155, 60, 0.15)", border: "1px solid rgba(200, 155, 60, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--gold)" }}>
                 <Eye size={22} />
               </div>
-              <h3 className="font-display" style={{ fontSize: 20, fontWeight: 600 }}>
+              <h3 className="font-display" style={{ fontSize: 22, fontWeight: 700, color: "#ffffff" }}>
                 Our Vision
               </h3>
-              <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.7 }}>
+              <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.75 }}>
                 {content.vision}
               </p>
             </div>
@@ -198,15 +210,15 @@ export default async function About() {
           <Reveal>
             <div
               style={{
-                background: "radial-gradient(ellipse at top left, var(--surface-2), var(--surface))",
-                border: "1px solid rgba(200, 155, 60, 0.28)",
-                borderRadius: 18,
-                padding: "52px 36px",
+                background: "radial-gradient(ellipse at top left, #0A2540 0%, #06111F 100%)",
+                border: "1px solid rgba(200, 155, 60, 0.35)",
+                borderRadius: 20,
+                padding: "52px 38px",
                 display: "grid",
                 gridTemplateColumns: "1fr",
                 gap: 40,
                 alignItems: "center",
-                boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)",
+                boxShadow: "0 22px 50px -10px rgba(0,0,0,0.5)",
               }}
               className="founder-grid"
             >
@@ -215,12 +227,12 @@ export default async function About() {
                   style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: 300,
+                    maxWidth: 290,
                     aspectRatio: "1/1",
-                    borderRadius: 14,
+                    borderRadius: 16,
                     overflow: "hidden",
-                    border: "2px solid rgba(200, 155, 60, 0.35)",
-                    boxShadow: "0 14px 34px -8px rgba(0,0,0,0.6)",
+                    border: "2px solid rgba(200, 155, 60, 0.45)",
+                    boxShadow: "0 16px 36px -8px rgba(0,0,0,0.7)",
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -235,23 +247,24 @@ export default async function About() {
                   />
                 </div>
                 <div style={{ marginTop: 14, textAlign: "center" }}>
-                  <span className="badge-gold font-mono" style={{ padding: "4px 12px", borderRadius: 999, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                  <span className="badge-gold font-mono" style={{ padding: "5px 14px", borderRadius: 999, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                     FOUNDER &amp; MANAGING DIRECTOR
                   </span>
                 </div>
               </div>
+
               <div>
                 <span className="eyebrow">Executive Leadership</span>
-                <h3 className="font-display" style={{ fontSize: 32, fontWeight: 700, marginTop: 12, color: "var(--text)" }}>
+                <h3 className="font-display" style={{ fontSize: 34, fontWeight: 800, marginTop: 12, color: "#ffffff" }}>
                   {content.founder.name}
                 </h3>
-                <p className="font-mono" style={{ fontSize: 13, color: "var(--gold)", marginTop: 6, letterSpacing: "0.05em" }}>
+                <p className="font-mono" style={{ fontSize: 13.5, color: "var(--gold)", marginTop: 6, letterSpacing: "0.06em" }}>
                   {content.founder.title} • PK IT Consultants
                 </p>
 
                 <div
                   style={{
-                    width: 48,
+                    width: 52,
                     height: 2,
                     background: "var(--gold)",
                     margin: "20px 0",
@@ -263,24 +276,44 @@ export default async function About() {
                     {para}
                   </p>
                 ))}
+
+                <div style={{ marginTop: 24, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                  <a
+                    href={`mailto:${settings.email || COMPANY.email}`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontSize: 13.5,
+                      color: "var(--gold)",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <Mail size={15} /> {settings.email || COMPANY.email}
+                  </a>
+                  <span style={{ color: "rgba(255, 255, 255, 0.2)" }}>•</span>
+                  <span style={{ fontSize: 13, color: "var(--muted)" }}>Deira, Dubai, UAE</span>
+                </div>
               </div>
             </div>
           </Reveal>
         </section>
 
         {/* Core Values */}
-        <section>
+        <section style={{ marginBottom: 96 }}>
           <div style={{ marginBottom: 48 }}>
             <SectionHeader
               eyebrow="Our Core Values"
-              heading="The principles that guide our code and counsel"
+              heading="The Principles That Guide Our Code and Counsel"
+              description="Uncompromising engineering standards that prioritize client business outcomes over short-term agency expediency."
             />
           </div>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
               gap: 24,
             }}
           >
@@ -288,14 +321,22 @@ export default async function About() {
               const IconComp = valueIcons[v.title] || ShieldCheck;
               return (
                 <Reveal key={v.title} delay={i * 80}>
-                  <div className="card" style={{ padding: 28, height: "100%" }}>
-                    <div className="icon-box" style={{ marginBottom: 18 }}>
+                  <div
+                    style={{
+                      background: "linear-gradient(180deg, #0A2540 0%, #06111F 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      borderRadius: 14,
+                      padding: 28,
+                      height: "100%",
+                    }}
+                  >
+                    <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(37, 99, 235, 0.15)", border: "1px solid rgba(37, 99, 235, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--cyan)", marginBottom: 18 }}>
                       <IconComp size={20} />
                     </div>
-                    <h4 className="font-display" style={{ fontSize: 17, fontWeight: 600 }}>
+                    <h4 className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "#ffffff" }}>
                       {v.title}
                     </h4>
-                    <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.6, marginTop: 10 }}>{v.desc}</p>
+                    <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.65, marginTop: 10 }}>{v.desc}</p>
                   </div>
                 </Reveal>
               );
@@ -304,17 +345,27 @@ export default async function About() {
         </section>
 
         {/* CTA section */}
-        <div style={{ marginTop: 112, textAlign: "center" }}>
+        <div style={{ textAlign: "center" }}>
           <Reveal>
-            <h3 className="font-display" style={{ fontSize: 28, fontWeight: 700 }}>
+            <h3 className="font-display" style={{ fontSize: 30, fontWeight: 700, color: "#ffffff" }}>
               Let&apos;s build the future together.
             </h3>
-            <p style={{ color: "var(--muted)", fontSize: 15, marginTop: 12, maxWidth: 480, marginInline: "auto" }}>
-              Interested in speaking with our engineering team? Let&apos;s connect for an initial architecture audit.
+            <p style={{ color: "var(--muted)", fontSize: 16, marginTop: 12, maxWidth: 520, marginInline: "auto" }}>
+              Interested in speaking with our senior engineering team? Connect with our Dubai office for an initial architecture scoping session.
             </p>
-            <div style={{ marginTop: 24 }}>
-              <Link href="/contact" className="btn-primary">
-                Contact Our Team <ArrowUpRight size={15} />
+            <div style={{ marginTop: 28, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link
+                href="/contact"
+                className="btn-primary"
+                style={{
+                  padding: "13px 28px",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  borderRadius: 10,
+                  background: "linear-gradient(135deg, var(--blue) 0%, #1D4ED8 100%)",
+                }}
+              >
+                Schedule Technical Scoping <ArrowUpRight size={15} />
               </Link>
             </div>
           </Reveal>
@@ -329,7 +380,7 @@ export default async function About() {
             align-items: center;
           }
           .founder-grid {
-            grid-template-columns: 320px 1fr !important;
+            grid-template-columns: 310px 1fr !important;
             gap: 48px !important;
           }
         }
